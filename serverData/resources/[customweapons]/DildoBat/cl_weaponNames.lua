@@ -1,0 +1,1 @@
+AddTextEntry("bat", "DildoBat")

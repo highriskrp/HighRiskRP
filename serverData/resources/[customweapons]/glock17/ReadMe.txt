@@ -1,0 +1,1 @@
+Add the weaponcomponents resource to get rid of the luxe attachments on the luxe versions, and the gold shine.  
