@@ -33,7 +33,12 @@ Lang["br"] = {
 	statistics_page_trucks: "Caminhões",
 	statistics_page_drivers: "Motoristas",
 	statistics_page_top_truckers: "Top caminhoneiros",
-	statistics_page_top_truckers_desc: "Lista do top 10 caminhoneiros da cidade",
+    statistics_page_top_truckers_desc: "Lista do top 10 caminhoneiros da cidade",
+
+    leaderboard_filter_all: "Todos os tempos",
+    leaderboard_filter_week: "Semana",
+    leaderboard_filter_month: "Mês",
+    leaderboard_filter_season: "Temporada",
 
 	contract_page_title: "Trabalhos Rápidos",
 	contract_page_desc: "Aqui você não precisa de caminhão. A empresa fornecerá tudo para você",

@@ -35,6 +35,11 @@ Lang["zh-cn"] = {
 	statistics_page_top_truckers: '卡车联盟排行榜',
 	statistics_page_top_truckers_desc: '将列出十大货车司机名单',
 
+    leaderboard_filter_all: "全部时间",
+    leaderboard_filter_week: "周",
+    leaderboard_filter_month: "月",
+    leaderboard_filter_season: "赛季",
+
 	contract_page_title: '快速工作',
 	contract_page_desc: '选择快速工作意味着无需自有卡车,公司将为您提供一切, 您只负责货物安全到达终点！',
 	contract_page_title_freight: '货运工作',

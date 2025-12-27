@@ -15,6 +15,7 @@ Lang['zh-cn'] = {
     ['press_e_to_park'] = '~w~键下 ~g~[E]~w~ 尝试 ~b~卸货~w~.',
     ['park_your_truck'] = '~w~在 ~y~停车场~w~ 中准确地停放 ~b~卡车~w~.',
     ['bring_back'] = '驾驶~b~您的卡车~w~安全回到车库位置.',
+    ['pickup_cargo'] = "前往地图上标记的~y~货物装载点~w~",
     ['fast_cargo_timer'] = '~w~你有 ~b~%s~w~ 秒来运送 ~y~货物~w~。',
     ['failed_urgent_time'] = "你未能及时运送紧急货物。你将被扣除 %s%% 的奖励",
     ['failed_fragile_health'] = "你未能以超过 %s%% 的完好度运送易碎货物。你将被扣除 %s%% 的奖励",

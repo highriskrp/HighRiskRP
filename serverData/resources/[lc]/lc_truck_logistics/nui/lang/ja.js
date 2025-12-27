@@ -35,6 +35,11 @@ Lang["ja"] = {
 	statistics_page_top_truckers: "トップドライバー",
 	statistics_page_top_truckers_desc: "最前線のトラック運転手ベスト10",
 
+    leaderboard_filter_all: "全期間",
+    leaderboard_filter_week: "週",
+    leaderboard_filter_month: "月",
+    leaderboard_filter_season: "シーズン",
+
 	contract_page_title: "クイックジョブ",
 	contract_page_desc: "トラックを所有してなくても大丈夫。依頼者が全てを用意してくれます",
 	contract_page_title_freight: "フレイト",

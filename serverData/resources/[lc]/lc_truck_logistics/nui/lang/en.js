@@ -35,6 +35,11 @@ Lang["en"] = {
     statistics_page_top_truckers: "Top drivers",
     statistics_page_top_truckers_desc: "Top 10 truck drivers list in the city",
 
+    leaderboard_filter_all: "All time",
+    leaderboard_filter_week: "Week",
+    leaderboard_filter_month: "Month",
+    leaderboard_filter_season: "Season",
+
     contract_page_title: "Quick Jobs",
     contract_page_desc: "Explore various job opportunities without the need for your own truck. The company will provide you with all the necessary resources, at the cost of earning slightly less money",
     contract_page_title_freight: "Freights",

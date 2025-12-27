@@ -33,7 +33,12 @@ Lang["fr"] = {
 	statistics_page_trucks: "Camions",
 	statistics_page_drivers: "Conducteurs",
 	statistics_page_top_truckers: "Meilleurs pilotes",
-	statistics_page_top_truckers_desc: "Liste des 10 meilleurs chauffeurs routiers de la ville",
+    statistics_page_top_truckers_desc: "Liste des 10 meilleurs chauffeurs routiers de la ville",
+
+    leaderboard_filter_all: "Tout le temps",
+    leaderboard_filter_week: "Semaine",
+    leaderboard_filter_month: "Mois",
+    leaderboard_filter_season: "Saison",
 
 	contract_page_title: "Travaux rapides",
 	contract_page_desc: "Ici, vous n'avez pas besoin d'un camion. L'entreprise vous fournira tout",

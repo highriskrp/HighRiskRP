@@ -18,6 +18,9 @@ window.addEventListener("message", async function (event) {
         let myTrucks = item.dados.trucker_trucks;
         let drivers = item.dados.trucker_drivers;
         let top_truckers = item.dados.top_truckers;
+        let top_truckers_week = item.dados.top_truckers_week;
+        let top_truckers_month = item.dados.top_truckers_month;
+        let top_truckers_season = item.dados.top_truckers_season;
         let loans = item.dados.trucker_loans;
         let trucker_party_members = item.dados.trucker_party_members;
         let trucker_party = item.dados.trucker_party;
@@ -26,7 +29,7 @@ window.addEventListener("message", async function (event) {
             // Open on first time
             $("#sidebar-ul").empty();
             $("#sidebar-ul").append(`
-			<li id="sidebar-main" onclick="openPage('main')">
+			<li id="sidebar-main" onclick="openPage('main', '${getFirstEnabledLeaderboardTab()}')">
 				<i class="fas fa-user-circle"></i>
 				<span class="tooltip">${Utils.translate("sidebar_profile")}</span>
 			</li>
@@ -97,10 +100,18 @@ window.addEventListener("message", async function (event) {
             $("#profile-drivers-span").empty();
             $("#profile-drivers-span").append(Utils.translate("statistics_page_drivers"));
 
+
             $("#top-truckers-title-div").html(`
-				<h4 class="text-uppercase">${Utils.translate("statistics_page_top_truckers")}</h4>
-				<p>${Utils.translate("statistics_page_top_truckers_desc")}</p>
-			`);
+                <h4 class="text-uppercase">${Utils.translate("statistics_page_top_truckers")}</h4>
+                <p>${Utils.translate("statistics_page_top_truckers_desc")}</p>
+                <div class="d-flex justify-content-between m-0">
+                    <div id="navigation-tab-top" class="navigation-tabs-container"></div>
+                </div>
+            `);
+
+            $(".navigation-tabs-container").empty();
+            $("#navigation-tab-top").append(getTopDriversTabsHtml());
+
             $("#job-title-div").html(`
 				<h4 class="text-uppercase">${Utils.translate("contract_page_title")}</h4>
 				<p>${Utils.translate("contract_page_desc")}</p>
@@ -279,7 +290,7 @@ window.addEventListener("message", async function (event) {
             $("#css-toggle").prop("checked", users.dark_theme).change();
 
             $(".main").fadeIn(200);
-            openPage("main");
+            openPage("main", getFirstEnabledLeaderboardTab());
         }
 
         $("#player-info-level").text(config.player_level);
@@ -406,33 +417,41 @@ window.addEventListener("message", async function (event) {
         }
         $("#profile-drivers").append(drivers_count);
 
-        $("#top-truckers-list").empty();
-        let c = 1;
-        let icon;
-        for (const top_users of top_truckers) {
-            if (c == 1) {
-                icon = "fa-medal amber accent-4 font-large-2";
-            } else if (c == 2) {
-                icon = "fa-medal blue-grey lighten-3 font-large-1";
-            } else if (c == 3) {
-                icon = "fa-medal bronze font-large-0";
-            } else {
-                icon = "fa-check-circle checkicon font-small-3";
+        function renderTopTruckers(list, targetUl) {
+            $(targetUl).empty();
+            let c = 1;
+            let icon;
+            for (const top_users of list) {
+                if (c == 1) {
+                    icon = "fa-medal amber accent-4 font-large-2";
+                } else if (c == 2) {
+                    icon = "fa-medal blue-grey lighten-3 font-large-1";
+                } else if (c == 3) {
+                    icon = "fa-medal bronze font-large-0";
+                } else {
+                    icon = "fa-check-circle checkicon font-small-3";
+                }
+                $(targetUl).append(`
+                    <li class="d-flex justify-content-between card-theme">
+                        <div class="d-flex flex-row align-items-center"><i class="fas ${icon}"></i>
+                            <div class="ml-2">
+                                <h6 class="mb-0">${top_users.name} ${top_users.firstname ?? ""}</h6>
+                                <div class="d-flex flex-row mt-1 text-black-50 date-time">
+                                    <div><i class="fas fa-route"></i></i><span class="ml-2">${Utils.translate("top_trucker_distance_traveled").format(Utils.numberFormat(top_users.traveled_distance, 2))}</span></div>
+                                    <div class="ml-3"><i class="fas fa-chart-line"></i></i><span class="ml-2">${Utils.translate("top_trucker_exp").format(Utils.numberFormat(top_users.exp))}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                `);
+                c++;
             }
-            $("#top-truckers-list").append(`
-			<li class="d-flex justify-content-between card-theme">
-				<div class="d-flex flex-row align-items-center"><i class="fas ${icon}"></i>
-					<div class="ml-2">
-						<h6 class="mb-0">${top_users.name} ${top_users.firstname ?? ""}</h6>
-						<div class="d-flex flex-row mt-1 text-black-50 date-time">
-							<div><i class="fas fa-route"></i></i><span class="ml-2">${Utils.translate("top_trucker_distance_traveled").format(Utils.numberFormat(top_users.traveled_distance, 2))}</span></div>
-							<div class="ml-3"><i class="fas fa-chart-line"></i></i><span class="ml-2">${Utils.translate("top_trucker_exp").format(Utils.numberFormat(top_users.exp))}</span></div>
-						</div>
-					</div>
-				</div>
-			</li>`);
-            c++;
         }
+
+        if (top_truckers) renderTopTruckers(top_truckers, "#top-truckers-list-all");
+        if (top_truckers_week) renderTopTruckers(top_truckers_week, "#top-truckers-list-week");
+        if (top_truckers_month) renderTopTruckers(top_truckers_month, "#top-truckers-list-month");
+        if (top_truckers_season) renderTopTruckers(top_truckers_season, "#top-truckers-list-season");
 
         $("#job-page-list").empty();
         $("#freight-page-list").empty();
@@ -962,11 +981,62 @@ window.addEventListener("message", async function (event) {
             $("li").removeClass("active");
             $(this).addClass("active");
         });
+
+        $(".navigation-tabs-container .navigation-tab").on("click", function() {
+            $(".navigation-tab").removeClass("selected");
+            $(this).addClass("selected");
+        });
     }
     if (item.hidemenu) {
         $(".main").fadeOut(200);
     }
 });
+
+function getFirstEnabledLeaderboardTab() {
+    const lbEnabled = config.leaderboards.enabled;
+    if (lbEnabled.all_time) return "top-all";
+    if (lbEnabled.week) return "top-week";
+    if (lbEnabled.month) return "top-month";
+    if (lbEnabled.season) return "top-season";
+    return null;
+}
+
+function getTopDriversTabsHtml() {
+    const lbEnabled = (config && config.leaderboards && config.leaderboards.enabled) || {};
+    const firstTab = getFirstEnabledLeaderboardTab();
+    if (!firstTab) return "";
+
+    let html = "";
+
+    const addTab = (key, id, labelKey) => {
+        if (lbEnabled[key]) {
+            const isSelected = (id === firstTab);
+            html += getTabHTML("main", id, Utils.translate(labelKey), isSelected);
+        }
+    };
+
+    addTab("all_time", "top-all", "leaderboard_filter_all");
+    addTab("week", "top-week", "leaderboard_filter_week");
+    addTab("month", "top-month", "leaderboard_filter_month");
+    addTab("season", "top-season", "leaderboard_filter_season");
+
+    return html;
+}
+
+function getTabHTML(page,tab,tab_title,selected) {
+    let selectedHTML = "";
+    if (selected) {
+        selectedHTML = "navigation-tab-available selected";
+    }
+    return `<div class="navigation-tab ${selectedHTML}" onclick="openPage('${page}','${tab}')">
+        <h5>${tab_title}</h5>
+        <div class="d-flex">
+            <div class="border-default"></div>
+            <div class="border-selected"></div>
+            <div class="border-default"></div>
+        </div>
+    </div>`;
+}
 
 function getDriverLevelHTML(value) {
     let html = "";
@@ -1024,9 +1094,16 @@ function setSkill(id, newValue) {
     }
 }
 
-function openPage(pageN) {
+function openPage(pageN, tab) {
     $(".pages").css("display", "none");
     $(`.${pageN}-page`).css("display", "block");
+
+    if (tab) {
+        $(".tabs").css("display", "none");
+        $(`.${tab}-tab`).css("display", "");
+        $(".navigation-tab").removeClass("selected");
+        $(".navigation-tab-available").first().addClass("selected");
+    }
 
     let titleHeight = $(`#${pageN}-title-div`).outerHeight(true) ?? 0;
     let footerHeight = $(`#${pageN}-footer-div`).outerHeight(true) ?? 0;
@@ -1176,7 +1253,7 @@ function refuelTruck(truck_id) {
     Utils.post("refuelTruck", { truck_id: truck_id });
 }
 function fireDriver(driver_id) {
-    Utils.post("fireDriver", { driver_id: driver_id });
+    Utils.showDefaultDangerModal(() => Utils.post("fireDriver", { driver_id: driver_id }));
 }
 function hireDriver(driver_id) {
     Utils.post("hireDriver", { driver_id: driver_id });

@@ -15,6 +15,7 @@ Lang['no'] = {
     ['press_e_to_park'] = '~w~Trykk ~g~[E]~w~ for å parkere ~b~lasten~w~.',
     ['park_your_truck'] = '~w~Parker ~b~lastebilen~w~ riktig i ~y~parkeringen~w~.',
     ['bring_back'] = '~w~Ta ~b~lastebilen~w~ tilbake til ~y~garasjen~w~.',
+    ['pickup_cargo'] = "Kjør til det ~y~markerte hentepunktet for lasten~w~ på kartet ditt",
     ['fast_cargo_timer'] = '~w~Du har ~b~%s~w~ sekunder på å levere ~y~lasten~w~.',
     ['failed_urgent_time'] = "Du klarte ikke å levere den hasterelaterte lasten i tide. Du vil få en straff på %s%% av belønningen",
     ['failed_fragile_health'] = "Du klarte ikke å levere den skjøre lasten med mer enn %s%% helse. Du vil få en straff på %s%% av belønningen",

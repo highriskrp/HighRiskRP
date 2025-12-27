@@ -33,7 +33,12 @@ Lang["no"] = {
 	statistics_page_trucks: "Lastebiler",
 	statistics_page_drivers: "Sjåfører",
 	statistics_page_top_truckers: "Topp Sjåfører",
-	statistics_page_top_truckers_desc: "Topp 10 lastebilsjåfører i byen",
+    statistics_page_top_truckers_desc: "Topp 10 lastebilsjåfører i byen",
+    
+    leaderboard_filter_all: "Hele tiden",
+    leaderboard_filter_week: "Uke",
+    leaderboard_filter_month: "Måned",
+    leaderboard_filter_season: "Sesong",
 
 	contract_page_title: "Raske Jobber",
 	contract_page_desc: "Her trenger du ikke en egen lastebil. Bedriften fikser alt for deg.",

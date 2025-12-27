@@ -24,6 +24,7 @@
 
 		<!-- Utils JavaScript -->
 		<script src="https://cfx-nui-lc_utils/nui/index.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="https://cfx-nui-lc_utils/nui/css/navigation-tabs.css">
 	</head>
 
 	<body>
@@ -208,10 +209,19 @@
 								<div id="top-truckers-title-div" class="col-12 mt-3 mb-1">
 									
 								</div>
-								<div class="mt-3">
-									<ul id="top-truckers-list" class="list list-inline">
-										
-									</ul>
+								<div style="height: auto;">
+									<div class="tabs top-all-tab">
+										<ul id="top-truckers-list-all" class="list list-inline"></ul>
+									</div>
+									<div class="tabs top-week-tab" style="display: none;">
+										<ul id="top-truckers-list-week" class="list list-inline"></ul>
+									</div>
+									<div class="tabs top-month-tab" style="display: none;">
+										<ul id="top-truckers-list-month" class="list list-inline"></ul>
+									</div>
+									<div class="tabs top-season-tab" style="display: none;">
+										<ul id="top-truckers-list-season" class="list list-inline"></ul>
+									</div>
 								</div>
 							</div>
 						</div>

@@ -33,7 +33,12 @@ Lang["de"] = {
 	statistics_page_trucks: "Lastwagen",
 	statistics_page_drivers: "Fahrer",
 	statistics_page_top_truckers: "Top-Fahrer",
-	statistics_page_top_truckers_desc: "Liste der Top 10 LKW-Fahrer in der Stadt",
+    statistics_page_top_truckers_desc: "Liste der Top 10 LKW-Fahrer in der Stadt",
+
+    leaderboard_filter_all: "Gesamte Zeit",
+    leaderboard_filter_week: "Woche",
+    leaderboard_filter_month: "Monat",
+    leaderboard_filter_season: "Saison",
 
 	contract_page_title: "Schnelljobs",
 	contract_page_desc: "Hier brauchst du keinen eigenen LKW. Die Firma stellt alles für dich bereit.",

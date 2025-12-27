@@ -15,6 +15,7 @@ Lang['es'] = {
     ['press_e_to_park'] = '~w~Presiona ~g~[E]~w~ para estacionar la ~b~carga~w~.',
     ['park_your_truck'] = '~w~Estaciona el ~b~camión~w~ correctamente en el ~y~estacionamiento~w~.',
     ['bring_back'] = '~w~Lleva el ~b~camión~w~ de vuelta al ~y~garaje~w~.',
+    ['pickup_cargo'] = "Conduce hasta el ~y~punto de recogida de la carga~w~ marcado en tu mapa",
     ['fast_cargo_timer'] = '~w~Tienes ~b~%s~w~ segundos para entregar la ~y~carga~w~.',
     ['failed_urgent_time'] = "No lograste entregar la carga urgente a tiempo. Recibirás una penalización del %s%% en tu recompensa",
     ['failed_fragile_health'] = "No lograste entregar la carga frágil con más de %s%% de integridad. Recibirás una penalización del %s%% en tu recompensa",

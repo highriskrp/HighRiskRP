@@ -33,7 +33,12 @@ Lang["es"] = {
   	statistics_page_trucks: "Camiones",
   	statistics_page_drivers: "Conductores",
   	statistics_page_top_truckers: "Mejores Conductores",
-  	statistics_page_top_truckers_desc: "Lista de los 10 mejores conductores de camiones en la ciudad",
+    statistics_page_top_truckers_desc: "Lista de los 10 mejores conductores de camiones en la ciudad",
+
+    leaderboard_filter_all: "Todo el tiempo",
+    leaderboard_filter_week: "Semana",
+    leaderboard_filter_month: "Mes",
+    leaderboard_filter_season: "Temporada",
 
   	contract_page_title: "Trabajos Rápidos",
   	contract_page_desc: "Explora varias oportunidades de trabajo sin necesidad de tu propio camión. La empresa te proporcionará todos los recursos necesarios, a costa de ganar un poco menos de dinero",
