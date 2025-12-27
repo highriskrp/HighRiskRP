@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS `brutal_keys` (
+  `player` text DEFAULT NULL,
+  `keys_data` longtext DEFAULT NULL,
+  UNIQUE KEY `Index 1` (`player`(100))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+ALTER TABLE `player_vehicles`
+ADD COLUMN `keyid` TEXT NOT NULL DEFAULT '';
