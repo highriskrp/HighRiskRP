@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sound Handler</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+</head>
+<body>
+  <script>
+    let audioPlayer = null;
+
+    // Listen for NUI / window messages and play sound
+    window.addEventListener("message", (event) => {
+      const data = event.data;
+      if (data.action === "PlaySound") {
+        audioPlayer = new Howl({ src: ["./sounds/" + data.audio] });
+        audioPlayer.volume(data.volume || 1.0);
+        audioPlayer.play();
+      }
+    });
+  </script>
+</body>
+</html>
