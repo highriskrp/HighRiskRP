@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<WeaponShopItemArray>
+	<weaponShopItems>
+		<Item>
+			<lockHash>CU_WEP_VITYAZ</lockHash>
+			<nameHash>VITYAZ</nameHash>
+			<cost value ="9750"/>
+			<ammoCost value="1200"/>
+			<textLabel>WT_VITYAZ</textLabel>
+			<weaponDesc>WTD_VITYAZ</weaponDesc>
+			<weaponTT>WTT_VITYAZ</weaponTT>
+			<weaponUppercase>WTU_VITYAZ</weaponUppercase>
+			<id value = "32"/>
+			<weaponComponents>
+			</weaponComponents>
+		</Item>
+	</weaponShopItems>
+</WeaponShopItemArray>	

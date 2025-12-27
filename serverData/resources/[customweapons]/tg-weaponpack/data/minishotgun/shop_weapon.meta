@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<WeaponShopItemArray>
+	<weaponShopItems>
+		<Item>
+			<lockHash>CU_WEP_MINISHOTGUN</lockHash>
+			<nameHash>WEAPON_MINISHOTGUN</nameHash>
+			<cost value ="14650"/>
+			<ammoCost value="108"/>
+			<textLabel>WT_MNSHOTGUN</textLabel>
+			<weaponDesc>WTD_MNSHOTGUN</weaponDesc>
+			<weaponTT>WTT_MNSHOTGUN</weaponTT>
+			<weaponUppercase>WTU_MNSHOTGUN</weaponUppercase>
+			<id value = "32"/>
+			<weaponComponents>
+				<Item>
+					<componentName>COMPONENT_MINISHOTGUN_CLIP_01</componentName>
+					<cost value = "50"/>
+					<textLabel>WCT_CLIP1</textLabel>
+					<componentDesc>WCD_CMPR_CLIP1</componentDesc>
+				</Item>
+				<Item>
+					<componentName>COMPONENT_MINISHOTGUN_DOVERAIL</componentName>
+					<cost value = "9950"/>
+					<textLabel>NULL</textLabel>
+					<componentDesc>NULL</componentDesc>
+				</Item>
+			</weaponComponents>
+		</Item>
+	</weaponShopItems>
+</WeaponShopItemArray>	

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WeaponShopItemArray>
+    <weaponShopItems>
+        <Item>
+            <lockHash>CU_WEP_POCKETLIGHT</lockHash>
+            <nameHash>WEAPON_POCKETLIGHT</nameHash>
+            <cost value="2500"/>
+            <ammoCost value="0"/>
+            <textLabel>WT_POCKETLIGHT</textLabel>
+            <weaponDesc>WTD_POCKETLIGHT</weaponDesc>
+            <weaponTT>WTT_POCKETLIGHT</weaponTT>
+            <weaponUppercase>WTU_POCKETLIGHT</weaponUppercase>
+            <weaponComponents>
+                <Item>
+                    <componentName>COMPONENT_PLIGHT_W</componentName>
+                    <cost value="0"/>
+                    <textLabel>WCT_PFLASH</textLabel>
+                    <componentDesc>WCD_PFLASH</componentDesc>
+                </Item>
+                <Item>
+                    <componentName>COMPONENT_PLIGHT_UV</componentName>
+                    <cost value="1250"/>
+                    <textLabel>WCT_PFLASH_UV</textLabel>
+                    <componentDesc>WCD_PFLASH_UV</componentDesc>
+                </Item>
+                <Item>
+                    <componentName>COMPONENT_PLIGHT_RED</componentName>
+                    <cost value="250"/>
+                    <textLabel>WCT_PFLASH_RED</textLabel>
+                    <componentDesc>WCD_PFLASH_RED</componentDesc>
+                </Item>
+                <Item>
+                    <componentName>COMPONENT_PLIGHT_WAND_W</componentName>
+                    <cost value="300"/>
+                    <textLabel>WCT_PFLASH_WAND_W</textLabel>
+                    <componentDesc>WCD_PFLASH_WAND</componentDesc>
+                </Item>
+                <Item>
+                    <componentName>COMPONENT_PLIGHT_WAND_R</componentName>
+                    <cost value="300"/>
+                    <textLabel>WCT_PFLASH_WAND_R</textLabel>
+                    <componentDesc>WCD_PFLASH_WAND</componentDesc>
+                </Item>
+                <Item>
+                    <componentName>COMPONENT_PLIGHT_WAND_A</componentName>
+                    <cost value="300"/>
+                    <textLabel>WCT_PFLASH_WAND_A</textLabel>
+                    <componentDesc>WCD_PFLASH_WAND</componentDesc>
+                </Item>
+                <Item>
+                    <componentName>COMPONENT_PLIGHT_WAND_G</componentName>
+                    <cost value="300"/>
+                    <textLabel>WCT_PFLASH_WAND_G</textLabel>
+                    <componentDesc>WCD_PFLASH_WAND</componentDesc>
+                </Item>
+                <!--
+                <Item>
+                    <componentName>COMPONENT_PLIGHT_CAMO_01</componentName>
+                    <cost value="500"/>
+                    <textLabel>WCT_CAMO_1</textLabel>
+                    <componentDesc>WCD_INVALID</componentDesc>
+                </Item>
+                <Item>
+                    <componentName>COMPONENT_PLIGHT_CAMO_02</componentName>
+                    <cost value="500"/>
+                    <textLabel>WCT_CAMO_2</textLabel>
+                    <componentDesc>WCD_INVALID</componentDesc>
+                </Item>
+                <Item>
+                    <componentName>COMPONENT_PLIGHT_CAMO_03</componentName>
+                    <cost value="425"/>
+                    <textLabel>WCT_CAMO_3</textLabel>
+                    <componentDesc>WCD_INVALID</componentDesc>
+                </Item>
+                <Item>
+                    <componentName>COMPONENT_PLIGHT_CAMO_04</componentName>
+                    <cost value="500"/>
+                    <textLabel>WCT_CAMO_9</textLabel>
+                    <componentDesc>WCD_INVALID</componentDesc>
+                </Item>
+                -->
+            </weaponComponents>
+        </Item>
+    </weaponShopItems>
+</WeaponShopItemArray>

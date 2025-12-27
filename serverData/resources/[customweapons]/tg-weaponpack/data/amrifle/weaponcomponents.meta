@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CWeaponComponentInfoBlob>
+  <Data>
+  </Data>
+  <Infos>
+	
+	<!-- AM RIFLE -->
+	
+    <Item type="CWeaponComponentClipInfo">
+      <Name>COMPONENT_AMRIFLE_CLIP_01</Name>
+      <Model>w_sr_amrifle_mag1</Model>
+      <LocName>WCT_CLIP1</LocName>
+      <LocDesc>WCD_CLIP1</LocDesc>
+      <AttachBone>AAPClip</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+      <ClipSize value="5" />
+      <ReloadData ref="RELOAD_DEFAULT" />
+	  <AmmoInfo />
+      <TracerFx />
+      <TracerFxSpacing value="-1" />
+      <TracerFxForceLast value="-1" />
+    </Item>
+    <Item type="CWeaponComponentClipInfo">
+      <Name>COMPONENT_AMRIFLE_CLIP_02</Name>
+      <Model>w_sr_amrifle_mag2</Model>
+      <LocName>WCT_CLIP2</LocName>
+      <LocDesc>WCD_CLIP2</LocDesc>
+      <AttachBone>AAPClip</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+      <ClipSize value="10" />
+      <ReloadData ref="RELOAD_DEFAULT" />
+	  <AmmoInfo />
+      <TracerFx />
+      <TracerFxSpacing value="-1" />
+      <TracerFxForceLast value="-1" />
+    </Item>
+    <Item type="CWeaponComponentClipInfo">
+      <Name>COMPONENT_AMRIFLE_CLIP_INCENDIARY</Name>
+      <Model>w_sr_amrifle_mag_inc</Model>
+      <LocName>WCT_CLIP_INC</LocName>
+      <LocDesc>WCD_CLIP_INC</LocDesc>
+      <AttachBone>AAPClip</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+      <HudDamage value="10" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+      <ClipSize value="5" />
+      <ReloadData ref="RELOAD_DEFAULT" />
+	  <AmmoInfo>AMMO_SNIPER_INCENDIARY</AmmoInfo>
+      <TracerFx />
+      <TracerFxSpacing value="-1" />
+      <TracerFxForceLast value="-1" />
+    </Item>
+    <Item type="CWeaponComponentClipInfo">
+      <Name>COMPONENT_AMRIFLE_CLIP_EXPLOSIVE</Name>
+      <Model>w_sr_amrifle_mag_exp</Model>
+      <LocName>WCT_CLIP_EX</LocName>
+      <LocDesc>WCD_CLIP_EX</LocDesc>
+      <AttachBone>AAPClip</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+      <HudDamage value="10" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+      <ClipSize value="5" />
+      <ReloadData ref="RELOAD_DEFAULT" />
+	  <AmmoInfo>AMMO_SNIPER_EXPLOSIVE</AmmoInfo>
+      <TracerFx />
+      <TracerFxSpacing value="-1" />
+      <TracerFxForceLast value="-1" />
+    </Item>
+	
+    <Item type="CWeaponComponentSuppressorInfo">
+      <Name>COMPONENT_AMRIFLE_MUZZLE_FORCED</Name>
+	  <Model>w_sr_amrifle_muzzle</Model>
+      <LocName>WCT_MUZZ</LocName>
+      <LocDesc>WCD_MUZZ_SR</LocDesc>
+      <AttachBone>AAPSupp</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="5" />
+      <HudRange value="0" />
+      <MuzzleBone>Gun_SuMuzzle</MuzzleBone>
+	  <FlashFX />
+	  <ShouldSilence value="false" />
+      <!--<RecoilShakeAmplitudeModifier value="0.750000" />-->
+    </Item>
+	
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_AMRIFLE_IRONS</Name>
+	  <Model>w_sr_amrifle_irons</Model>
+      <LocName>WCT_CAMO_1</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_AMRIFLE_IRONS_FOLDED</Name>
+	  <Model>w_sr_amrifle_irons_folded</Model>
+      <LocName>WCT_CAMO_1</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	
+	<!--Camos-->
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_AMRIFLE_CAMO_BLUEZEBRA</Name>
+	  <Model>w_sr_amrifle_camo_bluezebra</Model>
+      <LocName>WCT_CAMO_1</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPBarrel</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="false" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_AMRIFLE_CAMO_HAZARD</Name>
+	  <Model>w_sr_amrifle_camo_hazard</Model>
+      <LocName>WCT_CAMO_1</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPBarrel</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="false" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_AMRIFLE_CAMO_DOLLARBILLS</Name>
+	  <Model>w_sr_amrifle_camo_money</Model>
+      <LocName>WCT_CAMO_1</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPBarrel</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="false" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_AMRIFLE_CAMO_REDLEOPARD</Name>
+	  <Model>w_sr_amrifle_camo_redleopard</Model>
+      <LocName>WCT_CAMO_1</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPBarrel</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="false" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_AMRIFLE_CAMO_SESSANTANOVE</Name>
+	  <Model>w_sr_amrifle_camo_sessantanove</Model>
+      <LocName>WCT_CAMO_1</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPBarrel</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="false" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_AMRIFLE_CAMO_SESSANTANOVE2</Name>
+	  <Model>w_sr_amrifle_camo_sessantanove2</Model>
+      <LocName>WCT_CAMO_1</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPBarrel</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="false" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_AMRIFLE_CAMO_SKULL</Name>
+	  <Model>w_sr_amrifle_camo_skull</Model>
+      <LocName>WCT_CAMO_1</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPBarrel</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="false" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_AMRIFLE_CAMO_TRIBAL</Name>
+	  <Model>w_sr_amrifle_camo_tribal</Model>
+      <LocName>WCT_CAMO_1</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPBarrel</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="false" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_AMRIFLE_CAMO_TRUERUFFIAN</Name>
+	  <Model>w_sr_amrifle_camo_trueruffian</Model>
+      <LocName>WCT_CAMO_1</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPBarrel</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="false" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_AMRIFLE_CAMO_XMAS</Name>
+	  <Model>w_sr_amrifle_camo_xmas</Model>
+      <LocName>WCT_CAMO_1</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPBarrel</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="false" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_AMRIFLE_CAMO_ZANCUDO</Name>
+	  <Model>w_sr_amrifle_camo_zancudo</Model>
+      <LocName>WCT_CAMO_1</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPBarrel</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="false" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	<!--Scope-->
+    <Item type="CWeaponComponentScopeInfo">
+      <Name>COMPONENT_AMRIFLE_SCOPE_LARGE</Name>
+      <Model>w_sr_amrifle_scope_large</Model>
+      <LocName>WCT_SCOPE_LRG</LocName>
+      <LocDesc>WCD_SCOPE_LRG</LocDesc>
+      <AttachBone>AAPScop</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="5" />
+      <HudRange value="0" />
+      <CameraHash>SNIPER_LOW_ZOOM_AIM_CAMERA</CameraHash>
+      <RecoilShakeAmplitude value="0.280000" />
+      <ExtraZoomFactorForAccurateMode value="0.000000" />
+      <ReticuleHash>SNIPER_LARGE</ReticuleHash>
+    </Item>
+    <Item type="CWeaponComponentScopeInfo">
+      <Name>COMPONENT_AMRIFLE_SCOPE_MAX</Name>
+      <Model>w_sr_amrifle_scope_max</Model>
+      <LocName>WCT_SCOPE_MAX</LocName>
+      <LocDesc>WCD_SCOPE_MAX</LocDesc>
+      <AttachBone>AAPScop</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="10" />
+      <HudRange value="0" />
+      <CameraHash>SNIPER_AIM_CAMERA</CameraHash>
+      <RecoilShakeAmplitude value="0.280000" />
+      <ExtraZoomFactorForAccurateMode value="0.000000" />
+      <ReticuleHash>SNIPER_MAX</ReticuleHash>
+    </Item>
+	<!--Retro-->
+	<Item type="CWeaponComponentVariantModelInfo">
+      <Name>COMPONENT_AMRIFLE_VARMOD_RETRO</Name>
+      <Model>w_sr_amrifle_futurist</Model>
+      <LocName>WCT_INVALID</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone />
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="false" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+	  <TintIndexOverride value="0"/>
+	  <ExtraComponents>
+		<Item>
+		  <ComponentName>COMPONENT_AMRIFLE_SCOPE_LARGE</ComponentName>
+		  <ComponentModel>w_at_scope_futurist</ComponentModel>
+		</Item>
+		<Item>
+		  <ComponentName>COMPONENT_AMRIFLE_SCOPE_MAX</ComponentName>
+		  <ComponentModel>w_at_scope_futurist</ComponentModel>
+		</Item>
+		<Item>
+		  <ComponentName>COMPONENT_AMRIFLE_MUZZLE_FORCED</ComponentName>
+		  <ComponentModel>w_sr_amrifle_muzzle_futurist</ComponentModel>
+		</Item>
+		<Item>
+		  <ComponentName>COMPONENT_AMRIFLE_SUPPRESSOR</ComponentName>
+		  <ComponentModel>w_sr_amrifle_suppressor_futurist</ComponentModel>
+		</Item>
+	  </ExtraComponents>
+    </Item>
+	<!--Supp-->
+    <Item type="CWeaponComponentSuppressorInfo">
+      <Name>COMPONENT_AMRIFLE_SUPPRESSOR</Name>
+      <Model>w_sr_amrifle_suppressor</Model>
+      <LocName>WCT_SUPP</LocName>
+      <LocDesc>WCD_SR_SUPP</LocDesc>
+      <AttachBone>AAPSupp</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="CWeaponDamageModifier">
+        <DamageModifier value="0.800000" />
+      </DamageModifier>
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="true" />
+      <HudDamage value="-5" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="-5" />
+      <MuzzleBone>Gun_SuMuzzle</MuzzleBone>
+      <FlashFx>muz_pistol_silencer</FlashFx>
+    </Item>
+	
+  </Infos>
+  <InfoBlobName>DLC - AMRifle</InfoBlobName>
+</CWeaponComponentInfoBlob>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<WeaponShopItemArray>
+	<weaponShopItems>
+		<Item>
+			<lockHash>CU_WEP_HK416G</lockHash>
+			<nameHash>WEAPON_HK416G</nameHash>
+			<cost value ="5000"/>
+			<ammoCost value="50"/>
+			<textLabel>WT_HK416G</textLabel>
+			<weaponDesc>WTD_HK416G</weaponDesc>
+			<weaponTT>WTT_HK416G</weaponTT>
+			<weaponUppercase>WTU_HK416G</weaponUppercase>
+			<id value = "32"/>
+			<weaponComponents>
+                <Item>
+					<componentName>COMPONENT_HK416G_CLIP_01</componentName>
+					<cost value = "2000"/>
+					<textLabel>WCT_CLIP1</textLabel>
+					<componentDesc>WCD_CR_CLIP1</componentDesc>
+					</Item>
+				<Item>
+					<componentName>COMPONENT_AT_AR_SOCOML</componentName>
+					<cost value = "3000"/>
+					<textLabel>WCT_SUPP</textLabel>
+					<componentDesc>WCD_AR_SUP</componentDesc>
+				</Item>
+				<Item>
+					<componentName>COMPONENT_AT_SCOPE_SOF</componentName>
+					<cost value = "3000"/>
+					<textLabel>WCT_SCOPE_MED</textLabel>
+					<componentDesc>WCD_SCOPE_MED</componentDesc>
+				</Item>
+                </weaponComponents>
+                </Item>
+        </weaponShopItems>
+</WeaponShopItemArray>

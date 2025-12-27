@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF - 8"?>
+
+<CWeaponModelInfo__InitDataList>
+	<InitDatas>
+		<Item>
+			<modelName>w_at_scope_sof2</modelName>
+			<txdName>w_at_scope_sof2</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+			<Item>
+			<modelName>w_at_scope_sof1</modelName>
+			<txdName>w_at_scope_sof1</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		 </Item>
+			<Item>
+			<modelName>w_at_scope_sof</modelName>
+			<txdName>w_at_scope_sof</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>w_at_cr_stock_1</modelName>
+			<txdName>w_at_cr_stock_1</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>w_at_cr_stock_2</modelName>
+			<txdName>w_at_cr_stock_2</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+			<Item>
+			<modelName>w_at_cr_stock_3</modelName>
+			<txdName>w_at_cr_stock_3</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>w_at_cr_stock_4</modelName>
+			<txdName>w_at_cr_stock_4</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>w_at_ar_socomll</modelName>
+			<txdName>w_at_ar_socomll</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>w_at_ar_socoml</modelName>
+			<txdName>w_at_ar_socoml</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>w_at_ar_modc</modelName>
+			<txdName>w_at_ar_modc</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>w_at_ar_modb</modelName>
+			<txdName>w_at_ar_modb</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>w_at_ar_moda</modelName>
+			<txdName>w_at_ar_moda</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>w_at_ar_fl1b</modelName>
+			<txdName>w_at_ar_fl1b</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>w_at_ar_fl1</modelName>
+			<txdName>w_at_ar_fl1</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>w_ar_hk416g_mag1</modelName>
+			<txdName>w_ar_hk416g_mag1</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+				<Item>
+			<modelName>w_ar_hk416g_mag2</modelName>
+			<txdName>w_ar_hk416g_mag2</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+						<Item>
+			<modelName>w_ar_hk416g_mag3</modelName>
+			<txdName>w_ar_hk416g_mag3</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>w_ar_hk416g</modelName>
+			<txdName>w_ar_hk416g</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+	</InitDatas>
+</CWeaponModelInfo__InitDataList>

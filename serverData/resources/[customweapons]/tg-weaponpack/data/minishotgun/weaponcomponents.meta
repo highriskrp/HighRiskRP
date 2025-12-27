@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CWeaponComponentInfoBlob>
+  <Data>
+  </Data>
+  <Infos>
+    <Item type="CWeaponComponentClipInfo">
+      <Name>COMPONENT_MINISHOTGUN_CLIP_01</Name>
+      <Model>w_sg_heavyshotgun_smg_mag1</Model>
+      <LocName>WCT_CLIP1</LocName>
+      <LocDesc>WCD_CMPR_CLIP1</LocDesc>
+      <AttachBone>AAPClip</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+      <ClipSize value="5" />
+      <ReloadData ref="RELOAD_DEFAULT" />
+    </Item>
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_MINISHOTGUN_DOVERAIL</Name>
+      <Model>w_sg_heavyshotgun_smg_doverail</Model>
+      <LocName>NULL</LocName>
+      <LocDesc>NULL</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_MINISHOTGUN_STOCK</Name>
+	  <Model>w_sg_heavyshotgun_smg_stock</Model>
+      <LocName>COMPONENT_MINISHOTGUN_STOCK</LocName>
+      <LocDesc>NULL</LocDesc>
+      <AttachBone>AAPGrip</AttachBone>
+      <AccuracyModifier type="CWeaponAccuracyModifier">
+      	<AccuracyModifier value="1.100000" />
+      </AccuracyModifier>
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="5" />
+      <HudRange value="0" />
+    </Item>
+	<Item type="CWeaponComponentVariantModelInfo">
+      <Name>COMPONENT_MINISHOTGUN_VARMOD_LUXE</Name>
+      <Model>w_sg_heavyshotgun_smg_luxe</Model>
+      <LocName>WCT_INVALID</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone />
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="false" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+	  <TintIndexOverride value="2"/>
+	  <ExtraComponents>
+	  <Item>
+		  <ComponentName>COMPONENT_MINISHOTGUN_STOCK</ComponentName>
+		  <ComponentModel>w_sg_heavyshotgun_smg_stock_luxe</ComponentModel>
+		</Item>
+		<Item>
+		  <ComponentName>COMPONENT_MINISHOTGUN_DOVERAIL</ComponentName>
+		  <ComponentModel>w_sg_heavyshotgun_smg_doverail_luxe</ComponentModel>
+		</Item>
+	  </ExtraComponents>
+    </Item>
+  </Infos>
+  <InfoBlobName>DLC - Yuriy's Aftermarket</InfoBlobName>
+</CWeaponComponentInfoBlob>

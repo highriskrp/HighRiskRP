@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CWeaponModelInfo__InitDataList>
+	<InitDatas>
+
+		<!-- Mini Shotgun -->
+		<Item>
+		  <modelName>w_sg_heavyshotgun_smg</modelName>
+		  <txdName>w_sg_heavyshotgun_smg</txdName>
+		  <ptfxAssetName>NULL</ptfxAssetName>
+		  <lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgun_smg_mag1</modelName>
+			<txdName>w_sg_heavyshotgun_smg_mag1</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgun_smg_doverail</modelName>
+			<txdName>w_sg_heavyshotgun_smg_doverail</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgun_smg_stock</modelName>
+			<txdName>w_sg_heavyshotgun_smg_stock</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		
+		<!--Luxe Variant-->
+		<Item>
+		  <modelName>w_sg_heavyshotgun_smg_luxe</modelName>
+		  <txdName>w_sg_heavyshotgun_smg_luxe</txdName>
+		  <ptfxAssetName>NULL</ptfxAssetName>
+		  <lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgun_smg_doverail_luxe</modelName>
+			<txdName>w_sg_heavyshotgun_smg_doverail_luxe</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgun_smg_stock_luxe</modelName>
+			<txdName>w_sg_heavyshotgun_smg_stock_luxe</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+				
+	</InitDatas>
+</CWeaponModelInfo__InitDataList>

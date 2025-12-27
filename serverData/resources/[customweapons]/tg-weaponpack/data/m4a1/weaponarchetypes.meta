@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF - 8"?>
+
+<CWeaponModelInfo__InitDataList>
+	<InitDatas>
+		<Item>
+			<modelName>M4A1_FluffysMods</modelName>
+			<txdName>M4A1</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1SCOPE4_FluffysMods</modelName>
+			<txdName>M4A1</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1SCOPE3_FluffysMods</modelName>
+			<txdName>M4A1</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1SCOPE2_FluffysMods</modelName>
+			<txdName>M4A1</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1SCOPE1_FluffysMods</modelName>
+			<txdName>M4A1</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1FLSH6_FluffysMods</modelName>
+			<txdName>EXT</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1FLSH5_FluffysMods</modelName>
+			<txdName>EXT</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1FLSH4_FluffysMods</modelName>
+			<txdName>EXT</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1FLSH3_FluffysMods</modelName>
+			<txdName>EXT</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1FLSH2_FluffysMods</modelName>
+			<txdName>EXT</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1FLSH1_FluffysMods</modelName>
+			<txdName>EXT</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1CLIP4_FluffysMods</modelName>
+			<txdName>EXT</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1CLIP3_FluffysMods</modelName>
+			<txdName>EXT</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1CLIP2_FluffysMods</modelName>
+			<txdName>EXT</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1CLIP1_FluffysMods</modelName>
+			<txdName>EXT</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1Barrel4_FluffysMods</modelName>
+			<txdName>EXT</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1Barrel3_FluffysMods</modelName>
+			<txdName>EXT</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1Barrel2_FluffysMods</modelName>
+			<txdName>EXT</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+		<Item>
+			<modelName>M4A1Barrel1_FluffysMods</modelName>
+			<txdName>EXT</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+	</InitDatas>
+</CWeaponModelInfo__InitDataList>
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<WeaponShopItemArray>
+	<weaponShopItems>
+		<Item>
+			<lockHash>CU_WEP_HEAVYSHOTGUNMK2</lockHash>
+			<nameHash>WEAPON_HEAVYSHOTGUN_MK2</nameHash>
+			<cost value ="14650"/>
+			<ammoCost value="108"/>
+			<textLabel>WT_HVSHOTGUNMK2</textLabel>
+			<weaponDesc>WTD_HVSHOTGUNMK2</weaponDesc>
+			<weaponTT>WTT_HVSHOTGUNMK2</weaponTT>
+			<weaponUppercase>WTU_HVSHOTGUNMK2</weaponUppercase>
+			<id value = "32"/>
+			<weaponComponents/>
+		</Item>
+	</weaponShopItems>
+</WeaponShopItemArray>	

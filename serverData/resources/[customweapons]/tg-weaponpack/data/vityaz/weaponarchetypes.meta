@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CWeaponModelInfo__InitDataList>
+	<InitDatas>
+		<!-- ### PP-19 VITYAZ ### -->
+		<Item>
+			<modelName>W_SMG_VITYAZ</modelName>
+			<txdName>W_SMG_VITYAZ</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>	
+		<Item>
+			<modelName>W_AT_SMG_VITYAZM</modelName>
+			<txdName>W_AT_SMG_VITYAZM</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>	
+		<Item>
+			<modelName>W_AT_SMG_VITYAZS</modelName>
+			<txdName>W_AT_SMG_VITYAZS</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>	
+		<Item>
+			<modelName>W_SMG_VITYAZ30</modelName>
+			<txdName>W_SMG_VITYAZ30</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>	
+		<Item>
+			<modelName>W_SMG_VITYAZ20</modelName>
+			<txdName>W_SMG_VITYAZ20</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>	
+
+	</InitDatas>
+</CWeaponModelInfo__InitDataList>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CWeaponModelInfo__InitDataList>
+	<InitDatas>
+
+		<!-- Anti-Materiel Rifle -->
+		<Item>
+		  <modelName>w_sr_amrifle</modelName>
+		  <txdName>w_sr_amrifle</txdName>
+		  <ptfxAssetName>NULL</ptfxAssetName>
+		  <lodDist value="50"/>
+		</Item>
+		<Item>
+		  <modelName>w_sr_amrifle_mag1</modelName>
+		  <txdName>w_sr_amrifle_mag1</txdName>
+		  <ptfxAssetName>NULL</ptfxAssetName>
+		  <lodDist value="50"/>
+		</Item>
+		<Item>
+		  <modelName>w_sr_amrifle_mag2</modelName>
+		  <txdName>w_sr_amrifle_mag2</txdName>
+		  <ptfxAssetName>NULL</ptfxAssetName>
+		  <lodDist value="50"/>
+		</Item>
+		<Item>
+		  <modelName>w_sr_amrifle_mag_exp</modelName>
+		  <txdName>w_sr_amrifle_mag_exp</txdName>
+		  <ptfxAssetName>NULL</ptfxAssetName>
+		  <lodDist value="50"/>
+		</Item>
+		<Item>
+		  <modelName>w_sr_amrifle_mag_inc</modelName>
+		  <txdName>w_sr_amrifle_mag_inc</txdName>
+		  <ptfxAssetName>NULL</ptfxAssetName>
+		  <lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_muzzle</modelName>
+			<txdName>w_sr_amrifle_muzzle</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_irons_folded</modelName>
+			<txdName>w_sr_amrifle_irons_folded</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_irons</modelName>
+			<txdName>w_sr_amrifle_irons</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<!--Camos-->
+		<Item>
+			<modelName>w_sr_amrifle_camo_bluezebra</modelName>
+			<txdName>w_sr_amrifle_camo_bluezebra</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_camo_hazard</modelName>
+			<txdName>w_sr_amrifle_camo_hazard</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_camo_money</modelName>
+			<txdName>w_sr_amrifle_camo_money</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_camo_redleopard</modelName>
+			<txdName>w_sr_amrifle_camo_redleopard</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_camo_sessantanove</modelName>
+			<txdName>w_sr_amrifle_camo_sessantanove</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_camo_sessantanove2</modelName>
+			<txdName>w_sr_amrifle_camo_sessantanove2</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_camo_skull</modelName>
+			<txdName>w_sr_amrifle_camo_skull</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_camo_tribal</modelName>
+			<txdName>w_sr_amrifle_camo_tribal</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_camo_trueruffian</modelName>
+			<txdName>w_sr_amrifle_camo_trueruffian</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_camo_xmas</modelName>
+			<txdName>w_sr_amrifle_camo_xmas</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_camo_zancudo</modelName>
+			<txdName>w_sr_amrifle_camo_zancudo</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<!--Scope-->
+		<Item>
+			<modelName>w_sr_amrifle_scope_large</modelName>
+			<txdName>w_sr_amrifle_scope_large</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_scope_max</modelName>
+			<txdName>w_sr_amrifle_scope_max</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<!--Retro-->
+		<Item>
+			<modelName>w_sr_amrifle_futurist</modelName>
+			<txdName>w_sr_amrifle_futurist</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_at_scope_futurist</modelName>
+			<txdName>w_at_scope_futurist</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sr_amrifle_muzzle_futurist</modelName>
+			<txdName>w_sr_amrifle_muzzle_futurist</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>		
+		<Item>
+			<modelName>w_sr_amrifle_suppressor_futurist</modelName>
+			<txdName>w_sr_amrifle_suppressor_futurist</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>		
+		
+		<Item>
+			<modelName>w_sr_amrifle_suppressor</modelName>
+			<txdName>w_sr_amrifle_suppressor</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>		
+				
+	</InitDatas>
+</CWeaponModelInfo__InitDataList>

@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CWeaponComponentInfoBlob>
+  <Data>
+  </Data>
+  <Infos>
+  
+	<!-- MAGAZINES - HEAVY SHOTGUN MK II -->
+  
+    <Item type="CWeaponComponentClipInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CLIP_01</Name>
+      <Model>w_sg_heavyshotgunmk2_mag1</Model>
+      <LocName>WCT_SHELL</LocName>
+      <LocDesc>WCD_SHELL</LocDesc>
+      <AttachBone>AAPClip</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+      <ClipSize value="6" />
+      <ReloadData ref="RELOAD_DEFAULT" />
+	  <AmmoInfo />
+      <TracerFx />
+      <TracerFxSpacing value="-1" />
+      <TracerFxForceLast value="-1" />
+    </Item>
+    <Item type="CWeaponComponentClipInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CLIP_02</Name>
+      <Model>w_sg_heavyshotgunmk2_mag2</Model>
+      <LocName>WCT_SHELL</LocName>
+      <LocDesc>WCD_SHELL</LocDesc>
+      <AttachBone>AAPClip</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+      <ClipSize value="12" />
+      <ReloadData ref="RELOAD_DEFAULT" />
+	  <AmmoInfo />
+      <TracerFx />
+      <TracerFxSpacing value="-1" />
+      <TracerFxForceLast value="-1" />
+    </Item>
+    <!--<Item type="CWeaponComponentClipInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CLIP_SLUGS</Name>
+	  <Model>w_sg_heavyshotgunmk2_mag_slg</Model>
+      <LocName>WCT_CLIP1</LocName>
+      <LocDesc>WCD_CLIP1</LocDesc>
+      <AttachBone>AAPClip</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <FallOffModifier type="CWeaponFallOffModifier">
+        <RangeModifier value="1.0" />
+		<DamageModifier value="125.0" />
+      </FallOffModifier>
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+      <ClipSize value="6" />
+      <ReloadData ref="RELOAD_DEFAULT" />
+	  <AmmoInfo />
+      <TracerFx />
+      <TracerFxSpacing value="-1" />
+      <TracerFxForceLast value="-1" />
+	  <BulletsInBatch value="1" />
+    </Item>-->
+    <Item type="CWeaponComponentClipInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CLIP_ARMORPIERCING</Name>
+      <Model>w_sg_heavyshotgunmk2_mag_ap</Model>
+      <LocName>WCT_SHELL_AP</LocName>
+      <LocDesc>WCD_SHELL_AP</LocDesc>
+      <AttachBone>AAPClip</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+      <HudDamage value="10" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+      <ClipSize value="6" />
+      <ReloadData ref="RELOAD_DEFAULT" />
+	  <AmmoInfo>AMMO_SHOTGUN_ARMORPIERCING</AmmoInfo>
+      <TracerFx />
+      <TracerFxSpacing value="-1" />
+      <TracerFxForceLast value="-1" />
+	  <ShellFx>eject_shotgun_ap</ShellFx>
+	  <ShellFxFP>eject_shotgun_ap_fp</ShellFxFP>
+	  <BulletsInBatch value="0" />
+    </Item>
+    <Item type="CWeaponComponentClipInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CLIP_EXPLOSIVE</Name>
+      <Model>w_sg_heavyshotgunmk2_mag_exp</Model>
+      <LocName>WCT_SHELL_EX</LocName>
+      <LocDesc>WCD_SHELL_EX</LocDesc>
+      <AttachBone>AAPClip</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+      <HudDamage value="10" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+      <ClipSize value="6" />
+      <ReloadData ref="RELOAD_DEFAULT" />
+	  <AmmoInfo>AMMO_SHOTGUN_EXPLOSIVE</AmmoInfo>
+      <TracerFx>bullet_tracer</TracerFx>
+      <TracerFxSpacing value="-1" />
+      <TracerFxForceLast value="-1" />
+	  <ShellFx>eject_shotgun_exp</ShellFx>
+	  <ShellFxFP>eject_shotgun_exp_fp</ShellFxFP>
+	  <BulletsInBatch value="1" />
+    </Item>
+    <Item type="CWeaponComponentClipInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CLIP_HOLLOWPOINT</Name>
+      <Model>w_sg_heavyshotgunmk2_mag_hp</Model>
+      <LocName>WCT_SHELL_HP</LocName>
+      <LocDesc>WCD_SHELL_HP</LocDesc>
+      <AttachBone>AAPClip</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+      <HudDamage value="10" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+      <ClipSize value="6" />
+      <ReloadData ref="RELOAD_DEFAULT" />
+	  <AmmoInfo>AMMO_SHOTGUN_HOLLOWPOINT</AmmoInfo>
+      <TracerFx />
+      <TracerFxSpacing value="-1" />
+      <TracerFxForceLast value="-1" />
+	  <ShellFx>eject_shotgun_hp</ShellFx>
+	  <ShellFxFP>eject_shotgun_hp_fp</ShellFxFP>
+	  <BulletsInBatch value="0" />
+    </Item>	
+    <Item type="CWeaponComponentClipInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CLIP_INCENDIARY</Name>
+      <Model>w_sg_heavyshotgunmk2_mag_inc</Model>
+      <LocName>WCT_CLIP_INC</LocName>
+      <LocDesc>WCD_CLIP_INC</LocDesc>
+      <AttachBone>AAPClip</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+      <HudDamage value="10" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+      <ClipSize value="6" />
+      <ReloadData ref="RELOAD_DEFAULT" />
+	  <AmmoInfo>AMMO_SHOTGUN_INCENDIARY</AmmoInfo>
+      <TracerFx>tracer_xm_shotgun_inc</TracerFx>
+      <TracerFxSpacing value="-1" />
+      <TracerFxForceLast value="-1" />
+	  <ShellFx>eject_shotgun_inc</ShellFx>
+	  <ShellFxFP>eject_shotgun_inc_fp</ShellFxFP>
+	  <BulletsInBatch value="0" />
+    </Item>
+
+	<!-- BARRELS - HEAVY SHOTGUN MK II -->
+	
+    <Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_BARREL_01</Name>
+	  <Model>w_sg_heavyshotgunmk2_barrel_1</Model>
+      <LocName>WCT_BARR</LocName>
+      <LocDesc>WCD_BARR</LocDesc>
+      <AttachBone>AAPBarrel</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+    <Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_BARREL_02</Name>
+	  <Model>w_sg_heavyshotgunmk2_barrel_2</Model>
+      <LocName>WCT_BARR2</LocName>
+      <LocDesc>WCD_BARR2</LocDesc>
+      <AttachBone>AAPBarrel</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <FallOffModifier type="CWeaponFallOffModifier">
+        <RangeModifier value="1.250000" />
+		<DamageModifier value="1.333333" />
+      </FallOffModifier>
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+	  <ApplyWeaponTint value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="5" />
+    </Item>
+
+	<!-- CAMO - HEAVY SHOTGUN MK II-->
+	
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CAMO</Name>
+	  <Model>w_sg_heavyshotgunmk2_camo1</Model>
+      <LocName>WCT_CAMO_1</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+    <Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CAMO_02</Name>
+	  <Model>w_sg_heavyshotgunmk2_camo2</Model>
+      <LocName>WCT_CAMO_2</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+    <Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CAMO_03</Name>
+	  <Model>w_sg_heavyshotgunmk2_camo3</Model>
+      <LocName>WCT_CAMO_3</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+    <Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CAMO_04</Name>
+	  <Model>w_sg_heavyshotgunmk2_camo4</Model>
+      <LocName>WCT_CAMO_4</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+    <Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CAMO_05</Name>
+	  <Model>w_sg_heavyshotgunmk2_camo5</Model>
+      <LocName>WCT_CAMO_5</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+    <Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CAMO_06</Name>
+	  <Model>w_sg_heavyshotgunmk2_camo6</Model>
+      <LocName>WCT_CAMO_6</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+    <Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CAMO_07</Name>
+	  <Model>w_sg_heavyshotgunmk2_camo7</Model>
+      <LocName>WCT_CAMO_7</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+    <Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CAMO_08</Name>
+	  <Model>w_sg_heavyshotgunmk2_camo8</Model>
+      <LocName>WCT_CAMO_8</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+    <Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CAMO_09</Name>
+	  <Model>w_sg_heavyshotgunmk2_camo9</Model>
+      <LocName>WCT_CAMO_9</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+    <Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CAMO_10</Name>
+	  <Model>w_sg_heavyshotgunmk2_camo10</Model>
+      <LocName>WCT_CAMO_10</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+    <Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_CAMO_IND_01</Name>
+	  <Model>w_sg_heavyshotgunmk2_camo_ind1</Model>
+      <LocName>WCT_CAMO_IND</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	
+	<!-- Muzzles -->
+    <Item type="CWeaponComponentSuppressorInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_MUZZLE_1</Name>
+	  <Model>w_sg_heavyshotgunmk2_muzzle_1</Model>
+      <LocName>WCT_MUZZ</LocName>
+      <LocDesc>WCD_MUZZ</LocDesc>
+      <AttachBone>AAPSupp</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="5" />
+      <HudRange value="0" />
+      <MuzzleBone>Gun_SuMuzzle</MuzzleBone>
+	  <FlashFX />
+	  <ShouldSilence value="false" />
+      <RecoilShakeAmplitudeModifier value="0.650000" />
+	  <ApplyWeaponTint value="true" />
+    </Item>
+	<Item type="CWeaponComponentSuppressorInfo">
+      <Name>COMPONENT_HEAVYSHOTGUN_MK2_MUZZLE_SUPP</Name>
+      <Model>w_sg_heavyshotgunmk2_muzzle_supp</Model>
+      <LocName>WCT_SUPP</LocName>
+      <LocDesc>WCD_SR_SUPP</LocDesc>
+      <AttachBone>AAPSupp</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+      <HudDamage value="-5" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="-5" />
+      <MuzzleBone>Gun_SuMuzzle</MuzzleBone>
+      <FlashFx>muz_pistol_silencer</FlashFx>
+    </Item>
+	
+  </Infos>
+  <InfoBlobName>DLC - Gunrunning 2</InfoBlobName>
+</CWeaponComponentInfoBlob>

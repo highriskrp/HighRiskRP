@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CWeaponModelInfo__InitDataList>
+	<InitDatas>
+
+		<!-- Mini Shotgun -->
+		<Item>
+		  <modelName>w_sg_heavyshotgunmk2</modelName>
+		  <txdName>w_sg_heavyshotgunmk2</txdName>
+		  <ptfxAssetName>NULL</ptfxAssetName>
+		  <lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_mag1</modelName>
+			<txdName>w_sg_heavyshotgunmk2_mag1</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_mag2</modelName>
+			<txdName>w_sg_heavyshotgunmk2_mag2</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_mag_slg</modelName>
+			<txdName>w_sg_heavyshotgunmk2_mag_slg</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_mag_ap</modelName>
+			<txdName>w_sg_heavyshotgunmk2_mag_ap</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_mag_exp</modelName>
+			<txdName>w_sg_heavyshotgunmk2_mag_exp</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_mag_hp</modelName>
+			<txdName>w_sg_heavyshotgunmk2_mag_hp</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_mag_inc</modelName>
+			<txdName>w_sg_heavyshotgunmk2_mag_inc</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_barrel_1</modelName>
+			<txdName>w_sg_heavyshotgunmk2</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_barrel_2</modelName>
+			<txdName>w_sg_heavyshotgunmk2</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_muzzle_1</modelName>
+			<txdName>w_sg_heavyshotgunmk2</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_muzzle_supp</modelName>
+			<txdName>w_sg_heavyshotgunmk2_muzzle_supp</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		
+		<!-- Attachments - Camo - Heavy Shotgun Mk2 -->
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_camo1</modelName>
+			<txdName>W_AT_ARMk2_Camo1</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="30"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_camo2</modelName>
+			<txdName>W_AT_ARMk2_Camo2</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="30"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_camo3</modelName>
+			<txdName>W_AT_ARMk2_Camo3</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="30"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_camo4</modelName>
+			<txdName>W_AT_ARMk2_Camo4</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="30"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_camo5</modelName>
+			<txdName>W_AT_ARMk2_Camo5</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="30"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_camo6</modelName>
+			<txdName>W_AT_ARMk2_Camo6</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="30"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_camo7</modelName>
+			<txdName>W_AT_ARMk2_Camo7</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="30"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_camo8</modelName>
+			<txdName>W_AT_ARMk2_Camo8</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="30"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_camo9</modelName>
+			<txdName>W_AT_ARMk2_Camo9</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="30"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_camo10</modelName>
+			<txdName>W_AT_ARMk2_Camo10</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="30"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgunmk2_camo_ind1</modelName>
+			<txdName>W_AT_ARMk2_Camo_Ind1</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="30"/>
+		</Item>
+				
+	</InitDatas>
+</CWeaponModelInfo__InitDataList>

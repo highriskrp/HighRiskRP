@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<WeaponShopItemArray>
+	<weaponShopItems>
+		<Item>
+			<lockHash>CU_WEP_AMRIFLE</lockHash>
+			<nameHash>WEAPON_AMRIFLE</nameHash>
+			<cost value ="14650"/>
+			<ammoCost value="108"/>
+			<textLabel>WT_AMRIFLE</textLabel>
+			<weaponDesc>WTD_AMRIFLE</weaponDesc>
+			<weaponTT>WTT_AMRIFLE</weaponTT>
+			<weaponUppercase>WTU_AMRIFLE</weaponUppercase>
+			<id value = "32"/>
+			<weaponComponents>
+			</weaponComponents>
+		</Item>
+	</weaponShopItems>
+</WeaponShopItemArray>	
