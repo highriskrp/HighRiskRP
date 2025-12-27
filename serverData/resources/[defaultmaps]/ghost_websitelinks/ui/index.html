@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Menu Title</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        // Function to toggle the menu visibility based on Lua messages
+        function ToggleMenu(show) {
+            var menu = document.querySelector('.cards');
+            if (show) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+
+        // Listen for messages from Lua
+        window.addEventListener('message', function(event) {
+            var item = event.data;
+            if (item.type === "ui") {
+                ToggleMenu(item.status);
+            }
+        });
+
+        // Listen for ESC key press to close the menu
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape") {
+                // Send a message to Lua to close the menu
+                fetch(`https://${GetParentResourceName()}/exit`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    },
+                    body: JSON.stringify({}),
+                });
+
+                // Hide the menu
+                ToggleMenu(false);
+            }
+        });
+
+        // Function to handle card clicks
+        function handleCardClicks() {
+            document.querySelectorAll('.card.content').forEach(card => {
+                card.addEventListener('click', function() {
+                    const url = card.getAttribute('data-url');
+                    if (url) {
+                        console.log(`Opening URL: ${url}`);
+                        window.invokeNative('openUrl', url);
+                    }
+                });
+            });
+        }
+
+        // Call the function once the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', handleCardClicks);
+    </script>
+</head>
+
+
+<div class="cards hidden">
+    <div class="card content" id="WebsiteCard" data-url="https://www.5mservers.com">
+      <div class="card-content"> 
+        <div class="card-img">
+          <img src="https://i.imgur.com/MfiFj7A.png" alt="Site">
+        </div>
+        <div class="card-label">5Mservers</div>
+        <div class="card-title">
+          5M Servers Website
+        </div>
+      </div>
+    </div>
+    <div class="card content" id="ServersCard" data-url="https://www.5mservers.com/fivem-servers">
+      <div class="card-content">
+        <div class="card-img">
+          <img src="https://i.imgur.com/hiDuNnK.png" alt="Servers">
+        </div>
+        <div class="card-label">
+          Servers
+        </div>
+        <div class="card-title">
+          Complete RP Servers
+        </div>
+      </div>
+    </div>
+    <div class="card content" id="YouTubeCard" data-url="https://www.youtube.com/channel/UCJI_r4vJY_YM-2oHu0iN4kQ">
+      <div class="card-content">
+        <div class="card-img">
+          <img src="https://i.imgur.com/NqxmXGu.png" alt="YouTube">
+        </div>
+        <div class="card-label">
+          YouTube
+        </div>
+        <div class="card-title">
+          View Our Latest Updates
+        </div>
+      </div>
+    </div>
+    <div class="card content" id="DiscordCard" data-url="https://discord.gg/9fAXjFeh95">
+        <div class="card-content">
+          <div class="card-img">
+            <!-- Replace with your desired YouTube image -->
+            <img src="https://i.imgur.com/BHktKCf.png" alt="Discord">
+          </div>
+          <div class="card-label">
+            Discord
+          </div>
+          <div class="card-title">
+            Join Our Discord
+          </div>
+        </div>
+      </div>
+      
+    <script src="js.js"></script>
+  </div>
