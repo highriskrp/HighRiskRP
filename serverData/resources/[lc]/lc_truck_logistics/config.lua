@@ -9,6 +9,22 @@ Config.job = {}		-- Required jobs name to open the menu (set as {} to disable th
 Config.disable_loans = false					-- Set this to true if you want to disable the loans
 Config.disable_drivers = false					-- Set this to true if you want to disable the NPC drivers
 
+-- Leaderboards configuration
+Config.leaderboards = {
+	['enabled'] = {				-- Enable/disable each leaderboard
+		['all_time'] = true,	-- Lifetime traveled distance ranking
+		['week'] = true,		-- Current week
+		['month'] = true,		-- Current calendar month
+		['season'] = true		-- Custom rolling window defined below
+	},
+
+	-- Seasonal window only applies when enabled.season = true
+	['season'] = {
+		['start_date'] = "2025-01-01", -- First season start; only defines where the cycle begins, exact date doesn’t matter much (YYYY-MM-DD)
+		['length_days'] = 90			-- Duration of each season; repeats in 90-day cycles endlessly
+	}
+}
+
 -- Here are the places where the person can open the trucker menu
 -- You can add as many locations as you like, just use the location already created as an example
 Config.trucker_locations = {
