@@ -1,0 +1,101 @@
+{
+  "name": "Cayo1",
+  "renderDistance": 100,
+  "coords": {
+    "x": 4478.18,
+    "y": -5738.14,
+    "z": 22.23
+  },
+  "radius": 20,
+  "amount": 10,
+  "regrowTime": 60,
+  "blip": {
+    "blipVisible": true,
+    "areaVisible": true,
+    "icon": 12,
+    "color": 1,
+    "scale": 1
+  },
+  "items": [
+    {
+      "item": "aluminum",
+      "chance": 10,
+      "amount": {
+        "min": 25,
+        "max": 100
+      }
+    },
+    {
+      "item": "steel",
+      "chance": 15,
+      "amount": {
+        "min": 25,
+        "max": 100
+      }
+    },
+    {
+      "item": "copper",
+      "chance": 15,
+      "amount": {
+        "min": 25,
+        "max": 100
+      }
+    },
+    {
+      "item": "rubber",
+      "chance": 15,
+      "amount": {
+        "min": 25,
+        "max": 100
+      }
+    },
+    {
+      "item": "plastic",
+      "chance": 15,
+      "amount": {
+        "min": 25,
+        "max": 100
+      }
+    },
+    {
+      "item": "glass",
+      "chance": 15,
+      "amount": {
+        "min": 25,
+        "max": 100
+      }
+    },
+    {
+      "item": "iron",
+      "chance": 15,
+      "amount": {
+        "min": 25,
+        "max": 100
+      }
+    }
+  ],
+  "props": [
+    {
+      "hash": "m23_1_prop_m31_crate_narc",
+      "textureVariation": 0,
+      "minimumDistanceBetween": 1,
+      "chance": 100,
+      "offset": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "collectMessage": "Collect Loot",
+      "labelSingular": "Material",
+      "labelPlurar": "Materials",
+      "upsideDown": false,
+      "forceZCoordinate": false,
+      "icon": "fa-user-secret"
+    }
+  ]
+}
