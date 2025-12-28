@@ -51,8 +51,11 @@ if Config.Framework == "esx" and not Config.OxInvetory then
     if ChargeOn then
         for _, value in ipairs(Config.ChargeItems) do
             RegisterUsableItem(value, function(source)
-                RemoveItem(source, value, 1)
-                TriggerClientEvent('gksphone:client:powerbank', source)
+                local isCharging = Player(source).state.phoneIsCharging
+                if not isCharging then
+                    RemoveItem(source, value, 1)
+                    TriggerClientEvent('gksphone:client:powerbank', source)
+                end
             end)
         end
     end

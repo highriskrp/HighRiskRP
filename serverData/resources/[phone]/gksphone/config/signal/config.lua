@@ -1,6 +1,5 @@
 -- Signal Phone Check for GKS Phone
 -- Made by Gkshop@Xenknight61 | discord.gg/XUck63E
--- Version: 1.0.0
 
 Config.PolyZoneDebug = false
 Config.Signal = false

@@ -40,9 +40,10 @@ CREATE TABLE IF NOT EXISTS `gksphone_advertising` (
   `phone_number` varchar(50) NOT NULL,
   `phone_id` varchar(50) CHARACTER SET utf8 NOT NULL,
   `firstname` varchar(256) NOT NULL,
+  `title` VARCHAR(250) NULL DEFAULT NULL,
   `message` longtext NOT NULL,
   `image` longtext DEFAULT NULL,
-  `filter` varchar(255) DEFAULT NULL,
+  `price` INT(11) NULL DEFAULT NULL,
   `time` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`) USING BTREE,
   KEY `phone_id` (`phone_id`),
@@ -183,6 +184,7 @@ CREATE TABLE IF NOT EXISTS `gksphone_messages_groups` (
   `group_name` longtext NOT NULL,
   `group_about` longtext NOT NULL,
   `group_image` longtext NOT NULL,
+  `admin_only_messages` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=Everyone can send, 1=Only admins can send',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`) USING BTREE,
   KEY `phone_id` (`phone_id`),
@@ -195,6 +197,7 @@ CREATE TABLE IF NOT EXISTS `gksphone_messages_groups_members` (
   `phone_id` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT '',
   `group_id` int(11) NOT NULL,
   `phone_number` varchar(50) NOT NULL,
+  `role` tinyint DEFAULT 0 COMMENT '0=Member, 1=Admin, 2=Owner',
   `joined_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`) USING BTREE,
   KEY `phone_id` (`phone_id`) USING BTREE,
@@ -670,18 +673,31 @@ CREATE VIEW `gksphone_instagram_conversations_v1` AS SELECT
     m.created_at as last_message_time,
     m.sender_id as last_message_sender_id,
     u3.username as last_message_sender_username,
-    COUNT(CASE WHEN m2.is_read = FALSE AND m2.sender_id != cp.user_id THEN 1 END) as unread_count
+    COUNT(CASE 
+        WHEN m2.is_read = FALSE 
+        AND m2.sender_id != cp.user_id 
+        AND (cp.messages_deleted_at IS NULL OR m2.created_at > cp.messages_deleted_at)
+        THEN 1 
+    END) as unread_count
 FROM gksphone_instagram_conversations c
 JOIN gksphone_instagram_conversation_participants cp ON c.conversation_id = cp.conversation_id
-LEFT JOIN gksphone_instagram_conversation_participants cp2 ON c.conversation_id = cp2.conversation_id AND cp2.user_id != cp.user_id
-LEFT JOIN gksphone_instagram_users u2 ON cp2.user_id = u2.user_id
-LEFT JOIN gksphone_instagram_messages m ON c.conversation_id = m.conversation_id AND m.message_id = (
-    SELECT MAX(message_id) FROM gksphone_instagram_messages WHERE conversation_id = c.conversation_id
-)
+LEFT JOIN gksphone_instagram_conversation_participants cp2 ON c.conversation_id = cp2.conversation_id 
+    AND cp2.user_id != cp.user_id
+LEFT JOIN gksphone_instagram_users u2 ON cp2.user_id = u2.user_id 
+    AND u2.is_active = TRUE
+LEFT JOIN gksphone_instagram_messages m ON c.conversation_id = m.conversation_id 
+    AND (cp.messages_deleted_at IS NULL OR m.created_at > cp.messages_deleted_at)
+    AND m.message_id = (
+        SELECT MAX(message_id) 
+        FROM gksphone_instagram_messages 
+        WHERE conversation_id = c.conversation_id
+        AND (cp.messages_deleted_at IS NULL OR created_at > cp.messages_deleted_at)
+    )
 LEFT JOIN gksphone_instagram_users u3 ON m.sender_id = u3.user_id
 LEFT JOIN gksphone_instagram_messages m2 ON c.conversation_id = m2.conversation_id
 WHERE cp.user_id IS NOT NULL
-AND u2.user_id IS NOT NULL
+    AND u2.user_id IS NOT NULL
+    AND (cp.messages_deleted_at IS NULL OR m.message_id IS NOT NULL)
 GROUP BY c.conversation_id, cp.user_id, u2.user_id, m.message_id;
 
 CREATE TABLE IF NOT EXISTS `gksphone_darkchat_users` (
@@ -754,7 +770,7 @@ CREATE TRIGGER `gksphone_instagram_create_comment_notification` AFTER INSERT ON 
     SELECT user_id INTO post_owner_id FROM gksphone_instagram_posts WHERE post_id = NEW.post_id;
     IF post_owner_id != NEW.user_id THEN
         INSERT INTO gksphone_instagram_notifications (user_id, actor_id, notification_type, post_id, comment_id)
-        VALUES (post_owner_id, NEW.user_id, 'comment', NEW.post_id, NEW.comment_id);
+        VALUES (NEW.user_id, post_owner_id, 'comment', NEW.post_id, NEW.comment_id);
     END IF;
 END //
 

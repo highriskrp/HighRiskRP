@@ -38,6 +38,50 @@ if retval then
             print("^6[GKSPHONE] ^1[ERROR]^7: Callback not found: "..name)
         end
     end)
+
+    -- awaitCallback
+    RegisterNetEvent("gksphone:server:awaitCallback", function(eventName, requestId, ...)
+        local src = source
+        local args = {...}
+
+        -- Güvenlik kontrolleri
+        if type(eventName) ~= "string" or eventName == "" then
+            print("^6[GKSPHONE] ^1[ERROR]^7: Invalid eventName from player: "..src)
+            return
+        end
+
+        if type(requestId) ~= "number" then
+            print("^6[GKSPHONE] ^1[ERROR]^7: Invalid requestId from player: "..src)
+            return
+        end
+
+        Debugprint("^3[INFO]^7: Server received awaitCallback request: "..eventName.." from player: "..src)
+
+        local success, err = pcall(function()
+            TriggerEvent(eventName, src, function(...)
+                local response = {...}
+                local size = 8001
+                local maxSafeSize = 8000
+                local encodeSuccess, encoded = pcall(json.encode, response)
+                if encodeSuccess then
+                    size = #encoded
+                end
+
+                if size > maxSafeSize then
+                    TriggerLatentClientEvent("gksphone:client:awaitCallbackResponse", src, 125000, requestId, table.unpack(response))
+                else
+                    TriggerClientEvent("gksphone:client:awaitCallbackResponse", src, requestId, table.unpack(response))
+                end
+            end, table.unpack(args))
+        end)
+
+        if not success then
+            local stackTrace = Citizen.InvokeNative(`FORMAT_STACK_TRACE` & 0xFFFFFFFF, nil, 0, Citizen.ResultAsString())
+            print(("^1SCRIPT ERROR: awaitCallback '%s' failed: %s^7\n%s"):format(eventName, err or "", stackTrace or ""))
+            -- Hata durumunda client'a nil yanıtı gönder
+            TriggerClientEvent("gksphone:client:awaitCallbackResponse", src, requestId, nil)
+        end
+    end)
 else
     RegisterNetEvent("gksphone:client:triggerServerCallback", function (cb, ...)
         local pack = msgpack.pack({...})
@@ -47,4 +91,47 @@ else
     CallBackServerTrigger = function(name, cb, ...)
         TriggerServerEvent("gksphone:server:triggerServerCallback", name, cb, ...)
     end
+
+    -- awaitCallback
+    local pendingCallbacks = {}
+    local requestIdCounter = 0
+    local CALLBACK_TIMEOUT = 120000 -- 120 saniye timeout
+
+    RegisterNetEvent("gksphone:client:awaitCallbackResponse", function(requestId, ...)
+        if pendingCallbacks[requestId] then
+            pendingCallbacks[requestId].promise:resolve({...})
+            pendingCallbacks[requestId] = nil
+        end
+    end)
+
+    function AwaitCallback(eventName, ...)
+        requestIdCounter = requestIdCounter + 1
+        local requestId = requestIdCounter
+        local p = promise.new()
+        local timeoutMs = CALLBACK_TIMEOUT
+
+        SetTimeout(timeoutMs, function()
+            if pendingCallbacks[requestId] then
+                Debugprint("^1[ERROR]^7: Callback timeout: "..eventName.." (RequestID: "..requestId..")")
+                pendingCallbacks[requestId].promise:resolve(nil)
+                pendingCallbacks[requestId] = nil
+            end
+        end)
+
+        pendingCallbacks[requestId] = {
+            promise = p,
+            eventName = eventName
+        }
+
+        TriggerServerEvent("gksphone:server:awaitCallback", eventName, requestId, ...)
+
+        local result = Citizen.Await(p)
+
+        if result then
+            return table.unpack(result)
+        end
+        return nil
+    end
+
+
 end

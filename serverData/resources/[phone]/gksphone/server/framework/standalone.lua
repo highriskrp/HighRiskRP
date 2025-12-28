@@ -310,5 +310,18 @@ RegisterCommand("chargephone", function (source, args)
     end
 end, true)
 
+RegisterCommand("emergencyAlert", function (source, args)
+    if (source > 0) then
+        if args then
+            local title = args[1]
+            local message = table.concat(args, " ", 2)
+            exports["gksphone"]:EmergencyAlert(title, message)
+            FreamworkNotify(source, 'Emergency alert sent', 'success')
+        else
+            FreamworkNotify(source, 'You did not write the required information', 'error')
+        end
+    end
+end, true)
+
 
 print('^2[GKSPHONE] Standalone Loaded!^7')

@@ -2,6 +2,10 @@ local musicData = {}
 
 RegisterNetEvent("gksphone:server:musicListen", function (musicid, volume, action, time)
     Debugprint("Music event", {musicid, volume, action, time, source})
+    if not action then
+        Debugprint("No action provided for musicListen")
+        return
+    end
     local src = source
     if action == "play" then
         musicData[src] = "play"
@@ -26,6 +30,10 @@ RegisterNetEvent("gksphone:server:musicListen", function (musicid, volume, actio
         musicData[src] = "call"
         exports["gks-sound"]:PlayUrlPos(-1, src, musicid, volume, time)
     elseif action == "musicNext" then
+        if not musicid or musicid == false then
+            Debugprint("No musicid provided for musicNext")
+            return
+        end
         if musicData[src] then
             exports["gks-sound"]:SetChangeMusic(-1, src, musicid)
         else
@@ -33,6 +41,10 @@ RegisterNetEvent("gksphone:server:musicListen", function (musicid, volume, actio
             exports["gks-sound"]:PlayUrlPos(-1, src, musicid, 0.2, nil)
             TriggerClientEvent("gksphone:client:musicListen", src)
         end
+    else
+        Debugprint("Unknown music action", action)
+        musicData[src] = nil
+        exports["gks-sound"]:Destroy(-1, src)
     end
 end)
 

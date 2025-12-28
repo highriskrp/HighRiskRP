@@ -45,8 +45,8 @@ if Config.Framework == "qb" or Config.Framework == "qbx" then
                     hash = tonumber(vehicle.hash),
                     model = vehicle.vehicle,
                     fuel = vehicle.fuel,
-                    engine = math.floor(vehicle.engine),
-                    body = math.floor(vehicle.body),
+                    engine = math.floor(vehicle.engine / 10 + 0.5),
+                    body = math.floor(vehicle.body / 10 + 0.5),
                     garage = vehicle.garage and vehicle.garage:gsub("^%l", string.upper) or "Unknown",
                     carseller = vehicle.carseller or 0
                 }
@@ -77,6 +77,13 @@ if Config.Framework == "qb" or Config.Framework == "qbx" then
                     if vehicle.state == 0 then
                         vehData.garage = "On The Street"
                     elseif vehicle.state == 2 then
+                        vehData.garage = "Impounded"
+                    end
+                elseif GetResourceState("qs-advancedgarages") == "started" then
+                    vehData.garage = vehicle.garage
+                    if vehicle.garage == "OUT" then
+                        vehData.garage = "On The Street"
+                    elseif type(vehicle.impound_data) == 'table' or vehicle.garage == "Hayes Autos" then  -- Hayes Autos is impound garage named in qs-advancedgarages, you can change it to your impound garage named
                         vehData.garage = "Impounded"
                     end
                 end
@@ -117,6 +124,14 @@ if Config.Framework == "qb" or Config.Framework == "qbx" then
                         Debugprint("gksphone:server:vale:vehiclebring | Vehicle is not in garage | CitizenID: " .. identifier .. " | Plate: " .. plate)
                         return "carnotingarage"
                     end
+                elseif GetResourceState("qs-advancedgarages") == "started" then
+                    if type(ret.impound_data) == 'table' or ret.garage == "Hayes Autos" then -- Hayes Autos is impound garage named in qs-advancedgarages, you can change it to your impound garage named
+                        Debugprint("gksphone:server:vale:vehiclebring | Vehicle is impounded | CitizenID: " .. identifier .. " | Plate: " .. plate)
+                        return "carimpounded"
+                    elseif ret.garage == "OUT" then
+                        Debugprint("gksphone:server:vale:vehiclebring | Vehicle is not in garage | CitizenID: " .. identifier .. " | Plate: " .. plate)
+                        return "carnotingarage"
+                    end
                 end
             end
             local vehData = {
@@ -147,6 +162,15 @@ if Config.Framework == "qb" or Config.Framework == "qbx" then
             MySQL.Async.execute('UPDATE player_vehicles SET  `state` = @state WHERE `plate` = @plate', {
                 ['@plate'] = plate,
                 ['@state'] = 0,
+            })
+        elseif GetResourceState("qs-advancedgarages") == "started" then
+            local query = string.format(
+                "UPDATE player_vehicles SET %s = @garage WHERE plate = @plate",
+                Config.GarageDBColumn
+            )
+            MySQL.Async.execute(query, {
+                ['@plate'] = plate,
+                ['@garage'] = "OUT"
             })
         end
     end
@@ -299,7 +323,8 @@ if Config.Framework == "qb" or Config.Framework == "qbx" then
                         source = v.PlayerData.source,
                         job = {
                             name = v.PlayerData.job.name,
-                            grade = v.PlayerData.job.grade.level
+                            grade = v.PlayerData.job.grade.level,
+                            onDuty = v.PlayerData.job.onduty
                         }
                     }
                 end
@@ -834,7 +859,18 @@ if Config.Framework == "qb" or Config.Framework == "qbx" then
             end
     end, 'god')
 
-
+    RegisterCommand("emergencyAlert", function (source, args)
+        if (source > 0) then
+            if args then
+                local title = args[1]
+                local message = table.concat(args, " ", 2)
+                exports["gksphone"]:EmergencyAlert(title, message)
+                FreamworkNotify(source, 'Emergency alert sent', 'success')
+            else
+                FreamworkNotify(source, 'You did not write the required information', 'error')
+            end
+        end
+    end, true)
 
     local response = MySQL.single.await("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'player_vehicles' AND COLUMN_NAME = 'carseller';")
     if response then

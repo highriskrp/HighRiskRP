@@ -50,13 +50,16 @@ if Config.Framework == "esx" then
         return money
     end
 
+    function ApplyVehicleMods(vehicle, vehicleData)
+        Config.Core.Game.SetVehicleProperties(vehicle, vehicleData?.vehMods)
+        GiveKeyCar(vehicle)
+        SetFuel(vehicle, vehicleData?.vehMods?.fuelLevel or 100.0)
+    end
+
     function VehicleCreate(model, coords, vehicleData)
         local createCar = CreateVehicle(model, coords.x, coords.y, coords.z, 0.0, true, false)
-
+        ApplyVehicleMods(createCar, vehicleData)
         SetVehicleOnGroundProperly(createCar)
-        Config.Core.Game.SetVehicleProperties(createCar, vehicleData?.vehMods)
-        SetFuel(createCar, vehicleData?.vehMods?.fuelLevel or 100)
-        GiveKeyCar(createCar)
         SetModelAsNoLongerNeeded(model)
         return createCar
     end
@@ -111,19 +114,23 @@ if Config.Framework == "esx" then
         TriggerServerEvent("gksphone:server:playerDropped")
     end)
 
-    AddEventHandler('esx:onPlayerDeath', function(data)
-        if PhoneOpen == true then
-            OpenPhone()
-        end
-        PhoneOpenBlock = true
-        PhoneBlockReason = "You can't use the phone while dead, handcuffed or in last stand."
-        if Incall then
-            EndPhoneCall()
-        end
-        if MusicData and MusicData[CurrentPlayerId] then
-            TriggerServerEvent('gksphone:server:musicListen', nil, nil, "pause", nil)
-        end
-    end)
+    if not Config.allowPhoneWhileDead then
+        AddEventHandler('esx:onPlayerDeath', function(data)
+            if PhoneOpen == true then
+                OpenPhone()
+            end
+            PhoneOpenBlock = true
+            PhoneBlockReason = "You can't use the phone while dead, handcuffed or in last stand."
+            if Incall then
+                EndPhoneCall()
+            end
+            local soundId = tostring(CurrentPlayerId)
+            local id = "music" .. soundId
+            if MusicData and MusicData[id] then
+                TriggerServerEvent('gksphone:server:musicListen', false, false, "pause", false)
+            end
+        end)
+    end
 
     AddEventHandler("playerSpawned", function()
         PhoneBlockReason = ""
@@ -135,27 +142,34 @@ if Config.Framework == "esx" then
         PhoneOpenBlock = false
     end)
 
-    RegisterNetEvent('esx_policejob:handcuff', function()
-        Cuffed = not Cuffed
-        if Cuffed then
-            if PhoneOpen == true then
-                OpenPhone()
+    if not Config.allowPhoneWhileCuffed then
+        RegisterNetEvent('esx_policejob:handcuff', function()
+            Cuffed = not Cuffed
+            if Cuffed then
+                if PhoneOpen == true then
+                    OpenPhone()
+                end
+                PhoneOpenBlock = true
+                PhoneBlockReason = "You can't use the phone while dead, handcuffed or in last stand."
+                if Incall then
+                    EndPhoneCall()
+                end
+                local soundId = tostring(CurrentPlayerId)
+                local id = "music" .. soundId
+                if MusicData and MusicData[id] then
+                    TriggerServerEvent('gksphone:server:musicListen', false, false, "pause", false)
+                end
+            else
+                PhoneBlockReason = ""
+                PhoneOpenBlock = false
             end
-            PhoneOpenBlock = true
-            PhoneBlockReason = "You can't use the phone while dead, handcuffed or in last stand."
-            if Incall then
-                EndPhoneCall()
-            end
-        else
+        end)
+
+        RegisterNetEvent('esx_policejob:unrestrain', function()
             PhoneBlockReason = ""
             PhoneOpenBlock = false
-        end
-    end)
-
-    RegisterNetEvent('esx_policejob:unrestrain', function()
-        PhoneBlockReason = ""
-        PhoneOpenBlock = false
-    end)
+        end)
+    end
 
 
     AddEventHandler('onResourceStart', function(resource)
@@ -173,6 +187,11 @@ if Config.Framework == "esx" then
                 end
             end
             TriggerServerEvent("gksphone:server:restartphone")
+            Wait(100)
+            if Config.AutoOpen then
+                Debugprint('Config.AutoOpen OnPlayerLoaded')
+                ForceLoadPhone()
+            end
         end
     end)
 

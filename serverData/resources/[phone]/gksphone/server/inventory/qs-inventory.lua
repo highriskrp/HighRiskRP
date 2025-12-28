@@ -63,7 +63,8 @@ if ChargeOn then
         exports['qs-inventory']:CreateUsableItem(value, function(source)
             local src = source
             local Player = GetIdentifier(src)
-            if Player then
+            local isCharging = Player(source).state.phoneIsCharging
+            if Player and not isCharging then
                 exports['qs-inventory']:RemoveItem(src, value, 1)
                 TriggerClientEvent('gksphone:client:powerbank', src)
             end

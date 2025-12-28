@@ -43,7 +43,7 @@ RegisterNetEvent("gksphone:client:jobStartMember", function (Details)
         end
 
         local car = NetworkGetEntityFromNetworkId(Details.carNetworkID)
-        SetFuel(car, 100)
+        SetFuel(car, 100.0)
         local ped = PlayerPedId()
 
         while not IsPedInVehicle(ped, car, false) do

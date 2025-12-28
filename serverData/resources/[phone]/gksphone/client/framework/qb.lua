@@ -63,12 +63,16 @@ if Config.Framework == "qb" or Config.Framework == "qbx" then
         return money
     end
 
+    function ApplyVehicleMods(vehicle, vehicleData)
+        Config.Core.Functions.SetVehicleProperties(vehicle, vehicleData.vehMods)
+        GiveKeyCar(vehicle)
+        SetFuel(vehicle, vehicleData?.fuel or 100.0)
+    end
+
     function VehicleCreate(model, coords, vehicleData)
         local createCar = CreateVehicle(model, coords.x, coords.y, coords.z, 0.0, true, false)
         SetVehicleOnGroundProperly(createCar)
-        Config.Core.Functions.SetVehicleProperties(createCar, vehicleData.vehMods)
-        SetFuel(createCar, vehicleData?.fuel or 100)
-        GiveKeyCar(createCar)
+        ApplyVehicleMods(createCar, vehicleData)
         SetModelAsNoLongerNeeded(model)
         return createCar
     end
@@ -108,6 +112,11 @@ if Config.Framework == "qb" or Config.Framework == "qbx" then
         end
     end)
 
+    RegisterNetEvent('QBCore:Client:SetDuty', function(onDuty) 
+        JobInfo.onDuty = onDuty
+        JobUpdate()
+    end)
+
     RegisterNetEvent('QBCore:Client:OnPlayerUnload', function(jobdata)
         Debugprint('QBCore:Client:OnPlayerUnload')
         PlayerData = {}
@@ -119,24 +128,33 @@ if Config.Framework == "qb" or Config.Framework == "qbx" then
         TriggerServerEvent("gksphone:server:playerDropped")
     end)
 
+    local function BlockPhone()
+        if PhoneOpen == true then
+            OpenPhone()
+        end
+        PhoneOpenBlock = true
+        PhoneBlockReason = "You can't use the phone while dead, handcuffed or in last stand."
+        if Incall then
+            EndPhoneCall()
+        end
+        local soundId = tostring(CurrentPlayerId)
+        local id = "music" .. soundId
+        if MusicData and MusicData[id] then
+            TriggerServerEvent('gksphone:server:musicListen', false, false, "pause", false)
+        end
+    end
+
     RegisterNetEvent('QBCore:Player:SetPlayerData', function(val)
         PlayerData = val
-
-        if PlayerData.metadata["ishandcuffed"] or PlayerData.metadata["isdead"] or PlayerData.metadata["inlaststand"] then
-            if PhoneOpen == true then
-                OpenPhone()
+        if not Config.allowPhoneWhileCuffed then
+            if not Config.allowPhoneWhileCuffed and PlayerData.metadata["ishandcuffed"] then
+                BlockPhone()
+            elseif not Config.allowPhoneWhileDead and (PlayerData.metadata["isdead"] or PlayerData.metadata["inlaststand"]) then
+                BlockPhone()
+            else
+                PhoneOpenBlock = false
+                PhoneBlockReason = ""
             end
-            PhoneOpenBlock = true
-            PhoneBlockReason = "You can't use the phone while dead, handcuffed or in last stand."
-            if Incall then
-                EndPhoneCall()
-            end
-            if MusicData and MusicData[CurrentPlayerId] then
-                TriggerServerEvent('gksphone:server:musicListen', nil, nil, "pause", nil)
-            end
-        else
-            PhoneOpenBlock = false
-            PhoneBlockReason = ""
         end
     end)
 
@@ -155,6 +173,11 @@ if Config.Framework == "qb" or Config.Framework == "qbx" then
                 end
             end
             TriggerServerEvent("gksphone:server:restartphone")
+            Wait(100)
+            if Config.AutoOpen then
+                Debugprint('Config.AutoOpen OnPlayerLoaded')
+                ForceLoadPhone()
+            end
         end
     end)
 end

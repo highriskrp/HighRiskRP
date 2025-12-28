@@ -48,3 +48,19 @@ function SearchPhoneItems(source)
     end
     return itemData
 end
+
+-- Powerbank Item Use Event
+if ChargeOn then
+    for _, value in ipairs(Config.ChargeItems) do
+        exports(value, function(event, item, inventory, slot, data)
+            if event == 'usingItem' then
+                local src = inventory.id
+                local isCharging = Player(src).state.phoneIsCharging
+                if not isCharging then
+                    TriggerClientEvent('gksphone:client:powerbank', src)
+                    exports.ox_inventory:RemoveItem(src, item, 1, nil, slot)
+                end
+            end
+        end)
+    end
+end

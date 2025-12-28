@@ -1,6 +1,6 @@
 --- GKSPHONE MUSIC APP ---
 -- Made by GKSHOP  | https://discord.gg/XUck63E
--- Version: 2.0.0
+-- Version: 2.1.1
 MusicData = {}
 local volume = 0.2
 StreamMode = false
@@ -21,33 +21,45 @@ RegisterNUICallback('gksphone:client:playMusic', function(data, cb)
     if data.action == "volume" then
         volume = data.volume
     end
-    local id = CurrentPlayerId
+    local soundId = tostring(CurrentPlayerId)
+    local id = "music" .. soundId
     if data.action == "stopcall" then
-        TriggerServerEvent('gksphone:server:musicListen', nil, nil, data.action, nil)
+        TriggerServerEvent('gksphone:server:musicListen', false, false, data.action, false)
     elseif MusicData[id] then
-        if data.action == "stop" and exports["gks-sound"]:soundExists(id) then
-            local getTime = exports["gks-sound"]:getTimeStamp(id)
+        if data.action == "stop" and exports["gks-sound"]:soundExists(soundId) then
+            local getTime = exports["gks-sound"]:getTimeStamp(soundId)
             check = {time = getTime}
         end
-        TriggerServerEvent('gksphone:server:musicListen', data.musicid, data.action == "volume" and data.volume or nil, data.action, data.action == "seek" and data.seekTime or nil)
+        if data.action == "volume" then
+            Debugprint("Setting volume to", data.volume)
+            TriggerServerEvent('gksphone:server:musicListen', false, data.volume, data.action, false)
+        elseif data.action == "seek" then
+            Debugprint("Seeking to", data.seekTime)
+            TriggerServerEvent('gksphone:server:musicListen', false, false, data.action, data.seekTime)
+        else
+            Debugprint("Performing action", data.action, data.musicid or false)
+            TriggerServerEvent('gksphone:server:musicListen', data.musicid or false, false, data.action, false)
+        end
     elseif not MusicData[id] and data.action == "musicNext" then
-        TriggerServerEvent('gksphone:server:musicListen', data.musicid, volume, "play", 0)
+        TriggerServerEvent('gksphone:server:musicListen', data.musicid or false, volume, "musicNext", 0)
     end
     cb(check)
 end)
 
 RegisterNetEvent("gksphone:client:musicListen", function (action)
-    if MusicData[CurrentPlayerId] then return end
-    exports["gks-sound"]:onPlayStart(CurrentPlayerId, function(event)
+    local soundId = tostring(CurrentPlayerId)
+    local id = "music" .. soundId
+    if MusicData[id] then return end
+    exports["gks-sound"]:onPlayStart(soundId, function(event)
         Debugprint("Music started", event)
-        MusicData[CurrentPlayerId] = {sid = CurrentPlayerId}
+        MusicData[id] = {sid = soundId}
         CreateThread(function()
             while true do
-                if not MusicData[CurrentPlayerId] then
+                if not MusicData[id] then
                     break
                 end
-                local duration = exports["gks-sound"]:getMaxDuration(CurrentPlayerId)
-                local currentTime = exports["gks-sound"]:getTimeStamp(CurrentPlayerId)
+                local duration = exports["gks-sound"]:getMaxDuration(soundId)
+                local currentTime = exports["gks-sound"]:getTimeStamp(soundId)
                 local progress = (currentTime / duration) * 100
                 if type(progress) == "number" and progress ~= progress then
                     progress = 0
@@ -61,7 +73,7 @@ RegisterNetEvent("gksphone:client:musicListen", function (action)
             end
         end)
     end)
-    exports['gks-sound']:onPlayEnd(CurrentPlayerId, function(event)
+    exports['gks-sound']:onPlayEnd(soundId, function(event)
         Debugprint("Music ended", event)
         SendNUIMessage({
             action = 'updatePlay',
@@ -69,27 +81,23 @@ RegisterNetEvent("gksphone:client:musicListen", function (action)
             isEnd = true
         })
     end)
-    exports['gks-sound']:onPlayPause(CurrentPlayerId, function(event)
+    exports['gks-sound']:onPlayPause(soundId, function(event)
         Debugprint("Music paused", event)
         SendNUIMessage({
             action = 'updatePlay',
             isPlay = false
         })
     end)
-    exports['gks-sound']:onPlayResume(CurrentPlayerId, function(event)
+    exports['gks-sound']:onPlayResume(soundId, function(event)
         Debugprint("Music resumed", event)
         SendNUIMessage({
             action = 'updatePlay',
             isPlay = true
         })
     end)
-    exports['gks-sound']:onPlayDestroy(CurrentPlayerId, function(event)
+    exports['gks-sound']:onPlayDestroy(soundId, function(event)
         Debugprint("Music destroy", event)
-        MusicData[CurrentPlayerId] = nil
-        TriggerServerEvent("gksphone:server:musicDestroy", CurrentPlayerId)
+        MusicData[id] = nil
+        TriggerServerEvent("gksphone:server:musicDestroy", soundId)
     end)
 end)
-
-RegisterCommand("musicfix2", function(source, args)
-    exports["gks-sound"]:mute()
-end, false)

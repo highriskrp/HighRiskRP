@@ -63,8 +63,8 @@ if Config.Framework == "esx" then
                 hash = tonumber(vehMods.model),
                 model = tonumber(vehMods.model),
                 fuel = vehMods?.fuelLevel or 100,
-                engine = math.floor(vehMods?.engineHealth or 1000.0 / 10 + 0.5),
-                body = math.floor(vehMods?.bodyHealth or 1000.0 / 10 + 0.5),
+                engine = vehMods?.engineHealth and math.floor(vehMods.engineHealth / 10 + 0.5) or 100,
+                body = vehMods?.bodyHealth and math.floor(vehMods.bodyHealth / 10 + 0.5) or 100,
                 garage = "Unknown",
                 type = vehicle.type and vehicle.type:gsub("^%l", string.upper) or "Car",
                 carseller = vehicle.carseller or 0
@@ -90,6 +90,13 @@ if Config.Framework == "esx" then
                 if vehicle.state == 0 then
                     vehData.garage = "On The Street"
                 elseif vehicle.state == 2 then
+                    vehData.garage = "Impounded"
+                end
+            elseif GetResourceState("qs-advancedgarages") == "started" then
+                vehData.garage = vehicle.garage
+                if vehicle.garage == "OUT" then
+                    vehData.garage = "On The Street"
+                elseif type(vehicle.impound_data) == 'table' or vehicle.garage == "Hayes Autos" then -- Hayes Autos is impound garage named in qs-advancedgarages, you can change it to your impound garage named
                     vehData.garage = "Impounded"
                 end
             end
@@ -129,6 +136,14 @@ if Config.Framework == "esx" then
                         Debugprint("gksphone:server:vale:vehiclebring | Vehicle is not in garage | CitizenID: " .. identifier .. " | Plate: " .. plate)
                         return "carnotingarage"
                     end
+                elseif GetResourceState("qs-advancedgarages") == "started" then
+                    if type(ret.impound_data) == 'table' or ret.garage == "Hayes Autos" then -- Hayes Autos is impound garage named in qs-advancedgarages, you can change it to your impound garage named
+                        Debugprint("gksphone:server:vale:vehiclebring | Vehicle is impounded | CitizenID: " .. identifier .. " | Plate: " .. plate)
+                        return "carimpounded"
+                    elseif ret.garage == "OUT" then
+                        Debugprint("gksphone:server:vale:vehiclebring | Vehicle is not in garage | CitizenID: " .. identifier .. " | Plate: " .. plate)
+                        return "carnotingarage"
+                    end
                 end
             end
             local vehMods = json.decode(ret.vehicle)
@@ -160,6 +175,12 @@ if Config.Framework == "esx" then
         elseif GetResourceState("esx_garage") == "started"  then
             MySQL.Async.execute('UPDATE owned_vehicles SET  `stored` = @stored WHERE `plate` = @plate', {
                 ['@plate'] = plate,
+                ['@stored'] = 0,
+            })
+        elseif GetResourceState("qs-advancedgarages") == "started"  then
+            MySQL.Async.execute('UPDATE owned_vehicles SET  `garage` = @garage, `stored` = @stored WHERE `plate` = @plate', {
+                ['@plate'] = plate,
+                ['@garage'] = "OUT",
                 ['@stored'] = 0,
             })
         end
@@ -229,10 +250,7 @@ if Config.Framework == "esx" then
             end
         else
             if Config.Core.DoesJobExist(job, grade) then
-                MySQL.update('UPDATE users SET job = ?, job_grade = ? WHERE identifier = ?', {job, grade, identifier},
-                function()
-                    cb()
-                end)
+                MySQL.update('UPDATE users SET job = ?, job_grade = ? WHERE identifier = ?', {job, grade, identifier})
                 return true
             end
         end
@@ -311,7 +329,8 @@ if Config.Framework == "esx" then
                     source = v.source,
                     job = {
                         name = v.job.name,
-                        grade = v.job.grade
+                        grade = v.job.grade,
+                        onDuty = v.job?.onDuty or true
                     }
                 }
             end
@@ -324,7 +343,8 @@ if Config.Framework == "esx" then
                         source = source,
                         job = {
                             name = playerData.job.name,
-                            grade = playerData.job.grade
+                            grade = playerData.job.grade,
+                            onDuty = true
                         }
                     }
                 end
@@ -432,6 +452,13 @@ if Config.Framework == "esx" then
                     end
                 end
             end)
+            return data
+        elseif GetResourceState("bcs_licensemanager") == 'started' then
+            local data = {}
+            local licenses = exports.bcs_licensemanager:GetLicenses(source)
+            for i = 1, #licenses, 1 do
+                data[licenses[i].label] = true
+            end
             return data
         else
             return {}
@@ -829,6 +856,18 @@ if Config.Framework == "esx" then
         end
     end, false, {help = 'Change phone charge percentage', arguments = {{name = "source", help = "Player Source", type = 'any'}, {name = "charge", help = "Charge Percentage", type = 'number'}}})
 
+    RegisterCommand("emergencyAlert", function (source, args)
+        if (source > 0) then
+            if args then
+                local title = args[1]
+                local message = table.concat(args, " ", 2)
+                exports["gksphone"]:EmergencyAlert(title, message)
+                FreamworkNotify(source, 'Emergency alert sent', 'success')
+            else
+                FreamworkNotify(source, 'You did not write the required information', 'error')
+            end
+        end
+    end, true)
 
     local response = MySQL.single.await("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'owned_vehicles' AND COLUMN_NAME = 'carseller';")
     if response then

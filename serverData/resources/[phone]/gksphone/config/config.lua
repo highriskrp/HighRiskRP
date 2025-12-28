@@ -31,7 +31,8 @@ Config.PropName = { -- Phone props (3D models) - No need to change
 }
 Config.ItemRequire = true           -- Require phone item to use phone? (true = yes, false = no) ( If the meta is active, the item's requirement must be true )
 Config.DefaultPhoneModel = "phone"  -- Default phone if ItemRequire is false (iphone or phone)
-Config.AutoOpen = false             -- Open phone automatically on spawn? (Not recommended) ( This function does not work in the metaitem )
+Config.AutoOpen = false             -- Open phone automatically on spawn? ( This function does not work in the metaitem )
+Config.SetupScreen = false          -- If true, the player will see the setup screen when they first turn on the phone. ( This function does not work in the metaitem )
 
 Config.SerialNumberPrefix  = "GKS"       -- Phone serial number prefix (default: gks)
 Config.PropActive          = true        -- Show phone prop in hand? (default: true)
@@ -40,9 +41,12 @@ Config.WaitPhone           = 2           -- Set the time to wait before opening 
 Config.MetaItem            = false       -- Use metadata for phones? (Only if your inventory supports it!)
 Config.AutoDeleteData      = true        -- Auto-delete old data? (Recommended: true)
 Config.AutoDeleteDays      = 5           -- Delete data older than X days (default: 5)
-Config.deleteCharacter     = false       -- Delete phone data when character is deleted? !!!All data in Darkchat, Messages and similar applications will be deleted.!!!
+Config.deleteCharacter     = false       -- Delete phone data when character is deleted? !!!All data in Messages and similar applications will be deleted.!!!
 Config.UnderWaterCheck     = false       -- Disable phone underwater? (true = disable underwater)
 Config.RealApplication     = false       -- Enable if you purchased Real APP Integration -- https://service.gkshop.org/package/6368261
+Config.allowPhoneWhileCuffed = false     -- Should the player be able to use the phone while cuffed or not?
+Config.allowPhoneWhileDead = false       -- Should the player be able to use the phone when dead or not?
+
 
 Config.PhoneNumber = {}
 Config.PhoneNumber.Length = 5 -- PHONE NUMBER LENGTH (without area code) - CHANGE IF NEEDED!
@@ -201,6 +205,8 @@ Config.ValeBlaclistCars = { -- VEHICLES THAT VALET CANNOT BRING - ADD YOUR OWN!
     "ambulance",
 }
 
+Config.ServerSideSpawnVehicle = false   -- should entities be spawned on the server? (vehicles)
+
 --- ### Car Seller App Settings ### ---
 Config.CarSellerAppFee = 10 -- CAR SELLING FEE % - CHANGE THIS! (default: 10)
 Config.SellerBlaclistCars = { -- VEHICLES THAT CANNOT BE SOLD - ADD YOUR OWN!
@@ -212,6 +218,7 @@ Config.SellerBlaclistCars = { -- VEHICLES THAT CANNOT BE SOLD - ADD YOUR OWN!
 
 --- ### Advertising APP Settings ### ---
 Config.AdvertisingPrice = 1000    -- PRICE TO POST AN AD - CHANGE THIS!
+Config.AdvertisingCooldown = 5   -- Cooldown in minutes between posts (default: 5 minutes)
 
 --- ### Twitter APP Settings ### ---
 Config.TwitterVerifyCommand = "twitterverify"   -- Admin command for verified badge
@@ -446,6 +453,7 @@ Config.BillPlayerFeeJobs = {
 -- employe = Employee section
 -- jobBalanceView = Authority according to job grade level (Viewing the balance of the job centered account)
 -- showInList = Show in list?
+-- autoCallByDuty = Should the player's call option open automatically?
 
 Config.JOBServices = {
     ["police"] = {
@@ -458,6 +466,7 @@ Config.JOBServices = {
         label = "Police",
         isOpen = true,
         canCall = true,
+        autoCallByDuty = false,
         Duty = true,
         playerNotifications = true,
         alternativejobs= { ["sheriff"] = true },
@@ -487,6 +496,7 @@ Config.JOBServices = {
         label = "EMS",
         isOpen = false,
         canCall = true,
+        autoCallByDuty = false,
         Duty = true,
         playerNotifications = true,
         jobNumber = "912",
@@ -515,6 +525,7 @@ Config.JOBServices = {
         label = "Mechanic",
         isOpen = false,
         canCall = true,
+        autoCallByDuty = true,
         Duty = true,
         playerNotifications = true,
         jobNumber = "",
@@ -558,11 +569,66 @@ Config.Casino = {
     RollMaxBet = 50000,  -- MAX BET AMOUNT - CHANGE THIS!
 }
 
-
 ---- ## MDT APP ## -----
 Config.MDTApp = false    -- Enable MDT app? (requires qb-core)
 
 
---- ## Custom APP Settings ## ---
+--- ### Locations Settings ### ---
+-- Locations that will appear in the Maps application
 
+Config.Locations = {
+    {
+        position = vector2(428.9, -984.5),
+        name = "LSPD",
+        description = "Los Santos Police Department",
+        icon = "https://cdn-icons-png.flaticon.com/512/1802/1802581.png",
+    },
+    {
+        position = vector2(304.2, -587.0),
+        name = "Pillbox",
+        description = "Pillbox Medical Hospital",
+        icon = "https://cdn-icons-png.flaticon.com/512/4006/4006511.png",
+    },
+}
+
+
+--- ### KeyBindings ### ---
+
+Config.KeyBindings = {
+    openPhone = {
+        enabled = Config.KeyMapping,
+        key = Config.OpenPhone,
+        description = "Open/Close Phone",
+    },
+    toggleCursor = {
+        enabled = true,
+        key = "LMENU",
+        description = "Toggle Cursor",
+    },
+    answerCall = {
+        enabled = true,
+        key = "RETURN",
+        description = "Answer Call",
+    },
+    declineCall = {
+        enabled = true,
+        key = "BACK",
+        description = "Decline Call",
+    },
+
+    chargePhone = { -- Charge Phone (if eyetarget is disabled)
+        enabled = true,
+        key = Config.UseChargeKey or "E",
+        description = "Charge Phone",
+    },
+    phoneBoxUse = { -- Phone Booth Use (if eyetarget is disabled)
+        enabled = true,
+        key = Config.PhoneBoxKey or "E",
+        description = "Use Phone Booth",
+    },
+}
+
+
+
+--- ## Custom APP Settings ## ---
 Config.CustomApps = {}

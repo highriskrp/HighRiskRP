@@ -6,14 +6,17 @@
   "Picturequality": 0.95,
   "ImageSizeLimitMB": 10,
   "PictureType": "webp",
-  "Valebring": true,
-  "GamblingGame" : true,
   "qbitPurchase": true,
   "qbitSell": true,
   "qbitTransfer": true,
   "MessageLiveLocation": true,
-  "BackLastPage": true,
   "isBillingEnabled": true,
+  "isNicknameChangeEnabled": true,
+  "Garage": {
+    "bring": true,
+    "track": true,
+    "actions": true
+  },
   "NewsPerm" : {
     "police" : true,
     "newspaper" : true
@@ -28,41 +31,63 @@
   "TunefiyRingtoneBlockedWords": {
     "span": false
   },
-  "HomeApp": {
+  "HouseApp": {
     "transfer": true,
     "keys": true
   },
   "CarSellerApp": {
     "buy": true
   },
+  "Crypto": {
+    "buy": true,
+    "sell": true,
+    "transfer": true
+  },
   "BlacklistURLs": [
     "discord.com",
-    "discordapp.net"
+    "discordapp.net",
+    "discordapp.com"
   ],
 
   "Settings": {
     "DefaultSound": "Default",
     "Sounds": {
-      "Default": "/html/sounds/ringtones/default.ogg"
+      "Default": "/html/sounds/ringtones/default.ogg",
+      "Classic": "/html/sounds/ringtones/classic.ogg",
+      "Classic 2": "/html/sounds/ringtones/classic2.ogg",
+      "Classic 3": "/html/sounds/ringtones/classic3.ogg",
+      "Harp": "/html/sounds/ringtones/harp.ogg",
+      "Nostalgic": "/html/sounds/ringtones/nostalgic.ogg",
+      "Nostalgic 2": "/html/sounds/ringtones/nostalgic2.ogg",
+      "Pixel": "/html/sounds/ringtones/pixel.ogg",
+      "Reflection": "/html/sounds/ringtones/reflection.ogg",
+      "SciFi": "/html/sounds/ringtones/sci-fi.ogg",
+      "Tune": "/html/sounds/ringtones/tune.ogg",
+      "Violin": "/html/sounds/ringtones/violin.ogg",
+      "Ring": "/html/sounds/ringtones/ring.ogg"
     },
     "DefaultNotification": "Arrived",
     "Notifications": {
       "Arrived": "/html/sounds/notifications/arrived.ogg",
       "Crystal": "/html/sounds/notifications/crystal.ogg"
     },
-    "DefaultWallpaper": "/html/img/wallpapers/newphonedark.jpg",
-    "DefaultWallpaperMD": "/html/img/wallpapers/newphonemd.jpg",
+    "DefaultWallpaper": "/html/img/wallpapers/wallpaper9.jpg",
+    "DefaultWallpaperMD": "/html/img/wallpapers/wallpaper9.jpg",
     "Wallpapers": {
-      "1": "/html/img/wallpapers/newphonedark.jpg",
-      "2": "/html/img/wallpapers/newphonemd.jpg",
-      "3": "/html/img/wallpapers/newphone.jpg",
-      "4": "/html/img/wallpapers/wallpaper-4.jpg", 
-      "5": "/html/img/wallpapers/wallpaper.jpg",
-      "6": "/html/img/wallpapers/wallpaper-5.jpg",
-      "7": "/html/img/wallpapers/oscuridad.jpg",
-      "8": "/html/img/wallpapers/car.jpg",
-      "9": "/html/img/wallpapers/gta5.jpg",
-      "10": "/html/img/wallpapers/iluminacion.jpg"
+      "1": "/html/img/wallpapers/wallpaper1.jpg",
+      "2": "/html/img/wallpapers/wallpaper2.jpg",
+      "3": "/html/img/wallpapers/wallpaper3.jpg",
+      "4": "/html/img/wallpapers/wallpaper4.jpg", 
+      "5": "/html/img/wallpapers/wallpaper5.jpg",
+      "6": "/html/img/wallpapers/wallpaper6.jpg",
+      "7": "/html/img/wallpapers/wallpaper7.jpg",
+      "8": "/html/img/wallpapers/wallpaper8.jpg",
+      "9": "/html/img/wallpapers/wallpaper9.jpg",
+      "10": "/html/img/wallpapers/wallpaper10.jpg",
+      "11": "/html/img/wallpapers/wallpaper11.jpg",
+      "12": "/html/img/wallpapers/wallpaper12.jpg",
+      "13": "/html/img/wallpapers/wallpaper13.jpg",
+      "14": "/html/img/wallpapers/wallpaper14.jpg"
     }
   },
 
@@ -95,12 +120,6 @@
     "emoji": true,
     "CharacterLimit": 500,
     "verify": true
-  },
-
-  "YellowFilter": {
-    "mechanic" : "Mechanic",
-    "bartender" : "Bartender",
-    "lawyer" : "Lawyer"
   },
 
   "CreateBillingJobs" : {
@@ -464,37 +483,9 @@
       }
     },
     {
-      "name": "SnapGram",
-      "icons": "/html/img/icons/snapgram.png",
-      "description": "Share photos and videos",
-      "url": "/instagram",
-      "blockedjobs": {},
-      "allowjob": {},
-      "signal": true,
-      "show": true,
-      "labelLangs": {
-          "af": "SnapGram",
-          "ar": "SnapGram",
-          "cs": "SnapGram",
-          "de": "SnapGram",
-          "en": "SnapGram",
-          "es": "SnapGram",
-          "fr": "SnapGram",
-          "id": "SnapGram",
-          "nl": "SnapGram",
-          "pt-PT": "SnapGram",
-          "ro": "SnapGram",
-          "sv": "SnapGram",
-          "th": "SnapGram",
-          "tr": "SnapGram",
-          "uk": "SnapGram",
-          "zh-TW": "SnapGram"
-      }
-    },
-    {
       "name": "Dark Chat",
       "icons": "/html/img/icons/darkchat.png",
-      "description": "Public & private chat rooms",
+      "description": "All dark chats",
       "url": "/newdarkchat",
       "blockedjobs": {},
       "allowjob": {},
@@ -523,7 +514,7 @@
       "name": "Advertising",
       "icons": "/html/img/icons/advertising.png",
       "description": "Product and service ads",
-      "url": "/advertising",
+      "url": "/newadv/home",
       "blockedjobs": {},
       "allowjob": {},
       "signal": true,
@@ -607,7 +598,7 @@
       "name": "Vale",
       "icons": "/html/img/icons/vale.png",
       "description": "Manage your vehicles",
-      "url": "/vale",
+      "url": "/garage",
       "blockedjobs": {},
       "allowjob": {},
       "signal": true,
@@ -887,6 +878,34 @@
       }
     },
     {
+      "name": "Taxi Driver",
+      "icons": "/html/img/icons/taxijobdriver.png",
+      "description": "For Taxi Drivers",
+      "url": "/taxi/driver",
+      "blockedjobs": {},
+      "allowjob": {},
+      "signal": true,
+      "show": true,
+      "labelLangs": {
+          "af": "Taxi Driver",
+          "ar": "Taxi Driver",
+          "cs": "Taxi Driver",
+          "de": "Taxi Driver",
+          "en": "Taxi Driver",
+          "es": "Taxi Driver",
+          "fr": "Taxi Driver",
+          "id": "Taxi Driver",
+          "nl": "Taxi Driver",
+          "pt-PT": "Taxi Driver",
+          "ro": "Taxi Driver",
+          "sv": "Taxi Driver",
+          "th": "Taxi Driver",
+          "tr": "Taxi Driver",
+          "uk": "Taxi Driver",
+          "zh-TW": "Taxi Driver"
+      }
+    },
+    {
       "name": "LiveStream",
       "icons": "/html/img/icons/liveapp.png",
       "description": "Discover live streams",
@@ -1055,6 +1074,35 @@
       }
     },
     {
+      "name": "Custom App",
+      "icons": "/html/img/icons/appstore.png",
+      "description": "Description to custom app",
+      "appurl": "https://cfx-nui-gksphone-app/ui/index.html",
+      "url": "/customapp",
+      "blockedjobs": {},
+      "allowjob": {},
+      "signal": true,
+      "show": false,
+      "labelLangs": {
+        "af": "Custom App",
+        "ar": "Custom App",
+        "cs": "Custom App",
+        "de": "Custom App",
+        "en": "Custom App",
+        "es": "Custom App",
+        "fr": "Custom App",
+        "id": "Custom App",
+        "nl": "Custom App",
+        "pt-PT": "Custom App",
+        "ro": "Custom App",
+        "sv": "Custom App",
+        "th": "Custom App",
+        "tr": "Custom App",
+        "uk": "Custom App",
+        "zh-TW": "Custom App"
+      }
+    },
+    {
       "name": "Flare",
       "icons": "/html/img/icons/flare.png",
       "description": "Meet new friends",
@@ -1083,32 +1131,31 @@
       }
     },
     {
-      "name": "Custom App",
-      "icons": "/html/img/icons/qbit.png",
-      "description": "Description to custom app",
-      "appurl": "https://cfx-nui-gksphone-app/ui/index.html",
-      "url": "/customapp",
+      "name": "SnapGram",
+      "icons": "/html/img/icons/snapgram.png",
+      "description": "Share photos and videos",
+      "url": "/instagram",
       "blockedjobs": {},
       "allowjob": {},
       "signal": true,
-      "show": false,
+      "show": true,
       "labelLangs": {
-        "af": "Custom App",
-        "ar": "Custom App",
-        "cs": "Custom App",
-        "de": "Custom App",
-        "en": "Custom App",
-        "es": "Custom App",
-        "fr": "Custom App",
-        "id": "Custom App",
-        "nl": "Custom App",
-        "pt-PT": "Custom App",
-        "ro": "Custom App",
-        "sv": "Custom App",
-        "th": "Custom App",
-        "tr": "Custom App",
-        "uk": "Custom App",
-        "zh-TW": "Custom App"
+          "af": "SnapGram",
+          "ar": "SnapGram",
+          "cs": "SnapGram",
+          "de": "SnapGram",
+          "en": "SnapGram",
+          "es": "SnapGram",
+          "fr": "SnapGram",
+          "id": "SnapGram",
+          "nl": "SnapGram",
+          "pt-PT": "SnapGram",
+          "ro": "SnapGram",
+          "sv": "SnapGram",
+          "th": "SnapGram",
+          "tr": "SnapGram",
+          "uk": "SnapGram",
+          "zh-TW": "SnapGram"
       }
     }
   ]

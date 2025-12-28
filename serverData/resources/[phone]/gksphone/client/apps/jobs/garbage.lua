@@ -89,8 +89,8 @@ RegisterNetEvent("gksphone:client:JobStartTask", function (jobInfoName, Tasks)
                     end
                 }
             })
-        end
-        if GetResourceState("qb-target") == "started" then
+        
+        elseif GetResourceState("qb-target") == "started" then
             local qb_options = {
                 options = {
                     {
@@ -203,7 +203,7 @@ RegisterNetEvent("gksphone:client:jobStartMember", function (gjobInfo)
         end
         local car = NetworkGetEntityFromNetworkId(gjobInfo.carNetworkID)
         GiveKeyCar(car)
-        SetFuel(car, 100)
+        SetFuel(car, 100.0)
 
         while not IsPedInVehicle(ped, car, false) do
             Wait(200)
@@ -236,8 +236,7 @@ RegisterNetEvent("gksphone:client:garbageDisband", function (jobname)
         if GetResourceState("ox_target") == "started" then
             exports.ox_target:removeGlobalVehicle("oxPlaceGarbage")
             exports.ox_target:removeModel("SearchGarbageBin")
-        end
-        if GetResourceState("qb-target") == "started" then
+        elseif GetResourceState("qb-target") == "started" then
             exports['qb-target']:RemoveTargetBone({ "boot" })
             exports["qb-target"]:RemoveTargetModel(garbageObjects, "Garbage Bin Search")
         end
@@ -253,8 +252,7 @@ RegisterNetEvent("gksphone:client:memberKick", function (jobname)
         if GetResourceState("ox_target") == "started" then
             exports.ox_target:removeGlobalVehicle("oxPlaceGarbage")
             exports.ox_target:removeModel("SearchGarbageBin")
-        end
-        if GetResourceState("qb-target") == "started" then
+        elseif GetResourceState("qb-target") == "started" then
             exports['qb-target']:RemoveTargetBone({ "boot" })
             exports["qb-target"]:RemoveTargetModel(garbageObjects, "Garbage Bin Search")
         end
@@ -283,8 +281,7 @@ function StartGotoLocation(TaskID, carpos)
         if GetResourceState("ox_target") == "started" then
             exports.ox_target:removeGlobalVehicle("oxPlaceGarbage")
             exports.ox_target:removeModel("SearchGarbageBin")
-        end
-        if GetResourceState("qb-target") == "started" then
+        elseif GetResourceState("qb-target") == "started" then
             exports['qb-target']:RemoveTargetBone({ "boot" })
             exports["qb-target"]:RemoveTargetModel(garbageObjects, "Garbage Bin Search")
         end

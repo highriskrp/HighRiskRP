@@ -75,7 +75,8 @@ if ChargeOn then
         RegisterUsableItem(value, function(source)
             local src = source
             local Player = Config.Core.Functions.GetPlayer(src)
-            if Player and Player.Functions.RemoveItem(value, 1) then
+            local isCharging = Player(source).state.phoneIsCharging
+            if Player and not isCharging and Player.Functions.RemoveItem(value, 1) then
                 TriggerClientEvent('gksphone:client:powerbank', src)
             end
         end)

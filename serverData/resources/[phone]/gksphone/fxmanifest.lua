@@ -1,8 +1,8 @@
 fx_version 'cerulean'
-games { 'gta5' }
+game "gta5"
 lua54 'yes'
-description 'GKSPHONEv2'
-version '2.0.17'
+description 'GKSPHONE - Advanced Phone System'
+version '2.1.1'
 
 ui_page 'html/index.html'
 
@@ -10,19 +10,19 @@ shared_scripts {
     "config/config.lua",
 	"config/functions.lua",
 	"config/rentacar/sh_config.lua",
-    "config/jobs/*",
+    "config/jobs/*.lua",
+    "config/signal/*.lua",
+    "config/charge/*.lua",
 }
 
 files {
-    "html/**/*",
+    "html/**",
     "config/config.json",
-    "config/locales/*"
+    "config/locales/*.json"
 }
 
 client_scripts {
     "callbacks.lua",
-    "config/charge/*.lua",
-    "config/signal/*.lua",
     "config/camera/*.lua",
 	"client/**/*",
     "escrow/client/**/*",
@@ -31,10 +31,8 @@ client_scripts {
 server_scripts {
     "@oxmysql/lib/MySQL.lua",
     "callbacks.lua",
-    "config/*.lua",
+    "config/serverconfig.lua",
 	"config/rentacar/sv_config.lua",
-    "config/charge/*.lua",
-    "config/signal/*.lua",
     "server/**/*",
     "escrow/server/**/*",
 }

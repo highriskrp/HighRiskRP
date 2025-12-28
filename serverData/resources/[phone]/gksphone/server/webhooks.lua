@@ -16,7 +16,7 @@ function WebhookLogs(logType, source, logData)
         {
           ["color"] = 1942002,
           ['title'] = "AdvertisingAPP",
-          ['description'] = '**Phone Number:** ' ..logData[1].. '\n**Message:** ' ..logData[2].. '\n**Filter:** ' ..logData[4]
+          ['description'] = '**Phone Number:** ' ..logData[1].. '\n**Message:** ' ..logData[2].. '\n**Name:** ' ..logData[4]
         }
       }
     }
@@ -789,6 +789,26 @@ function WebhookLogs(logType, source, logData)
         {
           ["color"] = 1942002,
           ['title'] = "DarkChatAPP Delete Room",
+          ['description'] = logMessage
+        }
+      }
+    }
+  elseif logType == "societywallet" then
+    -- darkchat
+    discord_webhook = Cfg.DiscordWebHooks[logType]
+
+    local logMessage = '**Player Source:** ' .. source ..
+    '\n**JOB Name :** ' .. logData.job ..
+    '\n**Withdraw Amount :** ' .. logData.amaount
+    headers = {
+      ['Content-Type'] = 'application/json'
+    }
+    data = {
+      ["username"] = "Society",
+      ["embeds"] = {
+        {
+          ["color"] = 1942002,
+          ['title'] = "JOB Society withdrawal",
           ['description'] = logMessage
         }
       }
