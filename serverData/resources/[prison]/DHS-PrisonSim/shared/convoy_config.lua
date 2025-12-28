@@ -4,7 +4,7 @@ ConvoyConfig.isEnabled = true                       -- Toggle This To False If Y
 ConvoyConfig.isAIConvoyEnabled = true               -- [HEAVILY EXPERIMENTAL] Toggle This To False If You Do Not Want To Use The AI Convoy System (Players Will Have To Drive Prisoners To The Prison)
 ConvoyConfig.isConvoySkippableOptionEnabled = false -- Toggle This To False If You Do Not Want The Convoy To Be Skippable in Options (Can only be turned on if isAIConvoyEnabled is false)
 ConvoyConfig.IllegalCallChance = 100                -- The Chance Of The Police Calling The Convoy (1-100)
-ConvoyConfig.FreezePlayer = true -- If true, the script will handle stopping the player from leaving the convoy, if false you will have to handle it yourself in editablefunctions_cl.lua however this could allow you to let prisoners escape the convoy
+ConvoyConfig.FreezePlayer = false -- If true, the script will handle stopping the player from leaving the convoy, if false you will have to handle it yourself in editablefunctions_cl.lua however this could allow you to let prisoners escape the convoy
 ConvoyConfig.ConvoySpawnTimer = 2000 -- This should only be modified if your convoy is not spawning.
 ConvoyConfig.UseLightsandSirens = true -- If true, the lights and sirens will be used
 
@@ -34,10 +34,10 @@ if Config.MLOSelection == 'prompt-prison' then
         policeStations = {
             { coords = vector4(-1817.57, -314.37, 42.66, 223), name = "LSPD", compatibleRouteIDs = {1},
                 vehicles = {
-                    { model = "lib19silv", position = "ahead",   leader = true, xoffset = 5, yoffset = -10 },
-                    { model = "polcoach",    position = "default", xoffset = 0, yoffset = 10 },
-                    { model = "libcvpi",  position = "behind", xoffset = 0,  yoffset = 5 },
-                    { model = "lib20exp",    position = "behind", xoffset = 0,  yoffset = -7 },
+                    { model = "policet", position = "ahead",   leader = true, xoffset = -10, yoffset = 0 },
+                    { model = "pbus",    position = "default", xoffset = 0, yoffset = 10 },
+                    { model = "police",  position = "behind",  xoffset = 5, yoffset = 10 },
+                    { model = "riot",    position = "behind",  xoffset = 10, yoffset = 10 },
                 }
             },
         }

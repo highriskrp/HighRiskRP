@@ -89,16 +89,16 @@ ClothingConfig.ClothingSettings = {
     min = {
         male = {
             clothing = {
-                { componentid = 11, drawableid = 543, textureid = 0,  paletteid = 0, waitTime = 0 }, -- Jacket
+                { componentid = 11, drawableid = 544, textureid = 0,  paletteid = 0, waitTime = 0 }, -- Jacket
                 --{ componentid = 0, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Head
-                { componentid = 1, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Beard
+                --{ componentid = 1, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Beard
                 --{ componentid = 2, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Hair
-                { componentid = 3,  drawableid = 2,  textureid = 0,  paletteid = 0, waitTime = 1000 }, -- Upper / Arms
-                { componentid = 4,  drawableid = 201, textureid = 0,  paletteid = 0, waitTime = 1000 }, -- Lower
+                { componentid = 3,  drawableid = 11,  textureid = 0,  paletteid = 0, waitTime = 1000 }, -- Upper / Arms
+                { componentid = 4,  drawableid = 202, textureid = 0,  paletteid = 0, waitTime = 1000 }, -- Lower
                 --{ componentid = 5,  drawableid = 0,  textureid = 0, paletteid = 0 }, -- Bags & Parachutes
                 { componentid = 6,  drawableid = 112, textureid = 14, paletteid = 0, waitTime = 0 },    -- Feet
                 --{ componentid = 7, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Scarfs and Chains
-                { componentid = 8,  drawableid = 15, textureid = 0, paletteid = 0, waitTime = 0 }, -- Undershirt
+                { componentid = 8,  drawableid = -1, textureid = 0, paletteid = 0, waitTime = 0 }, -- Undershirt
                 { componentid = 9,  drawableid = 0,  textureid = 0, paletteid = 0, waitTime = 0 }, -- Body Armor
                 { componentid = 10, drawableid = 0,  textureid = 0, paletteid = 0, waitTime = 0 }, -- Decals
             },
@@ -109,16 +109,16 @@ ClothingConfig.ClothingSettings = {
         },
         female = {
             clothing = {
-                { componentid = 11, drawableid = 583, textureid = 1,  paletteid = 0, waitTime = 0 }, -- Jacket
+                { componentid = 11, drawableid = 588, textureid = 0,  paletteid = 0, waitTime = 0 }, -- Jacket
                 --{ componentid = 0, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Head
                 { componentid = 1, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Beard
                 --{ componentid = 2, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Hair
                 { componentid = 3,  drawableid = 14,  textureid = 0,  paletteid = 0, waitTime = 1000 }, -- Upper / Arms
-                { componentid = 4,  drawableid = 216, textureid = 1,  paletteid = 0, waitTime = 1000 }, -- Lower
+                { componentid = 4,  drawableid = 217, textureid = 0,  paletteid = 0, waitTime = 1000 }, -- Lower
                 --{ componentid = 5,  drawableid = 0,  textureid = 0, paletteid = 0 }, -- Bags & Parachutes
-                { componentid = 6,  drawableid = 128, textureid = 21, paletteid = 0, waitTime = 0 },    -- Feet
+                { componentid = 6,  drawableid = 117, textureid = 14, paletteid = 0, waitTime = 0 },    -- Feet
                 --{ componentid = 7, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Scarfs and Chains
-                { componentid = 8,  drawableid = 2, textureid = 0, paletteid = 0, waitTime = 0 }, -- Undershirt
+                { componentid = 8,  drawableid = 14, textureid = 0, paletteid = 0, waitTime = 0 }, -- Undershirt
                 { componentid = 9,  drawableid = 0,  textureid = 0, paletteid = 0, waitTime = 0 }, -- Body Armor
                 { componentid = 10, drawableid = 0,  textureid = 0, paletteid = 0, waitTime = 0 }, -- Decals
             },
@@ -131,16 +131,16 @@ ClothingConfig.ClothingSettings = {
     med = {
         male = {
             clothing = {
-                { componentid = 11, drawableid = 543, textureid = 1,  paletteid = 0, waitTime = 0 }, -- Jacket
+                { componentid = 11, drawableid = 544, textureid = 1, paletteid = 0, waitTime = 0 }, -- Jacket
                 --{ componentid = 0, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Head
-                { componentid = 1, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Beard
+                --{ componentid = 1, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Beard
                 --{ componentid = 2, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Hair
-                { componentid = 3,  drawableid = 2,  textureid = 0,  paletteid = 0, waitTime = 1000 }, -- Upper / Arms
-                { componentid = 4,  drawableid = 201, textureid = 1,  paletteid = 0, waitTime = 1000 }, -- Lower
-                --{ componentid = 5,  drawableid = 0,  textureid = 0, paletteid = 0 }, -- Bags & Parachutes
-                { componentid = 6,  drawableid = 112, textureid = 3, paletteid = 0, waitTime = 0 },    -- Feet
+                { componentid = 3,  drawableid = 11,  textureid = 0, paletteid = 0, waitTime = 1000 }, -- Upper / Arms
+                { componentid = 4,  drawableid = 202, textureid = 1, paletteid = 0, waitTime = 1000 }, -- Lower
+                --{ componentid = 5,  drawableid = 0,  textureid = 0, paletteid = 0, waitTime = 0 }, -- Bags & Parachutes
+                { componentid = 6,  drawableid = 112, textureid = 9, paletteid = 0, waitTime = 0 },    -- Feet
                 --{ componentid = 7, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Scarfs and Chains
-                { componentid = 8,  drawableid = 15, textureid = 0, paletteid = 0, waitTime = 0 }, -- Undershirt
+                { componentid = 8,  drawableid = -1, textureid = 0, paletteid = 0, waitTime = 0 }, -- Undershirt
                 { componentid = 9,  drawableid = 0,  textureid = 0, paletteid = 0, waitTime = 0 }, -- Body Armor
                 { componentid = 10, drawableid = 0,  textureid = 0, paletteid = 0, waitTime = 0 }, -- Decals
             },
@@ -151,16 +151,16 @@ ClothingConfig.ClothingSettings = {
         },
         female = {
             clothing = {
-                { componentid = 11, drawableid = 583, textureid = 1,  paletteid = 0, waitTime = 0 }, -- Jacket
+                { componentid = 11, drawableid = 588, textureid = 1,  paletteid = 0, waitTime = 0 }, -- Jacket
                 --{ componentid = 0, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Head
-                { componentid = 1, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Beard
+                --{ componentid = 1, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Beard
                 --{ componentid = 2, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Hair
-                { componentid = 3,  drawableid = 14,  textureid = 0,  paletteid = 0, waitTime = 1000 }, -- Upper / Arms
-                { componentid = 4,  drawableid = 216, textureid = 1,  paletteid = 0, waitTime = 1000 }, -- Lower
+                { componentid = 3,  drawableid = 15,  textureid = 0,  paletteid = 0, waitTime = 1000 }, -- Upper / Arms
+                { componentid = 4,  drawableid = 217, textureid = 1,  paletteid = 0, waitTime = 1000 }, -- Lower
                 --{ componentid = 5,  drawableid = 0,  textureid = 0, paletteid = 0 }, -- Bags & Parachutes
-                { componentid = 6,  drawableid = 128, textureid = 3, paletteid = 0, waitTime = 0 },    -- Feet
-                --{ componentid = 7, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Scarfs and Chains
-                { componentid = 8,  drawableid = 2, textureid = 0, paletteid = 0, waitTime = 0 }, -- Undershirt
+                { componentid = 6,  drawableid = 117, textureid = 9, paletteid = 0, waitTime = 0 },    -- Feet
+                --{ componentid = 7, drawableid = 15, textureid = 0, paletteid = 0, waitTime = 0 }, -- Scarfs and Chains
+                { componentid = 8,  drawableid = 14, textureid = 0, paletteid = 0, waitTime = 0 }, -- Undershirt
                 { componentid = 9,  drawableid = 0,  textureid = 0, paletteid = 0, waitTime = 0 }, -- Body Armor
                 { componentid = 10, drawableid = 0,  textureid = 0, paletteid = 0, waitTime = 0 }, -- Decals
             },
@@ -173,16 +173,16 @@ ClothingConfig.ClothingSettings = {
     max = {
         male = {
             clothing = {
-                { componentid = 11, drawableid = 543, textureid = 2,  paletteid = 0, waitTime = 0 }, -- Jacket
+                { componentid = 11, drawableid = 544, textureid = 2, paletteid = 0, waitTime = 0 }, -- Jacket
                 --{ componentid = 0, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Head
-                { componentid = 1, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Beard
+                --{ componentid = 1, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Beard
                 --{ componentid = 2, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Hair
-                { componentid = 3,  drawableid = 2,  textureid = 0,  paletteid = 0, waitTime = 1000 }, -- Upper / Arms
-                { componentid = 4,  drawableid = 201, textureid = 2,  paletteid = 0, waitTime = 1000 }, -- Lower
-                --{ componentid = 5,  drawableid = 0,  textureid = 0, paletteid = 0 }, -- Bags & Parachutes
-                { componentid = 6,  drawableid = 112, textureid = 0, paletteid = 0, waitTime = 0 },    -- Feet
+                { componentid = 3,  drawableid = 11,  textureid = 0, paletteid = 0, waitTime = 1000 }, -- Upper / Arms
+                { componentid = 4,  drawableid = 202, textureid = 2, paletteid = 0, waitTime = 1000 }, -- Lower
+                --{ componentid = 5,  drawableid = 0,  textureid = 0, paletteid = 0, waitTime = 0 }, -- Bags & Parachutes
+                { componentid = 6,  drawableid = 112, textureid = 8, paletteid = 0, waitTime = 0 },    -- Feet
                 --{ componentid = 7, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Scarfs and Chains
-                { componentid = 8,  drawableid = 15, textureid = 0, paletteid = 0, waitTime = 0 }, -- Undershirt
+                { componentid = 8,  drawableid = -1, textureid = 0, paletteid = 0, waitTime = 0 }, -- Undershirt
                 { componentid = 9,  drawableid = 0,  textureid = 0, paletteid = 0, waitTime = 0 }, -- Body Armor
                 { componentid = 10, drawableid = 0,  textureid = 0, paletteid = 0, waitTime = 0 }, -- Decals
             },
@@ -193,16 +193,16 @@ ClothingConfig.ClothingSettings = {
         },
         female = {
             clothing = {
-                { componentid = 11, drawableid = 583, textureid = 2,  paletteid = 0, waitTime = 0 }, -- Jacket
+                { componentid = 11, drawableid = 588, textureid = 2,  paletteid = 0, waitTime = 0 }, -- Jacket
                 --{ componentid = 0, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Head
-                { componentid = 1, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Beard
+                --{ componentid = 1, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Beard
                 --{ componentid = 2, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Hair
                 { componentid = 3,  drawableid = 14,  textureid = 0,  paletteid = 0, waitTime = 1000 }, -- Upper / Arms
-                { componentid = 4,  drawableid = 216, textureid = 2,  paletteid = 0, waitTime = 1000 }, -- Lower
+                { componentid = 4,  drawableid = 217, textureid = 2,  paletteid = 0, waitTime = 1000 }, -- Lower
                 --{ componentid = 5,  drawableid = 0,  textureid = 0, paletteid = 0 }, -- Bags & Parachutes
-                { componentid = 6,  drawableid = 128, textureid = 2, paletteid = 0, waitTime = 0 },    -- Feet
-                --{ componentid = 7, drawableid = 0, textureid = 0, paletteid = 0, waitTime = 0 }, -- Scarfs and Chains
-                { componentid = 8,  drawableid = 2, textureid = 0, paletteid = 0, waitTime = 0 }, -- Undershirt
+                { componentid = 6,  drawableid = 117, textureid = 8, paletteid = 0, waitTime = 0 },    -- Feet
+                --{ componentid = 7, drawableid = 15, textureid = 0, paletteid = 0, waitTime = 0 }, -- Scarfs and Chains
+                { componentid = 8,  drawableid = 14, textureid = 0, paletteid = 0, waitTime = 0 }, -- Undershirt
                 { componentid = 9,  drawableid = 0,  textureid = 0, paletteid = 0, waitTime = 0 }, -- Body Armor
                 { componentid = 10, drawableid = 0,  textureid = 0, paletteid = 0, waitTime = 0 }, -- Decals
             },

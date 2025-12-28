@@ -419,5 +419,19 @@ Config.Lang = {
         lock_door = "[E] Lock Door",
         unlock_door = "[E] Unlock Door",
         instructions = "[Up Arrow] Move Forward  \n [Down Arrow] Move Backwards  \n[Left Arrow] Move Left  \n[Right Arrow] Move Right  \n [B] Move Backwards  \n [G] Move Forwards  \n [X] Rotate Prop  \n [E] Confirm Placement",
+    },
+    commands = {
+        lockdown = "lockdown",
+        stopLockdown = "stoplockdown",
+        resetPrisoner = "resetprisoner",
+        doc = "doc",
+        prison = "prison",
+        prisonPocket = "prisonpocket",
+        resetClothes = "resetclothes",
+        solitary = "solitary",
+        removeSolitary = "removesolitary",
+    },
+    radialmenu = {
+        depositWorkObjects = "Deposit Work Objects",
     }
 }

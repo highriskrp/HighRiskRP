@@ -2,7 +2,7 @@ fx_version 'cerulean'
 game 'gta5'
 
 description 'DHS-PrisonSim'
-version '1.2.6'
+version '1.2.7'
 
 use_experimental_fxv2_oal 'yes'
 bridge 'DHS-Bridge'

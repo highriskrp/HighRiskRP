@@ -190,3 +190,32 @@ RegisterNetEvent("DHS-PrisonSim:client:MedicalEvent", function()
         TriggerEvent("DHS-PrisonSim:client:CustomMedicalFunction")
     end
 end)
+
+if Config.AlternateObjectTurnIn == 'radial' then
+    if Config.RadialMenu == "qb-radialmenu" then
+        RegisterNetEvent('qb-radialmenu:client:onRadialmenuOpen', function()
+            local ped = cache.ped
+            MenuItemId1 = exports['qb-radialmenu']:AddOption({
+                id = 'deposit_work_objects',
+                title = Config.Lang.radialmenu.depositWorkObjects,
+                icon = 'fas fa-box',
+                type = 'client',
+                event = 'DHS-PrisonSim:server:DepositWorkObjects',
+                shouldClose = true
+            }, MenuItemId1)
+        end)
+    else
+        if Config.RadialMenu == "ox_lib" then
+            lib.addRadialItem({
+                {
+                    id = 'deposit_work_objects',
+                    label = Config.Lang.radialmenu.depositWorkObjects,
+                    icon = 'fas fa-box',
+                    onSelect = function()
+                        TriggerEvent("DHS-PrisonSim:server:DepositWorkObjects")
+                    end
+                }
+            })
+        end
+    end
+end
