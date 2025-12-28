@@ -1,4 +1,4 @@
-print'Pug Robbery Creator 1.2.2'
+print'Pug Robbery Creator 1.2.3'
 local soundId = GetSoundId()
 ---------- [Functions] ----------
 
@@ -236,7 +236,7 @@ function AlertPolice(settings)
             location    = { label = data.header, coords = { x = data.coords.x, y = data.coords.y } },
             time        = 30,
             image       = nil,
-            job         = data.job and data.job[1] or 'police',
+            job         = 'police',
             sound       = data.sound or false,
             fields      = { { icon = data.icon, label = data.message } },
             blip        = {
@@ -266,6 +266,16 @@ function AlertPolice(settings)
                 length = 30
             },
             jobs = data.job
+        })
+    elseif GetResourceState("wasabi_mdt") == 'started' then
+        exports.wasabi_mdt:CreateDispatch({
+            type = 'robbery',
+            title = data.header,
+            description = data.message,
+            location = data.header,
+            coords = {x = data.coords.x, y = data.coords.y, z = data.coords.z},
+            priority = data.priority,
+            departments = data.job
         })
 	else
 		PrintDebug("^1 YOU NEED TO ADD A POLICE CALL NOTIFICATION TO THE CallPoliceForCarJack() FUNCTION IN THE OPEN.LUA")

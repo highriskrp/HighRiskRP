@@ -4,7 +4,7 @@ game 'gta5'
 
 author 'zPug'
 description 'Robbery Creator'
-version '1.2.2'
+version '1.2.3'
 
 shared_scripts {
     'config/config-framework.lua',

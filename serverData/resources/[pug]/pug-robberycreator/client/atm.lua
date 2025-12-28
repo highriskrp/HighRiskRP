@@ -177,24 +177,71 @@ local function TakingMoney()
     FreezeEntityPosition(PlayerPedId(), false)
 end
 
+local function getDrivenWheelSpeed(veh)
+    local wheels = GetVehicleNumberOfWheels(veh)
+    if wheels >= 4 then
+        local rear = (GetVehicleWheelSpeed(veh, 2) + GetVehicleWheelSpeed(veh, 3)) * 0.5
+        return rear
+    end
+
+    local sum = 0.0
+    for i = 0, wheels - 1 do
+        sum = sum + GetVehicleWheelSpeed(veh, i)
+    end
+    return sum / math.max(1, wheels)
+end
+
 local function CreateRope(targetEntity, boneCoords)
     local Ped = PlayerPedId()
-    local hookModel = "prop_rope_hook_01"
-    spawnedHook = CreateObject(GetHashKey(hookModel), 0.0, 0.0, 0.0, true, true, false)
+    local hookModel = `prop_rope_hook_01`
+
+    spawnedHook = CreateObject(hookModel, 0.0, 0.0, 0.0, true, true, false)
     while not DoesEntityExist(spawnedHook) do Wait(0) end
-    local hookBone = GetPedBoneIndex(Ped, 57005)
-    AttachEntityToEntity(spawnedHook, Ped, hookBone, 0.15, 0.02, -0.03, -150.0, 40.0, 180.0, true, true, false, true, 1, true)
+
+    local handBone = GetPedBoneIndex(Ped, 57005)
+    AttachEntityToEntity(spawnedHook, Ped, handBone, 0.15, 0.02, -0.03, -150.0, 40.0, 180.0, true, true, false, true, 1, true)
 
     RopeLoadTextures()
-    Wait(100)
-    Notify("USE THE ROPEHOOK ITEM WHILE STANDING AT ANY TRUNK", "success")
-    local HookCoords = GetEntityCoords(spawnedHook)
-    local bootDst = boneCoords
-    Wait(100)         --   X          Y          Z         rotx,roty,rotz,  mxlnth  ropeType  initLength  minLength  lengthChangeRate  onlyPPU  collisionOn lockFromFront
-    spawnedRope = AddRope(bootDst.x, bootDst.y, bootDst.z,  0.0, 0.0, 0.0,   50.0,      4,       4.0,        1.0,            0.7,          0,        0,           0,        0, 0, 0)
-    SetRopeLengthChangeRate(spawnedRope, 0.5)
+    while not RopeAreTexturesLoaded() do Wait(0) end
 
-    AttachEntitiesToRope(spawnedRope, spawnedHook, targetEntity, HookCoords.x, HookCoords.y, HookCoords.z, bootDst.x, bootDst.y, bootDst.z+1, 1)
+    Notify("USE THE ROPEHOOK ITEM WHILE STANDING AT ANY TRUNK", "success")
+
+    local bootDst = boneCoords
+
+    local hookLocalAttach = vector3(0.0, 0.0, 0.12)
+
+    local hookWorld = GetOffsetFromEntityInWorldCoords(
+        spawnedHook,
+        hookLocalAttach.x, hookLocalAttach.y, hookLocalAttach.z
+    )
+
+    local dist =
+        #(vector3(hookWorld.x, hookWorld.y, hookWorld.z) - vector3(bootDst.x, bootDst.y, bootDst.z))
+
+    spawnedRope = AddRope(
+        hookWorld.x, hookWorld.y, hookWorld.z,
+        0.0, 0.0, 0.0,
+        dist + 2.0,
+        4,
+        dist,
+        dist,
+        0.7,
+        0, 0, 0, 0, 0, 0
+    )
+
+    while not DoesRopeExist(spawnedRope) do Wait(0) end
+
+    AttachEntitiesToRope(
+        spawnedRope,
+        spawnedHook,
+        targetEntity,
+        hookWorld.x, hookWorld.y, hookWorld.z,        -- WORLD point on hook
+        bootDst.x,  bootDst.y,  bootDst.z,            -- WORLD point on trunk bone
+        dist
+    )
+
+    SetRopeLengthChangeRate(spawnedRope, 0.1)
+
     ropeAttachedToAtm = true
     atmEntity = targetEntity
     local AttachVehicle
@@ -213,17 +260,16 @@ local function CreateRope(targetEntity, boneCoords)
 
             local vehicle = GetVehiclePedIsIn(Ped, false)
             if vehicle ~= 0 then
-                local wheelSpeed = GetVehicleWheelSpeed(vehicle)
+                local wheelSpeed   = getDrivenWheelSpeed(vehicle)
                 local currentSpeed = GetEntitySpeed(vehicle)
-                local elapsedTime = GetGameTimer() - startTime
+                local slip         = wheelSpeed - currentSpeed
 
-                if wheelSpeed > 0 and currentSpeed < 1.0 then
-                    burnoutTime = burnoutTime + 100
+                if currentSpeed < 2.0 and slip > 3.0 then
+                    burnoutTime = burnoutTime + 200
                 else
                     burnoutTime = 0
                 end
-
-                if burnoutTime > 5000 or elapsedTime > 60000 * 10 then 
+                if burnoutTime > 3500 then 
                     local atmCoords = GetEntityCoords(atmEntity)
                     local OldAtmHeading = GetEntityHeading(atmEntity)
                     AttachVehicle = vehicle
@@ -232,7 +278,7 @@ local function CreateRope(targetEntity, boneCoords)
                     ActivatePhysics(atmEntity)
                     FreezeEntityPosition(atmEntity, false)
                     SetEntityHeading(atmEntity, OldAtmHeading)
-                    local boneIndex = GetEntityBoneIndexByName(vehicle, 'bumper_r')
+                    local boneIndex = GetEntityBoneIndexByName(vehicle, 'exhaust') ~= -1 and GetEntityBoneIndexByName(vehicle, 'exhaust') or GetEntityBoneIndexByName(vehicle, 'bumper_r') ~= -1 and GetEntityBoneIndexByName(vehicle, 'bumper_r') or GetEntityBoneIndexByName(vehicle, 'boot') ~= -1 and GetEntityBoneIndexByName(vehicle, 'boot')
                     local boneCoords = GetWorldPositionOfEntityBone(vehicle, boneIndex)
                     AtmVailableToHook = false
                     DetachRopeFromEntity(spawnedRope, spawnedHook)
@@ -406,6 +452,7 @@ local function CreateRope(targetEntity, boneCoords)
                                             FreezeEntityPosition(PlayerPedId(), false)
                                             RemoveRope()
                                             TriggerEvent("FullyDeleteRobberiesEntity", Entity)
+        
                                             if AllAtmRobberyData and AllAtmRobberyData.rewardItems then
                                                 for _, reward in ipairs(AllAtmRobberyData.rewardItems) do
                                                     if math.random(0, 100) <= tonumber(reward.chance) then
@@ -419,7 +466,7 @@ local function CreateRope(targetEntity, boneCoords)
                                                 end
                                             end
 
-                                            if AllAtmRobberyData and AllAtmRobberyData.moneyReward then
+                                            if AllAtmRobberyData.moneyReward then
                                                 local minMoney = tonumber(AllAtmRobberyData.minMoney) or 0
                                                 local maxMoney = tonumber(AllAtmRobberyData.maxMoney) or 0
                                                 if maxMoney >= minMoney then
@@ -542,12 +589,12 @@ RegisterNetEvent('Pug:client:AttachHookToVehicle', function()
     end
 
     if closestVehicle then
-        local boneIndex = GetEntityBoneIndexByName(closestVehicle, 'boot')
+        local boneIndex = GetEntityBoneIndexByName(vehicle, 'exhaust') ~= -1 and GetEntityBoneIndexByName(vehicle, 'exhaust') or GetEntityBoneIndexByName(vehicle, 'bumper_r') ~= -1 and GetEntityBoneIndexByName(vehicle, 'bumper_r') or GetEntityBoneIndexByName(vehicle, 'boot') ~= -1 and GetEntityBoneIndexByName(vehicle, 'boot')
 
         if boneIndex ~= -1 then
             local boneCoords = GetWorldPositionOfEntityBone(closestVehicle, boneIndex)
 
-            if #(playerCoords - boneCoords) < 2.0 then
+            if #(playerCoords - boneCoords) < 4.0 then
                 RequestAnimDict("mini@repair")
                 while not HasAnimDictLoaded("mini@repair") do
                     Citizen.Wait(100)
@@ -600,7 +647,7 @@ local function DoDrill(entity)
     local OriginalCoords = GetEntityCoords(PlayerPedId())
     TaskStartScenarioInPlace(PlayerPedId(), 'WORLD_HUMAN_STAND_MOBILE', -1, true)
     Wait(2300)
-    PlaySoundFrontend(-1, "Fail", "dlc_xm_silo_laser_hack_sounds", true) 
+    PlaySoundFrontend(-1, "Fail", "dlc_xm_silo_laser_hack_sounds", true)
     if not AllAtmRobberyData.minigameOption or AllAtmRobberyData.minigameOption == "" or AllAtmRobberyData.minigameOption == " " then
         AllAtmRobberyData.minigameOption = "none"
     end
