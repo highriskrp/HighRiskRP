@@ -1455,36 +1455,49 @@ function openLeaderboard() {
 }
 
 function openButtons() {
-    var base = '        <div class="gangs-buttons  scale-down-center">' +
-        '          <div class="gangs-leaderboard" onclick="openLeaderboard()">' +
-        '            <svg viewBox="0 0 1024 1024" class="gangs-icon04">' +
-        '              <path' +
-        '                d="M692 554h118v256h-118v-256zM452 214h120v596h-120v-596zM214 392h128v418h-128v-418z"' +
-        '              ></path>' +
-        '            </svg>' +
-        '          </div>' +
-        '          <div class="gangs-bounties" onclick="openBounties()">' +
-        '            <svg viewBox="0 0 948.0045714285714 1024" class="gangs-icon06">' +
-        '              <path' +
-        '                d="M474.857 384.571c12 0 23.429 3.429 33.714 10.286l126.857 84.571c23.429 15.429 44.571 34.286 62.857 55.429l83.429 97.143c14.286 16.571 20.571 38.857 16.571 60.571l-41.143 236c-4.571 24-24 42.286-48.571 45.143l-301.143 32-201.143 18.286h-5.143c-29.714 0-54.857-24-54.857-54.857 0-28.571 24-51.429 52.571-54.857l148.571-18.286h-256c-31.429 0-56.571-26.286-54.857-57.714 1.714-29.714 28-52 57.714-52l252.571-0.571-297.714-36.571c-30.857-3.429-53.143-31.429-48.571-62.857 4.571-27.429 29.714-45.714 57.143-45.714h5.714l274.857 34.286-200.571-53.714c-28.571-7.429-50.286-33.714-45.714-62.857 4.571-27.429 28-46.286 54.286-46.286 4 0 7.429 0.571 11.429 1.143l256 54.857 124 21.143c1.143 0 2.286 0.571 3.429 0.571 17.143 0 25.714-23.429 10.286-33.714l-106.286-71.429c-26.286-17.714-32.571-53.143-13.714-78.286 10.286-14.286 26.857-21.714 43.429-21.714zM434.857 500l106.286 71.429-124.571-21.143-2.857-1.143-20.571-21.714-136-149.714c-1.143-1.143-1.714-2.857-2.857-4-17.714-23.429-13.714-57.714 10.857-76.571 22.857-17.714 55.429-12 75.429 9.143l81.143 84c-1.714 1.714-3.429 2.857-5.143 4.571-12 16.571-16.571 36.571-13.143 56.571 3.429 19.429 14.857 37.143 31.429 48.571zM941.714 240.571l8.571 152c1.714 28-0.571 56.571-6.286 84l-27.429 125.143c-4.571 21.714-18.286 39.429-38.286 49.714l-60.571 30.857c0.571-22.857-6.857-44.571-22.286-62.286l-83.429-97.143c-19.429-22.286-41.714-42.286-66.857-58.857l-126.857-84.571c-12.571-8.571-27.429-13.143-43.429-13.143-19.429 0-37.143 8-50.286 21.143l-134.286-178.286c-18.857-25.143-13.143-60.571 13.143-78.286 24.571-17.143 58.286-9.143 76.571 14.857l152 201.143-149.714-260c-16-26.857-6.857-61.714 21.143-76.571 26.286-13.714 59.429-2.857 74.286 22.857l137.714 240-77.714-192.571c-10.857-27.429-3.429-60.571 22.857-74.286 28-14.857 62.286-2.857 75.429 25.714l110.286 237.143 57.714 112c9.143 17.714 36 10.286 34.857-9.143l-6.857-128c-1.714-31.429 22.857-57.714 54.286-58.286 29.714 0 53.714 25.143 55.429 54.857z"' +
-        '              ></path>' +
-        '            </svg>' +
-        '          </div>' +
-        '          <div class="gangs-members" onclick="openMembers(\'' + Organization + '\')">' +
-        '            <svg viewBox="0 0 1024 1024" class="gangs-icon08">' +
-        '              <path' +
-        '                d="M682 554q56 0 122 16t122 52 56 82v106h-256v-106q0-88-84-148 14-2 40-2zM342 554q56 0 122 16t121 52 55 82v106h-598v-106q0-46 56-82t122-52 122-16zM342 470q-52 0-90-38t-38-90 38-90 90-38 89 38 37 90-37 90-89 38zM682 470q-52 0-90-38t-38-90 38-90 90-38 90 38 38 90-38 90-90 38z"' +
-        '              ></path>' +
-        '            </svg>' +
-        '          </div>' +
-        '          <div class="gangs-exit" onclick="focusElement(this, false, \'leave\')">' +
-        '<svg viewBox="0 0 1024 1024" class="gangs-icon10">' +
-        '      <path' +
-        '        d="M810 128q34 0 60 26t26 60v596q0 34-26 60t-60 26h-596q-36 0-61-25t-25-61v-170h86v170h596v-596h-596v170h-86v-170q0-36 25-61t61-25h596zM430 666l110-112h-412v-84h412l-110-112 60-60 214 214-214 214z"' +
-        '      ></path>' +
-        '    </svg>' +
-        '          </div>' +
-        '        </div>';
+    var base = '';
+
+    // Law enforcement mode - show special content
+    if (isLawEnforcement) {
+        base = '        <div class="gangs-buttons scale-down-center" style="display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 20px;">' +
+            '          <svg viewBox="0 0 1024 1024" style="width: 120px; height: 120px; fill: ' + (Organizations[Organization]?.color || '#1E88E5') + ';">' +
+            '            <path d="M512 64l256 128v256c0 141.385-96.768 274.432-256 384-159.232-109.568-256-242.615-256-384v-256z"></path>' +
+            '          </svg>' +
+            '          <span style="color: ' + (Organizations[Organization]?.color || '#1E88E5') + '; font-size: 28px; font-weight: 700; text-align: center; letter-spacing: 2px; line-height: 30px;">LAW ENFORCEMENT</span>' +
+            '        </div>';
+    } else {
+        // Normal criminal mode - show regular buttons
+        base = '        <div class="gangs-buttons  scale-down-center">' +
+            '          <div class="gangs-leaderboard" onclick="openLeaderboard()">' +
+            '            <svg viewBox="0 0 1024 1024" class="gangs-icon04">' +
+            '              <path' +
+            '                d="M692 554h118v256h-118v-256zM452 214h120v596h-120v-596zM214 392h128v418h-128v-418z"' +
+            '              ></path>' +
+            '            </svg>' +
+            '          </div>' +
+            '          <div class="gangs-bounties" onclick="openBounties()">' +
+            '            <svg viewBox="0 0 948.0045714285714 1024" class="gangs-icon06">' +
+            '              <path' +
+            '                d="M474.857 384.571c12 0 23.429 3.429 33.714 10.286l126.857 84.571c23.429 15.429 44.571 34.286 62.857 55.429l83.429 97.143c14.286 16.571 20.571 38.857 16.571 60.571l-41.143 236c-4.571 24-24 42.286-48.571 45.143l-301.143 32-201.143 18.286h-5.143c-29.714 0-54.857-24-54.857-54.857 0-28.571 24-51.429 52.571-54.857l148.571-18.286h-256c-31.429 0-56.571-26.286-54.857-57.714 1.714-29.714 28-52 57.714-52l252.571-0.571-297.714-36.571c-30.857-3.429-53.143-31.429-48.571-62.857 4.571-27.429 29.714-45.714 57.143-45.714h5.714l274.857 34.286-200.571-53.714c-28.571-7.429-50.286-33.714-45.714-62.857 4.571-27.429 28-46.286 54.286-46.286 4 0 7.429 0.571 11.429 1.143l256 54.857 124 21.143c1.143 0 2.286 0.571 3.429 0.571 17.143 0 25.714-23.429 10.286-33.714l-106.286-71.429c-26.286-17.714-32.571-53.143-13.714-78.286 10.286-14.286 26.857-21.714 43.429-21.714zM434.857 500l106.286 71.429-124.571-21.143-2.857-1.143-20.571-21.714-136-149.714c-1.143-1.143-1.714-2.857-2.857-4-17.714-23.429-13.714-57.714 10.857-76.571 22.857-17.714 55.429-12 75.429 9.143l81.143 84c-1.714 1.714-3.429 2.857-5.143 4.571-12 16.571-16.571 36.571-13.143 56.571 3.429 19.429 14.857 37.143 31.429 48.571zM941.714 240.571l8.571 152c1.714 28-0.571 56.571-6.286 84l-27.429 125.143c-4.571 21.714-18.286 39.429-38.286 49.714l-60.571 30.857c0.571-22.857-6.857-44.571-22.286-62.286l-83.429-97.143c-19.429-22.286-41.714-42.286-66.857-58.857l-126.857-84.571c-12.571-8.571-27.429-13.143-43.429-13.143-19.429 0-37.143 8-50.286 21.143l-134.286-178.286c-18.857-25.143-13.143-60.571 13.143-78.286 24.571-17.143 58.286-9.143 76.571 14.857l152 201.143-149.714-260c-16-26.857-6.857-61.714 21.143-76.571 26.286-13.714 59.429-2.857 74.286 22.857l137.714 240-77.714-192.571c-10.857-27.429-3.429-60.571 22.857-74.286 28-14.857 62.286-2.857 75.429 25.714l110.286 237.143 57.714 112c9.143 17.714 36 10.286 34.857-9.143l-6.857-128c-1.714-31.429 22.857-57.714 54.286-58.286 29.714 0 53.714 25.143 55.429 54.857z"' +
+            '              ></path>' +
+            '            </svg>' +
+            '          </div>' +
+            '          <div class="gangs-members" onclick="openMembers(\'' + Organization + '\')">' +
+            '            <svg viewBox="0 0 1024 1024" class="gangs-icon08">' +
+            '              <path' +
+            '                d="M682 554q56 0 122 16t122 52 56 82v106h-256v-106q0-88-84-148 14-2 40-2zM342 554q56 0 122 16t121 52 55 82v106h-598v-106q0-46 56-82t122-52 122-16zM342 470q-52 0-90-38t-38-90 38-90 90-38 89 38 37 90-37 90-89 38zM682 470q-52 0-90-38t-38-90 38-90 90-38 90 38 38 90-38 90-90 38z"' +
+            '              ></path>' +
+            '            </svg>' +
+            '          </div>' +
+            '          <div class="gangs-exit" onclick="focusElement(this, false, \'leave\')">' +
+            '<svg viewBox="0 0 1024 1024" class="gangs-icon10">' +
+            '      <path' +
+            '        d="M810 128q34 0 60 26t26 60v596q0 34-26 60t-60 26h-596q-36 0-61-25t-25-61v-170h86v170h596v-596h-596v170h-86v-170q0-36 25-61t61-25h596zM430 666l110-112h-412v-84h412l-110-112 60-60 214 214-214 214z"' +
+            '      ></path>' +
+            '    </svg>' +
+            '          </div>' +
+            '        </div>';
+    }
 
     $('.gangs-container02').html(base);
 }
@@ -1722,9 +1735,20 @@ function userInfo(register) {
 
         var criminal = Criminals[Identifier];
 
-        base = base + '            <span class="gangs-alias">' + criminal.name + '</span>' +
-            '            <span class="gangs-role" style="color: ' + config.CriminalTitles[criminal.role - 1].Color + '">' + config.CriminalTitles[criminal.role - 1].Title + '</span>' +
-            '          </div>' +
+        // Law enforcement mode - show simplified info
+        if (isLawEnforcement) {
+            var lawId = Identifier.substring(Identifier.length - 6); // Get last 6 characters
+            base = base + '            <span class="gangs-alias">LAW_' + lawId + '</span>' +
+                '            <span class="gangs-role" style="color: ' + Organizations[Organization].color + '">Law Enforcement</span>' +
+                '          </div>';
+        } else {
+            // Normal criminal mode
+            base = base + '            <span class="gangs-alias">' + criminal.name + '</span>' +
+                '            <span class="gangs-role" style="color: ' + config.CriminalTitles[criminal.role - 1].Color + '">' + config.CriminalTitles[criminal.role - 1].Title + '</span>' +
+                '          </div>';
+        }
+
+        base = base +
             '      <div class="gangs-iconbox" onclick="closeMenu()">' +
             '          <svg viewBox="0 0 1024 1024" class="gangs-icon">' +
             '            <path' +
@@ -2016,6 +2040,8 @@ function IsNullOrUndefined(data) {
     return data === undefined || data === null;
 }
 
+var isLawEnforcement = false; // Global variable to track law enforcement mode
+
 window.addEventListener('message', function (event) {
     var edata = event.data;
 
@@ -2032,6 +2058,7 @@ window.addEventListener('message', function (event) {
         UserConfig = edata.userConfig
         orgInCoolDown = edata.orgCoolDown
         zoneCooldowns = edata.zoneCooldowns
+        isLawEnforcement = edata.isLawEnforcement || false; // Store law enforcement flag
 
         // SETUP COLORS
         if (Organizations[Organization]) {

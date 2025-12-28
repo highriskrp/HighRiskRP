@@ -19,10 +19,8 @@ Config = {
     -- TARGET SETTINGS --
     ---------------------
 
-    -- If you use qb-target as target script
+    -- If you use qb-target or ox_target as target script
     UseQbTarget = GetResourceState('qb-target') == 'started',
-
-    -- If you use ox_target as target script
     UseOxTarget = GetResourceState('ox_target') == 'started',
 
     ------------------------
@@ -40,8 +38,31 @@ Config = {
     -------------------------
     ------ QBCORE ONLY ------
     -------------------------
-    AutoCreateQBSharedGang = false, -- Set to true if you want that the script auto create the gang that are in QBCore/shared/gang.lua file into his database
-    AutoAssignPlayerToQBSharedGang = false, -- Set to true if you want people to be assign to the gang there are linked to after they create their criminal profiles (only the first time they create their criminal profile when oppening the UI)
+    AutoCreateQBGang = { -- Define which QB gangs will be auto created in the system with assigned color by default. When player gets this gang, they will be added to the organization
+        -- ['vagos'] = '#DE2A21',
+        -- ['ballas'] = '#9D27B0',
+        -- ['families'] = '#4CAF50',
+    },
+
+    -------------------------
+    ---- JOBS AS GANGS  -----
+    -------------------------
+    AutoCreateJobGangs = { -- Define which jobs will be auto created as organizations (works for both ESX and QB). When player gets this job, they will be added to the organization
+        -- ['ambulance'] = '#E53935',
+    },
+
+    --------------------------------
+    ---- LAW ENFORCEMENT GANG  -----
+    --------------------------------
+    LawEnforcementGang = true, -- Set to true to enable a unified law enforcement organization
+    LawEnforcementGangName = 'lawenforcement', -- Name of the law enforcement organization
+    LawEnforcementGangColor = '#1E88E5', -- Color for the law enforcement organization
+    LawEnforcementJobs = { -- Jobs that are considered law enforcement (will be added to the law enforcement gang)
+        'police',
+        'sheriff',
+        'state',
+        -- Add more law enforcement jobs here
+    },
 
     ------------------------
     -- INVENTORY SETTINGS --
@@ -52,6 +73,7 @@ Config = {
     -- 'ox_inventory' : https://github.com/overextended/ox_inventory
     -- 'qs-inventory' (version higher or equal to 2.6.0) : https://buy.quasar-store.com/
     -- 'codem-inventory' (version higher or equal to 1.6) : https://codem.tebex.io/
+    -- 'tgiann-inventory' : https://tgiann.tebex.io/
     -- 'custom' : go to functions_override.lua to implement your own function to be comaptible with your inventory
     UseInventory = 'qb-inventory',
 
@@ -121,6 +143,10 @@ Config = {
     -- Minimum of player with a criminal profil connected
     -- on the server to allow war to start
     CriminalOnlineRequiredToStartWar = 2,
+
+    -- Maximum wars one organization can start at the same time
+    -- if set to 0 : infinite wars
+    MaximumOrganizationWars = 1,
 
     -- Amount of players in the organisation that need to be online to attack an owned zone by another organization
     -- (if organization members (offline and online) are less than this number, it won't be check),
@@ -291,9 +317,9 @@ Config = {
             Time = 3600000, -- Time in miliseconds after which item will be generated
 
             -- Set specific NPC model that will spawn for this zone when protection will be increase
-            NPCModels = { },
+            NPCModels = { 'mp_f_weed_01', 'mp_m_weed_01', 'g_m_y_mexgoon_01', ',g_m_y_famfor_01', 'g_f_importexport_01', 'a_f_y_hippie_01'},
             -- Set specific NPC weapon that will give to npc to the npc for this zone when protection will be increase
-            NPCWeapons = { }
+            NPCWeapons = { 'weapon_pistol', 'weapon_microsmg' }
             -- Amount of players in the organisation that need to be online to attack an owned zone by another organization
             -- (if organization members (offline and online) are less than this number, it won't be check)
             -- OrganizationMembersRequiredOnlineToAttackZone = 5,
@@ -347,6 +373,9 @@ Config = {
                     itemName = 'metalscrap',        -- item name that will be placed in the storage x time set
                     itemAmount = 5                  -- amount of item placed in the storage x time set
                 },
+            },
+            -- Processing parameters
+            ProcessingItems = {
                 {
                     itemName = 'glass',        -- item name that will be placed in the storage x time set
                     itemAmount = 5                  -- amount of item placed in the storage x time set
@@ -363,7 +392,7 @@ Config = {
             -- Set specific NPC weapon that will give to npc to the npc for this zone when protection will be increase
             NPCWeapons = { }
             -- Amount of players in the organisation that need to be online to attack an owned zone by another organization
-            -- (if organization members (offline and online) are less than this number, it won't be check)
+            -- (if organization members (offline and online) are less than this number, it won't be check),
             -- OrganizationMembersRequiredOnlineToAttackZone = 5,
         },
         [3287] = {
@@ -444,14 +473,13 @@ Config = {
                     itemAmount = 10                  -- amount of item placed in the storage x time set
                 },
             },
-            Time = 3600000, -- Time in miliseconds after which item will be generated
 
             -- Set specific NPC model that will spawn for this zone when protection will be increase
             NPCModels = { },
             -- Set specific NPC weapon that will give to npc to the npc for this zone when protection will be increase
             NPCWeapons = { }
             -- Amount of players in the organisation that need to be online to attack an owned zone by another organization
-            -- (if organization members (offline and online) are less than this number, it won't be check)
+            -- (if organization members (offline and online) are less than this number, it won't be check),
             -- OrganizationMembersRequiredOnlineToAttackZone = 5,
         },
         [6765] = {
@@ -491,7 +519,7 @@ Config = {
             Time = 3600000, -- Time in miliseconds after which item will be generated
 
             -- Set specific NPC model that will spawn for this zone when protection will be increase
-            NPCModels = { },
+            NPCModels = { 'csb_ballasog', 'g_f_y_ballas_01', 'g_m_y_ballasout_01', ',ig_ballasog', 'g_m_y_ballaeast_01', 'g_m_y_ballaorig_01', 'g_m_y_ballasout_01' },
             -- Set specific NPC weapon that will give to npc to the npc for this zone when protection will be increase
             NPCWeapons = { }
             -- Amount of players in the organisation that need to be online to attack an owned zone by another organization
@@ -567,7 +595,6 @@ Config = {
                     OnlyOwnerCanAccessStorage = false,  -- true : only owner can access the storage, false : all members can
                 },
             },
-
             NPCs = {
                 ['mp_m_weed_01'] = {
                     Coords = vector3(2233.12, 5603.56, 54.67 - 0.98),

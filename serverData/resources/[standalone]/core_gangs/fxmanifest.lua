@@ -4,7 +4,7 @@ game 'gta5'
 
 author 'C8RE'
 description 'Advanced Territory War System'
-version '1.3.0'
+version '1.3.5'
 
 lua54 'yes'
 

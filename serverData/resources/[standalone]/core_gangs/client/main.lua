@@ -599,17 +599,25 @@ elseif Config.Framework == 'esx' then
 end
 
 local function HandleDeleteData(deleteDataTable)
-    for k, v in pairs(deleteDataTable.Organizations) do
-        Organizations[k] = nil
+    if deleteDataTable.Organizations then
+        for k, v in pairs(deleteDataTable.Organizations) do
+            Organizations[k] = nil
+        end
     end
-    for k, v in pairs(deleteDataTable.Zones) do
-        Zones[k] = nil
+    if deleteDataTable.Zones then
+        for k, v in pairs(deleteDataTable.Zones) do
+            Zones[k] = nil
+        end
     end
-    for k, v in pairs(deleteDataTable.Criminals) do
-        Criminals[k] = nil
+    if deleteDataTable.Criminals then
+        for k, v in pairs(deleteDataTable.Criminals) do
+            Criminals[k] = nil
+        end
     end
-    for k, v in pairs(deleteDataTable.Bounties) do
-        Bounties[k] = nil
+    if deleteDataTable.Bounties then
+        for k, v in pairs(deleteDataTable.Bounties) do
+            Bounties[k] = nil
+        end
     end
 
 end
@@ -1034,22 +1042,62 @@ local function drawWall(topLeft, topRight, bottomLeft, bottomRight, zone)
 end
 
 function createWallBorder(zone)
+    local maxRetries = 3
+    local retryDelay = 500
 
-    local txd, txm = 'border' .. zone, 'holo' .. zone
-    local textureDict = CreateRuntimeTxd(txd)
-    local duiObj = CreateDui(string.format("nui://%s/html/border/border.html", GetCurrentResourceName()), 1500, 1500)
+    for attempt = 1, maxRetries do
+        ::continue::
+        local txd, txm = 'border' .. zone, 'holo' .. zone
+        local textureDict = CreateRuntimeTxd(txd)
 
-    local dui = GetDuiHandle(duiObj)
-    local tx = CreateRuntimeTextureFromDuiHandle(textureDict, txm, dui)
+        if not textureDict or textureDict == 0 then
+            print('^3[GANGS]^7 Border creation failed for zone ' .. zone .. ' - Texture dictionary invalid (Attempt ' .. attempt .. '/' .. maxRetries .. ')')
+            Wait(retryDelay)
+            goto continue
+        end
 
-    Wait(500)
-    Borders[zone] = { dui = duiObj }
+        local duiObj = CreateDui(string.format("nui://%s/html/border/border.html", GetCurrentResourceName()), 1500, 1500)
 
-    SendDuiMessage(duiObj, json.encode({
-        type = "load",
-        orgs = Organizations,
-        config = Config
-    }))
+        if not duiObj then
+            print('^3[GANGS]^7 Border creation failed for zone ' .. zone .. ' - DUI object invalid (Attempt ' .. attempt .. '/' .. maxRetries .. ')')
+            Wait(retryDelay)
+            goto continue
+        end
+
+        local dui = GetDuiHandle(duiObj)
+
+        if not dui or dui == '' then
+            print('^3[GANGS]^7 Border creation failed for zone ' .. zone .. ' - DUI handle invalid (Attempt ' .. attempt .. '/' .. maxRetries .. ')')
+            DestroyDui(duiObj)
+            Wait(retryDelay)
+            goto continue
+        end
+
+        local tx = CreateRuntimeTextureFromDuiHandle(textureDict, txm, dui)
+
+        if not tx or tx == 0 then
+            print('^3[GANGS]^7 Border creation failed for zone ' .. zone .. ' - Runtime texture invalid (Attempt ' .. attempt .. '/' .. maxRetries .. ')')
+            DestroyDui(duiObj)
+            Wait(retryDelay)
+            goto continue
+        end
+
+        Wait(500)
+
+        Borders[zone] = { dui = duiObj }
+
+        SendDuiMessage(duiObj, json.encode({
+            type = "load",
+            orgs = Organizations,
+            config = Config
+        }))
+
+        return true
+
+    end
+
+    print('^1[GANGS]^7 Border creation failed for zone ' .. zone .. ' after ' .. maxRetries .. ' attempts')
+    return false
 end
 
 local function drawSquareWalls(middlePoint, wallLength, wallHeight, zone)
@@ -1093,10 +1141,12 @@ local function drawSquareWalls(middlePoint, wallLength, wallHeight, zone)
 end
 
 function destroyBorder(zone)
-    if Borders[zone] and Borders[zone].dui then
-        DestroyDui(Borders[zone].dui)
+    if Borders[zone] then
+        if Borders[zone].dui then
+            DestroyDui(Borders[zone].dui)
+        end
+        Borders[zone] = nil
     end
-    Borders[zone] = nil
 end
 
 -- WALL DRAWING
@@ -1110,12 +1160,16 @@ if Config.DisplayWarWall then
                     for k, v in pairs(Borders) do
                         destroyBorder(k)
                     end
-                    createWallBorder(CurrentWar)
-                    Wait(500)
-                    local centerCoords = Zones[CurrentWar].coords
-                    CanSeeBorder = isPlayerInZone(coords, centerCoords, 60.0)
-                    drawSquareWalls(centerCoords, wallLength, wallHeight, CurrentWar)
-                    Wait(1)
+                    local success = createWallBorder(CurrentWar)
+                    if success then
+                        Wait(500)
+                        local centerCoords = Zones[CurrentWar].coords
+                        CanSeeBorder = isPlayerInZone(coords, centerCoords, 60.0)
+                        drawSquareWalls(centerCoords, wallLength, wallHeight, CurrentWar)
+                        Wait(1)
+                    else
+                        Wait(2000)
+                    end
                 else
                     if next(Borders) then
                         for k, v in pairs(Borders) do
@@ -1139,8 +1193,10 @@ if Config.DisplayWarWall then
                             local centerCoords = Zones[k].coords
                             local distance =  #(centerCoords - playerCoords);
                             if distance <= (Config.DistanceToDisplayWall + 5.0) then
-                                createWallBorder(zone)
-                                break
+                                local success = createWallBorder(zone)
+                                if success then
+                                    break
+                                end
                             end
                         end
                         Wait(1000)
@@ -1360,37 +1416,41 @@ function openMenu()
 
     local coords = GetEntityCoords(PlayerPedId())
 
-    framework:TriggerCallback('core_gangs:server:getPlayerCurrency', function(currency, ZoneCooldowns, OrgCooldowns, time)
-        Currency = currency
+    -- Check if player is law enforcement
+    framework:TriggerCallback('core_gangs:server:isLawEnforcement', function(isLawEnforcement)
+        framework:TriggerCallback('core_gangs:server:getPlayerCurrency', function(currency, ZoneCooldowns, OrgCooldowns, time)
+            Currency = currency
 
-        for k, v in pairs(ZoneCooldowns or {}) do
-            ZoneCooldowns[k] = v - time
-        end
+            for k, v in pairs(ZoneCooldowns or {}) do
+                ZoneCooldowns[k] = v - time
+            end
 
-        local OrgCoolDown = OrgCooldowns[Organization] and OrgCooldowns[Organization] > time and OrgCooldowns[Organization] - time or 0
+            local OrgCoolDown = OrgCooldowns[Organization] and OrgCooldowns[Organization] > time and OrgCooldowns[Organization] - time or 0
 
-        SendNUIMessage({
-            type = "currency",
-            currency = Currency
-        })
+            SendNUIMessage({
+                type = "currency",
+                currency = Currency
+            })
 
-        SetNuiFocus(true, true)
-        SendNUIMessage({
-            type = "open",
-            orgs = Organizations,
-            criminals = Criminals,
-            bounties = Bounties,
-            zones = Zones,
-            zoneCooldowns = ZoneCooldowns,
-            orgCoolDown = OrgCoolDown,
-            config = Config,
-            org = Organization,
-            cid = cid,
-            coords = coords,
-            userConfig = UserConfig
-        })
+            SetNuiFocus(true, true)
+            SendNUIMessage({
+                type = "open",
+                orgs = Organizations,
+                criminals = Criminals,
+                bounties = Bounties,
+                zones = Zones,
+                zoneCooldowns = ZoneCooldowns,
+                orgCoolDown = OrgCoolDown,
+                config = Config,
+                org = Organization,
+                cid = cid,
+                coords = coords,
+                userConfig = UserConfig,
+                isLawEnforcement = isLawEnforcement -- Add law enforcement flag
+            })
 
-        MenuOpen = true
+            MenuOpen = true
+        end)
     end)
 
 end
