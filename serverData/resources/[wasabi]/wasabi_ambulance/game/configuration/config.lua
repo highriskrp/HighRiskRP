@@ -89,7 +89,7 @@ Config.policeCanTreat = {
     enabled = true, -- Police can treat patients?
     jobs = {        -- Police / other jobs
         'police',
-        'sheriff',
+        --    'sheriff',
     }
 }
 
@@ -285,12 +285,28 @@ Config.EnviMedic = {
     enabled = false -- Enable to make Envi-Medic to work with wasabi_ambulance
 }
 
+Config.EnviZombies = {
+    ---------------------------------------------------
+    --            If you use Envi Zombies:           --
+    --         https://envi-scripts.tebex.io/        --
+    ---------------------------------------------------
+    autoDetect = false, -- Enable to make Envi-Zombies to work with wasabi_ambulance knockout loop
+}
+
 Config.NassPaintball = {
     ------------------------------------
     --   If you use Nass Paintball:   --
     --    https://store.nass.dev/     --
     ------------------------------------
     autoDetect = true -- Auto detect if player is in paintball area and disable injury/death system
+}
+
+Config.NassFighting = {
+    ------------------------------------
+    --   If you use Nass Fighting:   --
+    --    https://store.nass.dev/     --
+    ------------------------------------
+    autoDetect = true -- Auto detect if player is using fighting system and disable knockout loop
 }
 
 Config.mInsurance = {
