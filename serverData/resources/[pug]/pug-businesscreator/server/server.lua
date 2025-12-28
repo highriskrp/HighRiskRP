@@ -42,29 +42,49 @@ function BanBusinessPlayer(src)
     print("Player with the ID:"..src.." is attempting to inject into business creator")
 end
 function HasPermission(source)
+    -- ESX Framework check
     if Framework == 'ESX' then
         local player = FWork.GetPlayerFromId(source)
-        if player then
-            local playerGroup = player.getGroup()
-            for _, role in ipairs(Config.AllowedRoles) do
-                if playerGroup == role then
+        if not player then return false end
+
+        local playerGroup = player.getGroup()
+        for _, role in ipairs(Config.AllowedRoles) do
+            if playerGroup == role then
+                return true
+            end
+        end
+
+        local identifier = player.getIdentifier and player.getIdentifier() or (player.identifier or player.PlayerData and player.PlayerData.citizenid)
+        if identifier then
+            for _, cid in ipairs(Config.AccessGranted or {}) do
+                if tostring(identifier) == tostring(cid) then
                     return true
                 end
             end
         end
+
     else
         local playerPerm = FWork.Functions.GetPermission(source)
         for _, role in ipairs(Config.AllowedRoles) do
-            if FWork.Functions.HasPermission(source, role) or IsPlayerAceAllowed(source, 'command') then
-                return true
-            elseif type(playerPerm) == 'string' and playerPerm == role then
-                return true
-            elseif type(playerPerm) == 'table' and playerPerm[role] then
+            if FWork.Functions.HasPermission(source, role)
+                or IsPlayerAceAllowed(source, 'command')
+                or (type(playerPerm) == 'string' and playerPerm == role)
+                or (type(playerPerm) == 'table' and playerPerm[role])
+            then
                 return true
             end
         end
+
+        local player = FWork.Functions.GetPlayer(source)
+        if player and player.PlayerData and player.PlayerData.citizenid then
+            for _, cid in ipairs(Config.AccessGranted or {}) do
+                if tostring(player.PlayerData.citizenid) == tostring(cid) then
+                    return true
+                end
+            end
+        end
     end
-    
+
     for _, role in ipairs(Config.AllowedRoles) do
         if IsPlayerAceAllowed(source, role) then
             return true
@@ -73,6 +93,7 @@ function HasPermission(source)
 
     return false
 end
+
 
 
 ------------------------------
@@ -483,15 +504,10 @@ RegisterNetEvent('Pug:server:BuyShopItems', function(Data)
 
         local totalCost = rec.cost * selectedQuantity
         local paymentType = (Framework == "ESX") and "money" or "cash"
-        local playerMoney = 0
-        if Framework == "QBCore" then
-            playerMoney = (Player.PlayerData and Player.PlayerData.money and Player.PlayerData.money.cash) or 0
-        elseif Framework == "ESX" then
-            if Player.getMoney then playerMoney = Player.getMoney()
-            elseif Player.getAccount then local acc = Player.getAccount('money'); playerMoney = acc and acc.money or 0 end
-        end
+        local playerMoney = (Player.PlayerData and Player.PlayerData.money and Player.PlayerData.money.cash) or 0
         if playerMoney < totalCost then
-            TriggerClientEvent('Pug:client:ShowBusinessNotify', src, 'You do not have enough money', 'error')
+            local MissingMoney = math.ceil(totalCost - playerMoney)
+            TriggerClientEvent('Pug:client:ShowBusinessNotify', src, 'You are missing $'..MissingMoney, 'error')
             return
         end
 
@@ -712,6 +728,20 @@ RegisterNetEvent("Pug:Server:SendLbPhoneMailBusiness", function(CID, emailData)
         sender = emailData.sender,
         message = emailData.message,
     })
+end)
+
+RegisterNetEvent("Pug:Server:SendyseriesMailBusiness", function(CID, emailData)
+    local receiverType = "phoneNumber"
+    -- param: identifier string The identifier of the player(citizenid, identifier)
+    -- return: string The phone number of the player
+    local receiver = exports.yseries:GetPhoneNumberByIdentifier(tostring(CID))
+
+    exports["yseries"]:SendMail({
+        title = emailData.subject,
+        sender = emailData.sender,
+        senderDisplayName = emailData.sender,
+        content = emailData.message,
+    }, receiverType, receiver)
 end)
 
 local function GetPlayerSourceByCID(cid)
@@ -1246,40 +1276,70 @@ end)
 
 ---------- [Commands] ----------
 if Framework == "QBCore" then
-	FWork.Commands.Add(Config.BusinessMenuCommand, "Create business menu", {}, false, function(source, args)
-		local src = source
-		local result = MySQL.query.await('SELECT * FROM pug_businesses', {})
-		if result[1] ~= nil then
-			TriggerClientEvent("Pug:client:OpenBusinessCreatorUI",src, result)
-		else
-			TriggerClientEvent("Pug:client:OpenBusinessCreatorUI",src, false)
-		end
-	end,"admin")
-    FWork.Commands.Add(Config.ViewAllCreatedItemsCommand, "View or remove and created item", {}, false, function(source, args)
-		local src = source
-		local result = MySQL.query.await('SELECT * FROM pug_businesses', {})
-		if result[1] ~= nil then
-			TriggerClientEvent("Pug:client:ViewCreatedItemsMenu",src, result)
-		end
-	end,"admin")
+    -- Business Creator Menu Command
+    FWork.Commands.Add(Config.BusinessMenuCommand, "Create business menu", {}, false, function(source, args)
+        local src = source
+        if not HasPermission(src) then
+            TriggerClientEvent('QBCore:Notify', src, "You don't have permission.", "error")
+            return
+        end
+
+        local result = MySQL.query.await('SELECT * FROM pug_businesses', {})
+        if result and result[1] ~= nil then
+            TriggerClientEvent("Pug:client:OpenBusinessCreatorUI", src, result)
+        else
+            TriggerClientEvent("Pug:client:OpenBusinessCreatorUI", src, false)
+        end
+    end)
+    -- View All Created Items Command
+    FWork.Commands.Add(Config.ViewAllCreatedItemsCommand, "View or remove any created item", {}, false, function(source, args)
+        local src = source
+        if not HasPermission(src) then
+            TriggerClientEvent('QBCore:Notify', src, "You don't have permission.", "error")
+            return
+        end
+
+        local result = MySQL.query.await('SELECT * FROM pug_businesses', {})
+        if result and result[1] ~= nil then
+            TriggerClientEvent("Pug:client:ViewCreatedItemsMenu", src, result)
+        else
+            TriggerClientEvent('QBCore:Notify', src, "No created items found.", "error")
+        end
+    end)
+
 else
-	FWork.RegisterCommand(Config.BusinessMenuCommand, 'admin', function(xPlayer, args)
-		local src = xPlayer.source
-		local result = MySQL.query.await('SELECT * FROM pug_businesses', {})
-		if result[1] ~= nil then
-			TriggerClientEvent("Pug:client:OpenBusinessCreatorUI",src, result)
-		else
-			TriggerClientEvent("Pug:client:OpenBusinessCreatorUI",src, false)
-		end
-	end, true, {help = 'Create business menu', validate = true, arguments = {} })
-    FWork.RegisterCommand(Config.ViewAllCreatedItemsCommand, 'admin', function(xPlayer, args)
-		local src = xPlayer.source
-		local result = MySQL.query.await('SELECT * FROM pug_businesses', {})
-		if result[1] ~= nil then
-			TriggerClientEvent("Pug:client:ViewCreatedItemsMenu",src, result)
-		end
-	end, true, {help = 'View or remove and created item', validate = true, arguments = {} })
+    -- Business Creator Menu Command
+    FWork.RegisterCommand(Config.BusinessMenuCommand, 'user', function(xPlayer, args)
+        local src = xPlayer.source
+        if not HasPermission(src) then
+            TriggerClientEvent('esx:showNotification', src, "You don't have permission.")
+            return
+        end
+
+        local result = MySQL.query.await('SELECT * FROM pug_businesses', {})
+        if result and result[1] ~= nil then
+            TriggerClientEvent("Pug:client:OpenBusinessCreatorUI", src, result)
+        else
+            TriggerClientEvent("Pug:client:OpenBusinessCreatorUI", src, false)
+        end
+    end, true, {help = 'Create business menu', validate = true, arguments = {}})
+    -- View All Created Items Command
+    FWork.RegisterCommand(Config.ViewAllCreatedItemsCommand, 'user', function(xPlayer, args)
+        local src = xPlayer.source
+        if not HasPermission(src) then
+            TriggerClientEvent('esx:showNotification', src, "You don't have permission.")
+            return
+        end
+
+        local result = MySQL.query.await('SELECT * FROM pug_businesses', {})
+        if result and result[1] ~= nil then
+            TriggerClientEvent("Pug:client:ViewCreatedItemsMenu", src, result)
+        else
+            TriggerClientEvent('esx:showNotification', src, "No created items found.")
+        end
+    end, true, {help = 'View or remove any created item', validate = true, arguments = {}})
 end
+
 ------------------------------
 
 --// FRAMEWORK STUFF //--

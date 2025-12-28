@@ -4,7 +4,7 @@ game 'gta5'
 
 author 'zPug'
 description 'Pug Business Creator'
-version '2.5.1'
+version '2.5.3'
 
 shared_scripts {
     'config.lua'

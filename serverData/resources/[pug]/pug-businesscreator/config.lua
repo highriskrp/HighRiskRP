@@ -143,6 +143,10 @@ Config.AllowedRoles = {
     "god",
     "superadmin",
 }
+Config.AccessGranted = { -- [CITIZEN ID'S] This only matters if they are not already an Config.AllowedRoles
+    "CCZ77335",
+    -- ADD MORE CITIZEN ID'S HERE IF YOU LIKE.
+}
 Config.LangT = { -- All text options
     -- MENU
     ["SignsOnDuty"] = "Signs name in",

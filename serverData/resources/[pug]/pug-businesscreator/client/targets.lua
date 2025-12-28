@@ -2941,8 +2941,8 @@ local function IsSpawnPointClear(coords, maxDistance)
 	return #GetVehiclesInArea(coords, maxDistance) == 0 
 end
 local function SetVehicleFuel(Veh, Amount)
-	if GetResourceState("cdn-fuel") == 'started' then
-		exports["cdn-fuel"]:SetFuel(Veh, Amount)
+	if GetResourceState("LegacyFuel") == 'started' then
+		exports["LegacyFuel"]:SetFuel(Veh, Amount)
 	elseif GetResourceState("cdn-fuel") == 'started' then
 		exports["cdn-fuel"]:SetFuel(Veh, Amount)
 	elseif GetResourceState("ps-fuel") == 'started' then
@@ -5390,6 +5390,8 @@ RegisterNetEvent("Pug:Client:AcceptApplication", function(Data)
 				})
 			elseif GetResourceState("okokPhone") == 'started' then
 				TriggerServerEvent("Pug:Server:SendOkPhoneMailBusiness", tostring(application.citizenID), emailData)
+			elseif GetResourceState("yseries") == 'started' then
+        		TriggerServerEvent("Pug:Server:SendyseriesMailBusiness", tostring(application.citizenID), emailData)
 			else
 				TriggerServerEvent('jpr-phonesystem:server:sendEmail', tostring(application.citizenID), emailData)
 				TriggerServerEvent('qb-phone:server:sendNewEventMail', tostring(application.citizenID), emailData)
@@ -5447,6 +5449,8 @@ RegisterNetEvent("Pug:Client:AcceptApplication", function(Data)
 				})
 			elseif GetResourceState("okokPhone") == 'started' then
 				TriggerServerEvent("Pug:Server:SendOkPhoneMailBusiness", tostring(application.citizenID), emailData)
+			elseif GetResourceState("yseries") == 'started' then
+        		TriggerServerEvent("Pug:Server:SendyseriesMailBusiness", tostring(application.citizenID), emailData)
 			else
 				
 				TriggerServerEvent('jpr-phonesystem:server:sendEmail', tostring(application.citizenID), emailData)
@@ -5508,6 +5512,8 @@ RegisterNetEvent("Pug:Client:RejectApplication", function(Data)
 				})
 			elseif GetResourceState("okokPhone") == 'started' then
 				TriggerServerEvent("Pug:Server:SendOkPhoneMailBusiness", tostring(application.citizenID), emailData)
+			elseif GetResourceState("yseries") == 'started' then
+        		TriggerServerEvent("Pug:Server:SendyseriesMailBusiness", tostring(application.citizenID), emailData)
 			else
 				TriggerServerEvent('jpr-phonesystem:server:sendEmail', tostring(application.citizenID), emailData)
 				TriggerServerEvent('qb-phone:server:sendNewEventMail', tostring(application.citizenID), emailData)
@@ -5572,6 +5578,8 @@ RegisterNetEvent("Pug:Client:RejectApplication", function(Data)
 				})
 			elseif GetResourceState("okokPhone") == 'started' then
 				TriggerServerEvent("Pug:Server:SendOkPhoneMailBusiness", tostring(application.citizenID), emailData)
+			elseif GetResourceState("yseries") == 'started' then
+        		TriggerServerEvent("Pug:Server:SendyseriesMailBusiness", tostring(application.citizenID), emailData)
 			else
 				TriggerServerEvent('jpr-phonesystem:server:sendEmail', tostring(application.citizenID), emailData)
 				TriggerServerEvent('qb-phone:server:sendNewEventMail', tostring(application.citizenID), emailData)
