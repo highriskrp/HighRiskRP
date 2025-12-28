@@ -1,20 +1,22 @@
-print'Pug Paintball 3.3.3'
+print'Pug Paintball 4.0.3'
 
-function PaintBallNotify(msg, type, length)
+AddTextEntry("WEAPON_PAINTBALLGUN", "Paintball")
+
+function PaintBallNotify(msg, style, length)
     if Framework == "ESX" then
 		FWork.ShowNotification(tostring(msg))
 	elseif Framework == "QBCore" then
-    	FWork.Functions.Notify(tostring(msg), type, length)
+    	FWork.Functions.Notify(tostring(msg), style, length)
 	end
 end
 
 function DrawTextOptiopnForSpectate()
     if GetResourceState('cd_drawtextui') == 'started' then
-        TriggerEvent('cd_drawtextui:ShowUI', 'show', "[E] To open menu")
+        TriggerEvent('cd_drawtextui:ShowUI', 'show', Config.Translations.menu.open_menu_hint)
 	elseif Framework == "QBCore" then
-		exports[Config.CoreName]:DrawText('[E] To open menu', 'left')
+		exports[Config.CoreName]:DrawText(Config.Translations.menu.open_menu_hint, 'left')
 	else
-		FWork.TextUI('[E] To open menu', "error")
+		FWork.TextUI(Config.Translations.menu.open_menu_hint, "error")
 	end
 end
 
@@ -28,11 +30,55 @@ function HideTextOptiopnForSpectate()
 	end
 end
 
+function PugAddTargetToEntity(entity, data)
+    if Config.Target == "ox_target" then
+        exports.ox_target:addLocalEntity(entity, data)
+    else
+        exports[Config.Target]:AddTargetEntity(entity, {
+            options = data,
+            distance = data.distance or 2.0
+        })
+    end
+end
+
 function PugCreateMenu(menuId, menuTitle, options, parentId)
-    if Config.Menu == "ox_lib" then
+    if Config.Menu == "lation_ui" then
+        local lationOptions = {}
+        for _, item in ipairs(options) do
+            lationOptions[#lationOptions+1] = {
+                title = item.title,
+                description = item.description or "",
+                icon = item.icon,
+                iconColor = item.iconColor,
+                disabled = item.disabled,
+                readOnly = item.readOnly,
+                progress = item.progress,
+                image = item.image,
+                metadata = item.metadata,
+                event = item.event,
+                args = item.args,
+                keybind = item.keybind,
+                menu = item.menu
+            }
+        end
+
+        local data = {
+            id = menuId,
+            title = menuTitle,
+            subtitle = parentId and "" or nil,
+            options = lationOptions
+        }
+
+        if parentId then
+            data.menu = parentId
+        end
+
+        exports.lation_ui:registerMenu(data)
+        exports.lation_ui:showMenu(menuId)
+    elseif Config.Menu == "ox_lib" then
         local oxOptions = {}
         for _, item in ipairs(options) do
-            table.insert(oxOptions, {
+            oxOptions[#oxOptions+1] = {
                 title = item.title,
                 description = item.description or "",
                 icon = item.icon,
@@ -44,7 +90,7 @@ function PugCreateMenu(menuId, menuTitle, options, parentId)
                 colorScheme = item.colorScheme,
                 arrow = item.arrow,
                 args = item.args,
-            })
+            }
         end
 
         local data = {
@@ -54,7 +100,7 @@ function PugCreateMenu(menuId, menuTitle, options, parentId)
         }
 
         if parentId then
-            data.menu = parentId -- enables back button
+            data.menu = parentId
         end
 
         lib.registerContext(data)
@@ -62,7 +108,7 @@ function PugCreateMenu(menuId, menuTitle, options, parentId)
     else
         local qbOptions = {}
         for _, item in ipairs(options) do
-            table.insert(qbOptions, {
+            qbOptions[#qbOptions+1] = {
                 header = item.title,
                 txt = item.description or "",
                 icon = item.icon,
@@ -74,54 +120,127 @@ function PugCreateMenu(menuId, menuTitle, options, parentId)
                     event = item.event,
                     args = item.args
                 }
-            })
+            }
         end
 
         exports[Config.Menu]:openMenu(qbOptions)
     end
 end
 
+function PugSoundPlay(Name, Volume, Looped)
+    local actionName = "PlaySound"
+    if Looped then actionName = "playlooped" end
+    SendNUIMessage({
+        action = actionName,
+        audio = tostring(Name)..".ogg",
+        volume = tonumber(Volume),
+        loop = Looped,
+    })
+end
+
+function PugCloseMenu()
+    if Config.Menu == "lation_ui" then
+        -- exports.lation_ui:closeMenu()
+    elseif Config.Menu == "ox_lib" then
+        lib.hideContext(false)
+    else
+        exports[Config.Menu]:closeMenu()
+    end
+end
+
+function PugInputDialog(header, fields)
+    if Config.Input == "ox_lib" or Config.Input == "kl_lib" or Config.Input == "lation_ui" then
+        local Input = lib.inputDialog(header, fields)
+        if Input then return Input end
+    else
+        local inputFields = {}
+        for _, field in ipairs(fields) do
+            table.insert(inputFields, {
+                text = field.label,
+                name = field.name,
+                type = field.type,
+                isRequired = field.isRequired or false
+            })
+        end
+        local Input = exports[Config.Input]:ShowInput({
+            header = header,
+            submitText = Config.Translations.menu.submit_text,
+            inputs = inputFields,
+        })
+        if Input then
+            local result = {}
+            for _, f in ipairs(fields) do
+                table.insert(result, Input[f.name])
+            end
+            return result
+        end
+    end
+    ClearPedTasksImmediately(PlayerPedId())
+    PaintBallNotify(Config.Translations.error.missing_input, "error")
+    return false
+end
+
+function LockInventory()
+    if not Config.LockInventory then return end
+	local BusyType = "inv_busy"
+	if GetResourceState("ox_inventory") == 'started' then
+		BusyType = "invBusy"
+	end
+	if GetResourceState("tgiann-inventory") == 'started' then
+		exports["tgiann-inventory"]:SetInventoryActive(true)
+	else
+		LocalPlayer.state:set(BusyType, true, true)
+	end
+end
+
+function UnlockInventory()
+    if not Config.LockInventory then return end
+	local BusyType = "inv_busy"
+	if GetResourceState("ox_inventory") == 'started' then
+		BusyType = "invBusy"
+	end
+	if GetResourceState("tgiann-inventory") == 'started' then
+		exports["tgiann-inventory"]:SetInventoryActive(true)
+	else
+		LocalPlayer.state:set(BusyType, false, true)
+	end
+end
 
 local OriginalPlayersArmor
-function HandleStartingSetup() -- When you spawn into the match this function is called
+function HandleStartingSetup(spawnHeading) -- When you spawn into the match this function is called
     OriginalPlayersArmor = GetPedArmour(PlayerPedId())
-    if Config.RemoveAllItemsForPlayer then
-        TriggerServerEvent("Pug:server:SavePaintballItems")
-    end
+
     DoScreenFadeOut(500)
     Wait(500)
     inMatch()
-    if Config.UseVrHeadSet and Config.MakeCloneOfPlayer then
+    if Config.UseVrHeadSet and Config.MakeCloneOfPlayer and GetResourceState("pug-battleroyale") == 'started' then
         CreateClone()
     end
-    TriggerServerEvent("InteractSound_SV:PlayOnSource", "startround", 0.03)
+    PugSoundPlay("startround", 0.03)
     TriggerEvent('Pug:client:InPaintBallMatchWL')
     SetEntityHealth(PlayerPedId(), 200)
-    TriggerEvent("Pug:client:PaintballReviveEvent")
+    TriggerEvent("Pug:client:PaintballReviveEvent", spawnHeading)
     if Config.Debug then
         print(ClosedInfo().weapon, 'weapon chosen')
     end
-    if ClosedInfo().mode == Config.GameModes[4].name then
-    elseif ClosedInfo().mode == Config.GameModes[6].name then
-        GiveWeaponToPed(PlayerPedId(), GetHashKey(Config.OneInTheChamberWeapon), 0, false, false)
-        SetPedAmmo(PlayerPedId(), GetHashKey(Config.OneInTheChamberWeapon), 1)
-        SetCurrentPedWeapon(PlayerPedId(), GetHashKey(Config.OneInTheChamberWeapon), true)
+    if CheckMatchingGameMode("Gun_Game") then
+    elseif CheckMatchingGameMode("One_In_The_Chamber") then
+        GiveThePlayerTheWeapon()
         SetEntityHealth(PlayerPedId(), 110)
     else
-        GiveWeaponToPed(PlayerPedId(), GetHashKey(ClosedInfo().weapon), 0, false, false)
-        SetPedAmmo(PlayerPedId(), GetHashKey(ClosedInfo().weapon), 1000)
-        SetCurrentPedWeapon(PlayerPedId(), GetHashKey(ClosedInfo().weapon), true)
+        GiveThePlayerTheWeapon()
     end
     FreezeEntityPosition(PlayerPedId(),true)
 end
 
 -- HandleEndingSetup
-RegisterNetEvent('Pug:client:RemoveGameItems', function() -- removes items when the match ends
+RegisterNetEvent('Pug:client:RemovePlayerFromGameOpen', function() -- removes items when the match ends
     TriggerEvent("Pug:Anticheat:FixRemovedGun")
     RemoveAllPedWeapons(PlayerPedId(), false)
     SetEntityHealth(PlayerPedId(), 200)
     if OriginalPlayersArmor then
         SetPedArmour(PlayerPedId(), OriginalPlayersArmor)
+        OriginalPlayersArmor = nil
     end
 end)
 
@@ -131,57 +250,6 @@ local function LoadModel(model)
 		Wait(0)
 	end
 end
-
--- This is some bs thing a customer wanted me to add to detect some cheater flying into the arena or something, idk it made no sense. No one needs this......
--- local function createPaintBallZone(zones, name)
---     if GetResourceState('ox_lib') == 'started' then
---         Wait(1000)
---         lib.zones.poly({
---             thickness = zones['Zone'].maxZ - zones['Zone'].minZ,
---             debug = Config.Debug,
---             points = {
---                 table.unpack(zones['Zone']['Shape'])
---             },
---             onEnter = function()
---                 if name == 'ArenaMain' and ClosedInfo().ingame and ClosedInfo().map ~= 'gabz' then
---                     SetEntityCoords(PlayerPedId(), Config.PedLocation)
---                     if Framework == "QBCore" then
---                         local player = Config.FrameworkFunctions.GetPlayer(true, false, true)
---                         TriggerEvent('qb-log:server:CreateLog', 'paintballcheater', ("Player: %s %s somehow left the arena, was teleported back and may be cheating"):format(
---                             player.PlayerData.charinfo.firstname,
---                             player.PlayerData.charinfo.lastname
---                         ))
---                     end
---                 end
---             end,
---             onExit = function() end,
---         })
---     else
---         local zone = PolyZone:Create(zones['Zone']['Shape'], {
---             name = name,
---             minZ = zones.minZ,
---             maxZ = zones.maxZ,
---             debugPoly = Config.Debug
---         })
---         zone:onPlayerInOut(function(isPointInside)
---             if not isPointInside and name == 'ArenaMain' then
---                 if ClosedInfo().ingame and ClosedInfo().map ~= 'gabz' then
---                     SetEntityCoords(PlayerPedId(), Config.PedLocation)
---                     if Framework == "QBCore" then
---                         local player = Config.FrameworkFunctions.GetPlayer(true, false, true)
---                         TriggerEvent('qb-log:server:CreateLog', 'paintballcheater', ("Player: %s %s somehow left the arena, was teleported back and may be cheating"):format(
---                             player.PlayerData.charinfo.firstname,
---                             player.PlayerData.charinfo.lastname
---                         ))
---                     end
---                 end
---             end
---         end)
---     end
--- end
--- for k, v in pairs(Config.ArenaZone) do
---     createPaintBallZone(v, k)
--- end
 
 local function DrawText3Ds(x, y, z, text)
     SetTextScale(0.35, 0.35)
@@ -199,138 +267,123 @@ local function DrawText3Ds(x, y, z, text)
 end
 
 
+-- make a DrawText3D function that draws 3D text on the screen at the given coords
+local function DrawText3D(x, y, z, text)
+    local onScreen, _x, _y = GetScreenCoordFromWorldCoord(x, y, z)
+    local p = GetGameplayCamRelativePitch()
+    SetTextScale(0.60, 0.60)
+    SetTextFont(4)
+    SetTextProportional(1)
+    SetTextColour(255, 255, 255, 215)
+    SetTextEntry("STRING")
+    SetTextCentre(1)
+    AddTextComponentString(text)
+    DrawText(_x, _y)
+end
+
+
 CreateThread(function()
-    if not Config.UseVrHeadSet then
+    if not Config.UseVrHeadSet or GetResourceState("pug-battleroyale") ~= 'started' then
         -- PedCreation
 		ArenaPed = Config.ArenaPed
 		LoadModel(ArenaPed)
-		ArenaPedMan = CreatePed(2, ArenaPed, Config.PedLocation, false, false)
+        local PedLocationSpawn = GetResourceState("int_arcade") == 'started' and vector4(Config.PedLocation.x, Config.PedLocation.y, Config.PedLocation.z-1, Config.PedLocation.w) or vector4(Config.BackupPedLocation.x, Config.BackupPedLocation.y, Config.BackupPedLocation.z-1, Config.BackupPedLocation.w)
+		ArenaPedMan = CreatePed(2, ArenaPed, PedLocationSpawn, false, false)
 		SetPedFleeAttributes(ArenaPedMan, 0, 0)
 		SetPedDiesWhenInjured(ArenaPedMan, false)
 		SetPedKeepTask(ArenaPedMan, true)
 		SetBlockingOfNonTemporaryEvents(ArenaPedMan, true)
 		SetEntityInvincible(ArenaPedMan, true)
 		FreezeEntityPosition(ArenaPedMan, true)
-        TaskStartScenarioInPlace(ArenaPedMan, "WORLD_HUMAN_CLIPBOARD", 0, true)
+
+
+
+        local weaponHash = GetHashKey("WEAPON_CARBINERIFLE")
+        GiveWeaponToPed(ArenaPedMan, weaponHash, 0, false, true) -- 250 ammo, equipped in hand
+        SetCurrentPedWeapon(ArenaPedMan, weaponHash, true)
+
+        RequestAnimDict("rcmjosh4")
+        while not HasAnimDictLoaded("rcmjosh4") do Wait(0) end
+        TaskPlayAnim(ArenaPedMan, "rcmjosh4", "josh_leadout_cop2", 8.0, -8.0, -1, 2, 1.0, false, false, false)
+
         -- End
-        blip = AddBlipForCoord(Config.PedLocation)
+        blip = AddBlipForCoord(PedLocationSpawn)
         SetBlipSprite(blip, 110)
         SetBlipDisplay(blip, 4)
         SetBlipScale(blip, 0.75)
         SetBlipColour(blip, 5)
         SetBlipAsShortRange(blip, true)
         BeginTextCommandSetBlipName("STRING")
-        AddTextComponentString("Paint Ball")
+        AddTextComponentString(Config.Translations.menu.blip_paintball)
         EndTextCommandSetBlipName(blip)
+
         if Config.Target then
-            if Config.Target == "ox_target" then
-                exports.ox_target:addLocalEntity(ArenaPedMan, {
-                    {
-                        name = 'ViewLobby',
-                        event = 'Pug:client:ViewLobby',
-                        icon = 'fas fa-clipboard',
-                        label = "View Arena",
-                        distance = 2.0,
-                    }
-                })
-            else
-                exports[Config.Target]:AddTargetEntity(ArenaPedMan, {
-                    options = {
-                        {
-                            event = 'Pug:client:ViewLobby',
-                            icon = "fas fa-clipboard",
-                            label = "View Arena",
-                        },
-                    },
-                    distance = 2.0
-                })
-            end
+            PugAddTargetToEntity(ArenaPedMan, {
+                {
+                    name    = "1ViewLobby",
+                    type    = "client",
+                    event   = "Pug:client:OpenPaintballHUB",
+                    icon    = "fas fa-clipboard",
+                    label   = Config.Translations.menu.target_view_arena_label,
+                    args = { entity = ArenaPedMan},
+                    distance = 2.0,
+                },
+            })
         else
-            while true do
-                Wait(1)
-                if #(GetEntityCoords(PlayerPedId()) - vector3(Config.PedLocation.x, Config.PedLocation.y,Config.PedLocation.z)) <= 3 then
-                    DrawText3Ds(Config.PedLocation.x, Config.PedLocation.y,Config.PedLocation.z+1, "~b~[E] ~w~View Arena")
-                    if IsControlJustPressed(0, 38) then
-                        TriggerEvent("Pug:client:ViewLobby")
-                        Wait(500)
+            CreateThread(function()
+                while true do
+                    Wait(1)
+                    if #(GetEntityCoords(PlayerPedId()) - vector3(PedLocationSpawn.x, PedLocationSpawn.y,PedLocationSpawn.z)) <= 3 then
+                        DrawText3Ds(
+                            PedLocationSpawn.x,
+                            PedLocationSpawn.y,
+                            PedLocationSpawn.z+1,
+                            Config.Translations.menu.open_menu_hint_view_arena
+                        )
+                        if IsControlJustPressed(0, 38) then
+                            local args = {}
+                            args.entity = ArenaPedMan
+                            TriggerEvent("Pug:client:OpenPaintballHUB", args)
+                            Wait(500)
+                        end
+                    else
+                        Wait(2000)
                     end
-                else
-                    Wait(2000)
                 end
+            end)
+        end
+        while true do
+            Wait(0)
+            local playerPed = PlayerPedId()
+            local playerCoords = GetEntityCoords(playerPed)
+            local distance = #(playerCoords - vector3(PedLocationSpawn.x, PedLocationSpawn.y, PedLocationSpawn.z))
+            if distance < 12.0 then
+                DrawText3D(
+                    PedLocationSpawn.x,
+                    PedLocationSpawn.y,
+                    PedLocationSpawn.z+2.1,
+                    Config.Translations.menu.ped_text_paintball
+                )
+            else
+                Wait(1000)
             end
         end
     end
 end)
 
-RegisterNetEvent('Pug:client:ResetPlayerHealth', function()
-    SetEntityHealth(PlayerPedId(), 200)
-end)
-
-RegisterNetEvent('Pug:client:ChooseMap', function()
-    Config.FrameworkFunctions.TriggerCallback('Pug:serverCB:Checkongoinggame', function(gamestatus)
-        if gamestatus then
-            PaintBallNotify(Translations.error.active_game, 'error')
-            TriggerEvent("Pug:client:ViewLobby")
-            return
-        end
-
-        local options = {}
-
-        table.insert(options, {
-            title = Translations.menu.random,
-            description = "Randomly chosen maps",
-            event = "Pug:client:SelectChosenMap",
-            args = "random",
-            icon = "fa-dice",
-            iconColor = "#e91e63", -- pink
-        })
-
-
-        local keys = {}
-        for k in pairs(Config.Arenas) do
-            table.insert(keys, k)
-        end
-        table.sort(keys)
-
-        for _, k in ipairs(keys) do
-            local v = Config.Arenas[k]
-            table.insert(options, {
-                title = v.name,
-                description = v.description,
-                icon = "fas fa "..v.icon,
-                iconColor = v.iconColor,
-                image = v.url,
-                event = "Pug:client:SelectChosenMap",
-                args = k
-            })
-        end
-        if Config.Menu ~= "ox_lib" then
-            table.insert(options, {
-                title = " ",
-                description = Translations.menu.go_back,
-                event = "Pug:client:ViewLobby"
-            })
-        end
-
-        PugCreateMenu("choose_map_menu", Translations.menu.map, options, Translations.menu.arenalobby)
-    end)
-end)
-
 -- This is the selecting a map event (i dont remember why i placed it in open.lua?)
 RegisterNetEvent("Pug:client:SelectChosenMap", function(arenaMap)
-    if Config.HostOnlyCanControllGame then
-        if LobbyHost then
-            if LobbyHost == GetPlayerServerId(PlayerId()) then
-            else
-                TriggerEvent("Pug:client:ViewLobby")
-                PaintBallNotify(Translations.error.need_to_be_lobby_host, 'error')
-                return
-            end
+    if LobbyHost then
+        if LobbyHost == GetPlayerServerId(PlayerId()) then
         else
             TriggerEvent("Pug:client:ViewLobby")
-            PaintBallNotify(Translations.error.need_to_be_lobby_host, 'error')
+            PaintBallNotify(Config.Translations.error.need_to_be_lobby_host, 'error')
             return
         end
+    else
+        TriggerEvent("Pug:client:ViewLobby")
+        PaintBallNotify(Config.Translations.error.need_to_be_lobby_host, 'error')
+        return
     end
     if arenaMap == nil then
         TriggerServerEvent("Pug:SV:SetArenaMap",'random')
@@ -342,90 +395,114 @@ RegisterNetEvent("Pug:client:SelectChosenMap", function(arenaMap)
     end
 end)
 
--- Blip System --
--- local Blips = {}
--- RegisterNetEvent('Pug:client:UpdatePaintballBlips', function(data)
---     if ClosedInfo().ingame then
---         for k, v in pairs(data) do
---             if v.src == GetPlayerServerId(PlayerId()) then
---             else
---                 if tostring(v.team).."team" == ClosedInfo().team then
---                     if DoesBlipExist(Blips[k]) then
---                     else
---                         Blips[k] = AddBlipForCoord(v.coords)
---                         return
---                     end
---                     BeginTextCommandSetBlipName('STRING')
---                     AddTextComponentString(v.name)
---                     EndTextCommandSetBlipName(Blips[k])
---                     SetBlipCoords(Blips[k], v.coords.x, v.coords.y, v.coords.z)
---                     if v.team == "red" then
---                         SetBlipColour(Blips[k], 1)
---                     else
---                         SetBlipColour(Blips[k], 3)
---                     end
---                     SetBlipAsShortRange(Blips[k], false)
---                     ShowHeadingIndicatorOnBlip(Blips[k], true)
---                     SetBlipRotation(Blips[k], math.ceil(v.coords.w))
---                 end
---             end
---         end
---     end
--- end)
+AddEventHandler('onClientResourceStart', function(resourceName)
+    if GetCurrentResourceName() ~= resourceName then return end
 
--- RegisterNetEvent('Pug:client:PaintballRemoveAllBlips', function()
---     for k, v in pairs(Blips) do
---         if DoesBlipExist(Blips[k]) then
---             RemoveBlip(Blips[k])
---             Blips[k] = nil
---         end
---     end
--- end)
+    local center = vector3(2802.15, -3782.96, 96.95)
+    local length, width, heading = 300.0, 400.0, 0.0
+    local minZ, maxZ = 90.95, 101.15
+    local DEBUG = Config.Debug
 
-AddEventHandler('onClientResourceStart', function (resourceName)
-    if(GetCurrentResourceName() ~= resourceName) then
-        return
+    local h = math.rad(heading)
+    local cH, sH = math.cos(h), math.sin(h)
+    local halfL, halfW = length * 0.5, width * 0.5
+
+    local function rot2(xo, yo)
+        return vector3(
+            center.x + xo * cH - yo * sH,
+            center.y + xo * sH + yo * cH,
+            0.0
+        )
     end
-    Boundry = BoxZone:Create(vector3(2802.15, -3782.96, 96.95), 300, 400, {
-        name="outofbounds",
-        heading=0,
-        --debugPoly=true,
-        minZ=90.95,
-        maxZ=101.15
-    })
-    Boundry:onPlayerInOut(function(isPointInside)
-        if isPointInside then
-            if ClosedInfo().ingame then
-                if ClosedInfo().team == 'redteam' then
-                    SetEntityCoords(PlayerPedId(), Config.RedTeamSpawns[ClosedInfo().map][placement])
-                    Wait(500)
-                    TriggerEvent("Pug:client:PaintballReviveEvent")
-                    PaintBallNotify(Translations.success.savedfrinfall, 'success')
-                elseif ClosedInfo().team == 'blueteam' then
-                    SetEntityCoords(PlayerPedId(), Config.BlueTeamSpawns[ClosedInfo().map][placement])
-                    Wait(500)
-                    TriggerEvent("Pug:client:PaintballReviveEvent")
-                    PaintBallNotify(Translations.success.savedfrinfall, 'success')
-                else
-                    SetEntityCoords(PlayerPedId(), Config.BlueTeamSpawns[ClosedInfo().map][2])
-                    Wait(500)
-                    TriggerEvent("Pug:client:PaintballReviveEvent")
-                    PaintBallNotify(Translations.success.savedfrinfall, 'success')
-                end
+
+    local function corners()
+        local p1 = rot2( halfL,  halfW)
+        local p2 = rot2(-halfL,  halfW)
+        local p3 = rot2(-halfL, -halfW)
+        local p4 = rot2( halfL, -halfW)
+        local b1 = vector3(p1.x, p1.y, minZ)
+        local b2 = vector3(p2.x, p2.y, minZ)
+        local b3 = vector3(p3.x, p3.y, minZ)
+        local b4 = vector3(p4.x, p4.y, minZ)
+        local t1 = vector3(p1.x, p1.y, maxZ)
+        local t2 = vector3(p2.x, p2.y, maxZ)
+        local t3 = vector3(p3.x, p3.y, maxZ)
+        local t4 = vector3(p4.x, p4.y, maxZ)
+        return b1,b2,b3,b4,t1,t2,t3,t4
+    end
+
+    local function isInsideBox(pos)
+        if pos.z < minZ or pos.z > maxZ then return false end
+        local dx, dy = pos.x - center.x, pos.y - center.y
+        local rx =  dx * cH + dy * sH
+        local ry = -dx * sH + dy * cH
+        return math.abs(rx) <= halfL and math.abs(ry) <= halfW
+    end
+
+    local function tri(a,b,c,r,g,bl,a_) DrawPoly(a, b, c, r, g, bl, a_) end
+    local function quad(a,b,c,d,r,g,bl,a_)
+        tri(a,b,c,r,g,bl,a_); tri(a,c,d,r,g,bl,a_)
+    end
+
+    local function drawDebug()
+        local b1,b2,b3,b4,t1,t2,t3,t4 = corners()
+        DrawLine(b1,b2,255,0,0,220); DrawLine(b2,b3,255,0,0,220)
+        DrawLine(b3,b4,255,0,0,220); DrawLine(b4,b1,255,0,0,220)
+        DrawLine(t1,t2,0,255,0,220); DrawLine(t2,t3,0,255,0,220)
+        DrawLine(t3,t4,0,255,0,220); DrawLine(t4,t1,0,255,0,220)
+        DrawLine(b1,t1,0,150,255,220); DrawLine(b2,t2,0,150,255,220)
+        DrawLine(b3,t3,0,150,255,220); DrawLine(b4,t4,0,150,255,220)
+        quad(b1,b2,t2,t1,0,255,0,60)
+        quad(b2,b3,t3,t2,0,255,0,60)
+        quad(b3,b4,t4,t3,0,255,0,60)
+        quad(b4,b1,t1,t4,0,255,0,60)
+        quad(t1,t2,t3,t4,0,255,0,40)
+        quad(b1,b2,b3,b4,255,0,0,30)
+    end
+
+    local function handleInBounds()
+        if ClosedInfo().ingame then
+            if ClosedInfo().team == 'redteam' then
+                SetEntityCoords(PlayerPedId(), Config.RedTeamSpawns[ClosedInfo().map][placement])
+                Wait(500); TriggerEvent("Pug:client:PaintballReviveEvent")
+                PaintBallNotify(Config.Translations.success.savedfrinfall, 'success')
+            elseif ClosedInfo().team == 'blueteam' then
+                SetEntityCoords(PlayerPedId(), Config.BlueTeamSpawns[ClosedInfo().map][placement])
+                Wait(500); TriggerEvent("Pug:client:PaintballReviveEvent")
+                PaintBallNotify(Config.Translations.success.savedfrinfall, 'success')
             else
-                if not IsPedInAnyVehicle(PlayerPedId()) then
-                    SetEntityCoords(PlayerPedId(),Config.PedLocation)
-                    Wait(500)
-                    TriggerEvent("Pug:client:PaintballReviveEvent")
-                    PaintBallNotify(Translations.success.savedfrinfall, 'success')
-                end
+                SetEntityCoords(PlayerPedId(), Config.BlueTeamSpawns[ClosedInfo().map][2])
+                Wait(500); TriggerEvent("Pug:client:PaintballReviveEvent")
+                PaintBallNotify(Config.Translations.success.savedfrinfall, 'success')
             end
+        else
+            if not IsPedInAnyVehicle(PlayerPedId()) then
+                SetEntityCoords(PlayerPedId(), Config.PedLocation)
+                Wait(500); TriggerEvent("Pug:client:PaintballReviveEvent")
+                PaintBallNotify(Config.Translations.success.savedfrinfall, 'success')
+            end
+        end
+    end
+
+    local lastInside = false
+    CreateThread(function()
+        while true do
+            local ped = PlayerPedId()
+            local pos = GetEntityCoords(ped)
+            local inside = isInsideBox(pos)
+            if inside and not lastInside then handleInBounds() end
+            lastInside = inside
+            if DEBUG then drawDebug(); Wait(0) else Wait(500) end
         end
     end)
 end)
 
-RegisterNetEvent("Pug:client:PaintballNotifyEvent", function(msg, type, length)
-	PaintBallNotify(msg, type, length)
+
+
+
+
+RegisterNetEvent("Pug:client:PaintballNotifyEvent", function(msg, style, length)
+	PaintBallNotify(msg, style, length)
 end)
 
 if Framework == "QBCore" then
@@ -436,7 +513,7 @@ if Framework == "QBCore" then
         if #(GetEntityCoords(PlayerPedId()) - vector3(2945.65, -3796.44, 143.26)) <= 1000 or #(GetEntityCoords(PlayerPedId()) -  vector3(-3234.46, 7045.22, 637.62)) <= 100 or 
         #(GetEntityCoords(PlayerPedId()) -  vector3(1376.41, -784.41, 67.64)) <= 100 and GetResourceState('nuketown-mirrorpark') == 'started' then
             SetEntityCoords(PlayerPedId(), Config.PedLocation)
-            PaintBallNotify("You have been removed from the arena area.", 'success')
+            PaintBallNotify(Config.Translations.success.removed_from_arena, 'success')
         end
         if not Config.HasBattleRoyaleScript then
             if Config.RemoveAllItemsForPlayer then
@@ -451,7 +528,7 @@ elseif Framework == "ESX" then
         if #(GetEntityCoords(PlayerPedId()) - vector3(2945.65, -3796.44, 143.26)) <= 1000 or #(GetEntityCoords(PlayerPedId()) -  vector3(-3234.46, 7045.22, 637.62)) <= 100 or 
         #(GetEntityCoords(PlayerPedId()) -  vector3(1376.41, -784.41, 67.64)) <= 100 and GetResourceState('nuketown-mirrorpark') == 'started' then
             SetEntityCoords(PlayerPedId(), Config.PedLocation)
-            PaintBallNotify("You have been removed from the arena area.", 'success')
+            PaintBallNotify(Config.Translations.success.removed_from_arena, 'success')
         end
         if not Config.HasBattleRoyaleScript then
             if Config.RemoveAllItemsForPlayer then
@@ -545,15 +622,6 @@ function OutFitBlue()
         end
     end, Info)
 end
-RegisterNetEvent('Pug:client:CloseAllPaintballMenuWhenStart',function()
-    if #(GetEntityCoords(PlayerPedId()) - vector3(Config.PedLocation.x,Config.PedLocation.y,Config.PedLocation.z)) <= 50.0 then
-        if Config.Menu == "ox_lib" then
-            lib.hideContext(false)
-        else
-            exports[Config.Menu]:closeMenu()
-        end
-    end
-end)
 
 RegisterNetEvent('Pug:client:AcivateUavPaintball',function(coords,id)
     if ClosedInfo().ingame then
@@ -638,7 +706,7 @@ end)
 function SetupOxLibRadial()
     lib.addRadialItem({
         id = 'paintballsurrender',
-        label = "Surrender \n Paintball",
+        label = Config.Translations.menu.radial_surrender_label,
         icon = 'skull-crossbones',
         onSelect = function ()
             if isInMatch then
@@ -647,10 +715,10 @@ function SetupOxLibRadial()
                         TriggerServerEvent('Pug:paintball:RemovePlayer',playerTeam)
                         TriggerEvent('Pug:client:InPaintBallMatchWLFalse')
                     else
-                        PaintBallNotify(Translations.error.cant_do_this, 'error')
+                        PaintBallNotify(Config.Translations.error.cant_do_this, 'error')
                     end
                 else
-                    PaintBallNotify(Translations.error.cant_do_this, 'error')
+                    PaintBallNotify(Config.Translations.error.cant_do_this, 'error')
                 end
             end
             lib.hideRadial()
@@ -658,16 +726,38 @@ function SetupOxLibRadial()
     })
 end
 
-local function IsInPaintball()
-    return ClosedInfo().ingame
-end
-exports("IsInPaintball", IsInPaintball)
+RegisterNetEvent("Pug:client:PaintballKillFeed", function(data)
+    if not data then return end
+    SendNUIMessage({
+        action      = "KillFeed",
+        killer      = data.killer or "",
+        victim      = data.victim or "",
+        weapon      = data.weapon or "",
+        killerColor = data.killerColor or "",
+        victimColor = data.victimColor or "",
+        headshot    = data.headshot or false,
+    })
+end)
 
-function CheckingIfDeadFunction() -- NEVER CHANGE THIS UNLESS I HAVE DIRECTED YOU TO.
-    return IsPedFatallyInjured(PlayerPedId())
-end
 
-RegisterNetEvent("Pug:client:PaintballReviveEvent", function()
+RegisterNetEvent('Pug:client:PaintballRankUp', function(data)
+    local oldIcon = Config.Leveling.Prestiges[data.oldPrestige].icon
+    local newIcon = Config.Leveling.Prestiges[data.newPrestige].icon
+
+    data.oldIcon = oldIcon
+    data.newIcon = newIcon
+
+    SendNUIMessage({
+        action = 'RankUp',
+        data   = data
+    })
+end)
+
+RegisterNetEvent("Pug:client:PlayPaintballClientSound", function(Sound, Volume)
+    PugSoundPlay(Sound, Volume)
+end)
+
+RegisterNetEvent("Pug:client:PaintballReviveEvent", function(PlayerHeadingSet)
     if GetResourceState('ambulancejob') == 'started' then
         TriggerEvent('ambulancejob:healPlayer', {revive = true}) -- to heal player
     elseif GetResourceState('ak47_qb_ambulancejob') == 'started' then
@@ -677,10 +767,14 @@ RegisterNetEvent("Pug:client:PaintballReviveEvent", function()
         TriggerEvent('ak47_ambulancejob:revive') 
         TriggerEvent('ak47_ambulancejob:skellyfix') 
     elseif GetResourceState('wasabi_ambulance') == 'started' then
-        TriggerEvent('wasabi_ambulance:revive') -- Wasabi ambulance was updated and added support for "hospital:client:Revive"
+        TriggerEvent('esx_ambulancejob:revive')
+        TriggerEvent('wasabi_ambulance:revive')
     elseif GetResourceState('ars_ambulancejob') == 'started' then
+        Wait(1000)
         TriggerEvent('ars_ambulancejob:healPlayer', {revive = true}) -- to revive player
         TriggerEvent('ars_ambulancejob:healPlayer', {heal = true}) -- to heal player
+        Wait(1000)
+        if PlayerHeadingSet then ClearPedTasksImmediately(PlayerPedId()) SetEntityHeading(PlayerPedId(), PlayerHeadingSet) end
     elseif GetResourceState('visn_are') == 'started' then
         TriggerEvent('hospital:client:Revive')
         TriggerEvent('esx_ambulancejob:revive')
@@ -693,6 +787,11 @@ RegisterNetEvent("Pug:client:PaintballReviveEvent", function()
     end
 end)
 
-RegisterNetEvent('Pug:client:ResetPlayerHealth', function()
-    SetEntityHealth(PlayerPedId(), 200)
+RegisterNUICallback('RequestConfig', function(data, cb)
+    cb(Config)
 end)
+
+local function IsInPaintball()
+    return ClosedInfo().ingame
+end
+exports("IsInPaintball", IsInPaintball)
