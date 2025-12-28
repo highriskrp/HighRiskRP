@@ -1,6 +1,5 @@
 author 'jaksam1074'
-
-version '6.5.6' -- SCRIPT VERSION
+version '6.5.8' -- SCRIPT VERSION
 
 shared_script {
     'shared/shared.lua',

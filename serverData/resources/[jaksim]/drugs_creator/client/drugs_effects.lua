@@ -695,9 +695,15 @@ RegisterNetEvent(Utils.eventsPrefix .. ":cumulative:increaseThirst", function(am
 		TriggerEvent('esx_status:add', 'thirst', -amount)
 		return
 	end
+	
+	if SUBFRAMEWORK == "QBX" then
+		TriggerServerEvent('consumables:server:addThirst', -amount)
+		return
+	end
+	
 	local pd = QBCore.Functions.GetPlayerData()
 	local thirst = (pd.metadata and pd.metadata.thirst) and pd.metadata.thirst or 100
-	local newThirst = math.max(0, math.min(100, thirst - amount)) -- Diminuisci l'idratazione
+	local newThirst = math.max(0, math.min(100, thirst - amount))
 	TriggerServerEvent('consumables:server:addThirst', newThirst)
 end)
 
@@ -706,9 +712,15 @@ RegisterNetEvent(Utils.eventsPrefix .. ":cumulative:decreaseThirst", function(am
 		TriggerEvent('esx_status:add', 'thirst', amount)
 		return
 	end
+	
+	if SUBFRAMEWORK == "QBX" then
+		TriggerServerEvent('consumables:server:addThirst', amount)
+		return
+	end
+	
 	local pd = QBCore.Functions.GetPlayerData()
 	local thirst = (pd.metadata and pd.metadata.thirst) and pd.metadata.thirst or 100
-	local newThirst = math.max(0, math.min(100, thirst + amount)) -- Aumenta l'idratazione
+	local newThirst = math.max(0, math.min(100, thirst + amount))
 	TriggerServerEvent('consumables:server:addThirst', newThirst)
 end)
 
@@ -717,6 +729,12 @@ RegisterNetEvent(Utils.eventsPrefix .. ":cumulative:increaseHunger", function(am
 		TriggerEvent('esx_status:add', 'hunger', -amount)
 		return
 	end
+	
+	if SUBFRAMEWORK == "QBX" then
+		TriggerServerEvent('consumables:server:addHunger', -amount)
+		return
+	end
+	
 	local pd = QBCore.Functions.GetPlayerData()
 	local hunger = (pd.metadata and pd.metadata.hunger) and pd.metadata.hunger or 100
 	local newHunger = math.max(0, math.min(100, hunger - amount)) -- Diminuisci la sazietà
@@ -728,6 +746,12 @@ RegisterNetEvent(Utils.eventsPrefix .. ":cumulative:decreaseHunger", function(am
 		TriggerEvent('esx_status:add', 'hunger', amount)
 		return
 	end
+	
+	if SUBFRAMEWORK == "QBX" then
+		TriggerServerEvent('consumables:server:addHunger', amount)
+		return
+	end
+	
 	local pd = QBCore.Functions.GetPlayerData()
 	local hunger = (pd.metadata and pd.metadata.hunger) and pd.metadata.hunger or 100
 	local newHunger = math.max(0, math.min(100, hunger + amount)) -- Aumenta la sazietà
@@ -739,8 +763,13 @@ RegisterNetEvent(Utils.eventsPrefix .. ":cumulative:increaseStress", function(am
 		TriggerEvent('esx_status:add','stress',amount)
 		return
 	end
+	
+	if SUBFRAMEWORK == "QBX" then
+		TriggerServerEvent('consumables:server:addStress', amount)
+		return
+	end
 
-    TriggerServerEvent('hud:server:GainStress', amount)
+	TriggerServerEvent('hud:server:GainStress', amount)
 end)
 
 RegisterNetEvent(Utils.eventsPrefix .. ":cumulative:decreaseStress", function(amount)
@@ -748,6 +777,11 @@ RegisterNetEvent(Utils.eventsPrefix .. ":cumulative:decreaseStress", function(am
 		TriggerEvent('esx_status:add','stress',-amount)
 		return
 	end
+	
+	if SUBFRAMEWORK == "QBX" then
+		TriggerServerEvent('consumables:server:addStress', -amount)
+		return
+	end
 
-    TriggerServerEvent('hud:server:RelieveStress', amount)
+	TriggerServerEvent('hud:server:RelieveStress', amount)
 end)
