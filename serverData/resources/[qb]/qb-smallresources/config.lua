@@ -62,11 +62,11 @@ Config.Discord = {
     buttons = {
         {
             text = 'Click To Join!!',
-            url = 'cfx.re/join/p9839m'
+            url = 'cfx.re/join/89mgvb'
         },
         {
             text = 'Click To Join The Discord!',
-            url = 'https://discord.gg/SbayRP'
+            url = 'https://discord.gg/RQuww6N5aw'
         }
     }
 }
