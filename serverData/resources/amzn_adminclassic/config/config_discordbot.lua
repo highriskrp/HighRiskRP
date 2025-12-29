@@ -6,9 +6,9 @@ Config.DiscordBot.ConnectedMessage          = {}            -- Don't touch!
 -- Make sure you have created a bot and invited it to your server. 
 -- It will need "Message Content Intent" enabled to function properly.
 Config.DiscordBot.Enabled                   = true         -- Whether to enable or disable the Discord bot.
-Config.DiscordBot.Token                     = "MTM5MDMyMDU3MTEzNjM0NDEyNA.GOgQwH.jlfbHiwSuDadd1MTwrPqFpSt92JzNM0ogFfv7A"            -- Your bot token.
-Config.DiscordBot.Webhook                   = "https://discord.com/api/webhooks/1389372625553326272/nlWCNFpyjGLuiAdXdlf1Pn985B-onBX1UVR6iJswZmrXV2edtoxlmZn-zShNUqWdFss-"            -- Your bot webhook.
-Config.DiscordBot.ChannelID                 = "1389372579097350406"            -- The channel ID to send messages to.
+Config.DiscordBot.Token                     = "MTM5MDMyMDU3MTEzNjM0NDEyNA.Gyh5Ak.VpyvNX7dkltAtt7pKWFYw5QoucrUUWK58zgEns"            -- Your bot token.
+Config.DiscordBot.Webhook                   = "https://discord.com/api/webhooks/1454994332451868849/c6uYIZrfKjeVsX10RCwSid-ydz4yPwXqoaIzG8obhWERDEbiPIO6hpQIZSiKGzqrJWWf"            -- Your bot webhook.
+Config.DiscordBot.ChannelID                 = "1454994295084945561"            -- The channel ID to send messages to.
 
 Config.DiscordBot.CommandPrefix             = "!"
 Config.DiscordBot.UserName                  = "919ADMIN"
