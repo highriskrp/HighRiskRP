@@ -9,8 +9,8 @@ local Translations = {
         userAdd = 'User added',
         userRemove = 'User removed',
         card = 'Card created',
-        give = '£%s cash given',
-        receive = '£%s cash received',
+        give = '$%s cash given',
+        receive = '$%s cash received',
     },
     error = {
         error = 'An error occurred',

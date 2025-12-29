@@ -27,7 +27,7 @@ local Translations = {
         teleported_waypoint = 'Teleported To Waypoint.',
     },
     info = {
-        received_paycheck = 'You received your paycheck of £%{value}',
+        received_paycheck = 'You received your paycheck of $%{value}',
         job_info = 'Job: %{value} | Grade: %{value2} | Duty: %{value3}',
         gang_info = 'Gang: %{value} | Grade: %{value2}',
         on_duty = 'You are now on duty!',

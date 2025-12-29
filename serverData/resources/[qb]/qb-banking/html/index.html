@@ -15,11 +15,11 @@
                 <div class="sidebar">
                     <div class="sidebar-header">
                         {{ playerName }}<br />
-                        Cash: <span class="positive-balance">£{{ formatCurrency(playerCash) }}</span>
+                        Cash: <span class="positive-balance">{{ formatCurrency(playerCash) }}</span>
                     </div>
                     <div class="sidebar-accounts">
                         <ul>
-                            <li v-for="account in accounts" :key="account.name" :class="{ 'sidebar-selected': account.name === selectedAccountStatement }" @click="selectAccount(account)">{{ account.name }}: <span class="positive-balance">£{{ formatCurrency(account.balance) }}</span></li>
+                            <li v-for="account in accounts" :key="account.name" :class="{ 'sidebar-selected': account.name === selectedAccountStatement }" @click="selectAccount(account)">{{ account.name }}: <span class="positive-balance">${{ formatCurrency(account.balance) }}</span></li>
                         </ul>
                     </div>
                     <button class="action-button" @click="closeApplication()">Logout</button>
@@ -170,11 +170,11 @@
                 <div class="sidebar">
                     <div class="sidebar-header">
                         {{ playerName }}<br />
-                        Cash: <span class="positive-balance">£{{ formatCurrency(playerCash) }}</span>
+                        Cash: <span class="positive-balance">${{ formatCurrency(playerCash) }}</span>
                     </div>
                     <div class="sidebar-accounts">
                         <ul>
-                            <li v-for="account in accounts" :key="account.name">{{ account.name }}: <span class="positive-balance">£{{ formatCurrency(account.balance) }}</span></li>
+                            <li v-for="account in accounts" :key="account.name">{{ account.name }}: <span class="positive-balance">${{ formatCurrency(account.balance) }}</span></li>
                         </ul>
                     </div>
                     <button class="action-button" @click="closeApplication()">Logout</button>
