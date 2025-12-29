@@ -29,25 +29,25 @@ endpoint_add_tcp "0.0.0.0:30120"
 endpoint_add_udp "0.0.0.0:30120"
 
 set steam_webApiKey "F384679259EA4EFAB823FBDB5EC104EA"
-sets tags "female, streamer, custom, unique, LGBTQ, qbcore, qb-core, uk, london, cars, drugs, gangs, traplife"
-set sv_licenseKey "cfxk_1SrA5JFEXAxQjBMMMVP4r_20yFvW"
-set mysql_connection_string "mysql://root@localhost/QBCore_b44fea?cha=utf8mb4"
+sets tags "female, streamer, custom, unique, LGBTQ, qbcore, qb-core, cars, drugs, gangs, traplife"
+set sv_licenseKey "cfxk_1OlfvIPrGa20zz550EPgN_1bXnoh"
+set mysql_connection_string "mysql://root@localhost/QBCore_505040?cha=utf8mb4"
 
-sv_hostname "^5TheEstateRP | ^4Halloween Update! | ^1Custom Cars, Clothes, Heists, and Drugs! | ^2 Gangs, Orgs, MCs | ^3Hiring PD, NHS, MOJ!"
-sv_maxClients 64
-sets sv_projectName "^5TheEstateRP | ^1Halloween Update! | ^3Hiring PD, NHS, MOJ!"
-sets sv_projectDesc "UK Theme, Free Gangs/Orgs, PD/NHS hiring!"
-sets locale "en_GB"
+sv_hostname "^5HighRiskRP | ^1Custom Cars, Clothes, Heists, and Drugs! | ^2 Gangs, Orgs, MCs | ^3Hiring PD, EMS, DOJ!"
+sv_maxClients 48
+sets sv_projectName "^5HighRiskRP | ^3Hiring PD, EMS, DOJ!"
+sets sv_projectDesc "Free Gangs/Orgs, PD/NHS hiring!"
+sets locale "en_US"
 load_server_icon logo.png
-sets banner_detail "https://files.fivemerr.com/images/132dd355-5fd8-4262-a89f-54d051b6f475.png"
-sets banner_connecting "https://files.fivemerr.com/images/5fa3b928-cfb4-4f78-b55a-d1339d4597ad.png"
+sets banner_detail ""
+sets banner_connecting ""
 sv_enforceGameBuild 3095 #DLC The Chop Shop
 set resources_useSystemChat true
 setr game_enableDynamicDoorCreation "true" 
 set chat_showJoins 0
 set chat_showQuits 0
 
-sets FoundedBy "RealWARIER,MrRossyBop,DaniDiamondz"
+sets FoundedBy "kboskill3r,DaniDiamondz,Undead"
 
 # Voice config
 setr voice_use2dAudio true
@@ -93,23 +93,20 @@ ensure ac_radio
 ensure td_radiodisable
 ensure [qb]
 ensure [jim]
+ensure [jg]
+ensure [pug]
+ensure [rahe]
 ensure illenium-appearance
 ensure [minigames]
-ensure [jg]
-
 ensure ps-dispatch
 ensure ps-multijob
 ensure ps-ui
 ensure [customweapons]
 ensure xsound
 ensure [standalone]
-ensure [illegal]
 ensure [jaksim]
-ensure [pug]
-ensure [rahe]
 ensure [jobs]
 ensure [loadingscreen]
-ensure [okok]
 ensure wasabi_bridge
 ensure [wasabi]
 ensure [maps]
@@ -127,40 +124,30 @@ ensure ps-realtor
 ensure ps-mdt
 ensure [lc]
 ensure [props]
-ensure [NHSPD]
 exec @pmms/permissions.cfg
-start pmms
+ensure pmms
+ensure State_Fleet
+ensure lux_vehcontrol
+ensure okokChatV2
+ensure Vehicle_Sounds
+ensure [maps]
+
 
 ## Permissions ##
 add_ace group.admin command allow # allow all commands
-add_principal identifier.fivem:15352167 group.admin #SerenityBayRP
-add_principal identifier.steam: 76561198199992773 group.admin #Dani
-add_principal identifier.license:eeca000dad1badeb4265cdd82f7b1d3806b960d9 group.admin #Dani
-add_principal identifier.discord:199231079754760192 group.admin #Dani
 add_principal identifier.fivem:6611109 group.admin #Dani
 add_principal identifier.fivem:6611109 group.god #Dani
-add_principal identifier.discord:726966798125105233 group.admin #Rossy
-add_principal identifier.steam:76561199531052168 group.admin #Rossy
-add_principal identifier.license:2a64bbe1f3d3101438b63121cab08a84c343d4fb group.admin #Rossy
-add_principal identifier.fivem:13126835 group.admin #Rossy
-add_principal identifier.fivem:13126835 group.god #Rossy
-add_principal identifier.license:dbe754d16c812297166f5ddc306af2127f4dd235 group.admin #Real
-add_principal identifier.discord:207997254739427328 group.admin #Real
-add_principal identifier.steam:76561198160566037 group.admin #Real
-add_principal identifier.fivem:15345438 group.admin #Real
-add_principal identifier.fivem:15345438 group.god #Real
-add_principal identifier.discord:623246593243480124 group.admin #Peter
-add_principal identifier.steam:76561198160566037 group.admin #Peter
-add_principal identifier.fivem:1487758 group.admin #Peter
-add_principal identifier.license:7caf8b729699be91849b66ff594a96ec87a69eee group.admin #Peter
+add_principal identifier.fivem:1193560 group.admin #Nikki
+add_principal identifier.fivem:1014151 group.admin #Undead
+add_principal identifier.fivem:1014151 group.god #Undead
+add_principal identifier.fivem:225203 group.admin #blackjack
+add_principal identifier.fivem:225203 group.god #blackjack
 
 
 # Resources
 add_ace resource.qb-core command allow # Allow qb-core to execute commands
 add_ace group.admin drugs_creator allow
 add_ace group.admin dealerships_creator allow
-add_ace group.admin p_plants allow
-add_ace group.mod mth-k9 allow
 
 # Gods
 add_ace qbcore.god command allow # Allow all commands
@@ -169,4 +156,3 @@ add_ace qbcore.god command allow # Allow all commands
 add_principal qbcore.god group.admin # Allow gods access to the main admin group used to get all default permissions
 add_principal qbcore.god qbcore.admin # Allow gods access to admin commands
 add_principal qbcore.admin qbcore.mod # Allow admins access to mod commands
-add_principal qbcore.mod qbcore.police # Allow admins access to mod commands

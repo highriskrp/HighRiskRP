@@ -6,12 +6,10 @@ Config.PermissionedUsers = {
     -- Make sure to take the one that is prefixed with "license:"
     -- "license2:", "fivem:", "live:" etc are not valid.
     -- ["LICENSE"] = "god",
-    ["license:7caf8b729699be91849b66ff594a96ec87a69eee"] = "admin", -- Peter
-    ["license:2a64bbe1f3d3101438b63121cab08a84c343d4fb"] = "god", -- Ross
+    ["license:6350d41afedc5ca3bf5dd7d1c12f9a4cd0903681"] = "god", -- Blackjack
     ["license:eeca000dad1badeb4265cdd82f7b1d3806b960d9"] = "god", -- Dani
-    ["license:dbe754d16c812297166f5ddc306af2127f4dd235"] = "god", -- Warier
-    ["license:0c7c6f6baa759157e2ce751e24e28bf7c5d19485"] = "admin", -- Cyber
-    ["license:68268e97ad8b7bf54bddfc31b7139843b0eb6756"] = "admin", -- Thief
+    ["license:dbe754d16c812297166f5ddc306af2127f4dd235"] = "god", -- Undead
+    ["license:0c7c6f6baa759157e2ce751e24e28bf7c5d19485"] = "admin", -- Justnikki
 }
 
 -- Discord Roles
